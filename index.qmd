@@ -12,7 +12,7 @@ editor:
 <img src="misc/banner_image3.png" alt="AI generated banner image" class="center" width="100%"/>
 
 <!-- Place this tag where you want the button to render. -->
-<a class="github-button" href="https://github.com/mattiasvillani/introbayes" data-color-scheme="no-preference: dark; light: light; dark: dark;" data-size="large" data-show-count="true" aria-label="Star mattiasvillani/Julia4Stats on GitHub">Star</a>
+<a class="github-button" href="https://github.com/mattiasvillani/Julia4Stats" data-color-scheme="no-preference: dark; light: light; dark: dark;" data-size="large" data-show-count="true" aria-label="Star mattiasvillani/Julia4Stats on GitHub">Star</a>
 
 ### Aim
 
@@ -26,7 +26,7 @@ This tutorial introduces the Julia programming language and its use for statisti
 - likelihood inference using numerical optimization
 - probabilistic programming for statistical inference using Turing.jl
 
-### Lecturer
+### Teacher
 
 <img src="/misc/villani_foto.jpg" width="15%"/>\
 [Mattias Villani](https://mattiasvillani.com)<br> Professor of
