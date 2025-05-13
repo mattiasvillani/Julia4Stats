@@ -1,1 +1,2 @@
-# Julia4Stats
+# Julia for Statistics - a tutorial
+

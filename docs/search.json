@@ -1,0 +1,9 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Julia for Statistics - a tutorial",
+    "section": "",
+    "text": "Star\n\nAim\nThis tutorial introduces the Julia programming language and its use for statistical analysis. The following topics will be covered:\n\nintroduction to the Julia programming language\nthe package manager and tooling\nmanaging data in Julia\nplots for statistics\nstatistical distributions and tools\nlikelihood inference using numerical optimization\nprobabilistic programming for statistical inference using Turing.jl\n\n\n\nLecturer\n\nMattias Villani Professor of Statistics Stockholm University\n\n\nWorkshop plan and schedule\n\nThe Julia programming language and tooling Time: 14.00-15.00  Reading: Slides \n🍎 leg stretcher\nLecture 2 - Managing data and plotting Time: 15.00-16.00  Reading: Slides \n☕ tea break\nLecture 3 - Statistical distributions, optimization and automatic differentiation Time: 16.30-17.30  Reading: Slides \n🍓 leg stretcher\nLecture 4 - Probabilistic programming using Turing.jl Time: 17.30-18.30  Reading: Slides\n\nJulia and Turing\n Install Julia  Install VS Code  Install Julia extension for VS Code | Guided Youtube video  Install and get started with Turing.jl | Turing tutorials"
+  }
+]

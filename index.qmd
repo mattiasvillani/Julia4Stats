@@ -1,0 +1,67 @@
+---
+title: "Julia for Statistics - a tutorial"
+format: html
+editor: 
+  markdown: 
+    wrap: 72
+---
+
+<!-- Place this tag in your head or just before your close body tag. -->
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+
+<img src="misc/banner_image3.png" alt="AI generated banner image" class="center" width="100%"/>
+
+<!-- Place this tag where you want the button to render. -->
+<a class="github-button" href="https://github.com/mattiasvillani/introbayes" data-color-scheme="no-preference: dark; light: light; dark: dark;" data-size="large" data-show-count="true" aria-label="Star mattiasvillani/Julia4Stats on GitHub">Star</a>
+
+### Aim
+
+This tutorial introduces the Julia programming language and its use for statistical analysis. The following topics will be covered:
+
+- introduction to the Julia programming language
+- the package manager and tooling
+- managing data in Julia
+- plots for statistics
+- statistical distributions and tools
+- likelihood inference using numerical optimization
+- probabilistic programming for statistical inference using Turing.jl
+
+### Lecturer
+
+<img src="/misc/villani_foto.jpg" width="15%"/>\
+[Mattias Villani](https://mattiasvillani.com)<br> Professor of
+Statistics<br> Stockholm University
+
+### Workshop plan and schedule
+
+---
+
+**The Julia programming language and tooling**<br>
+Time: 14.00-15.00 <br>
+Reading: [Slides](figs/larry.png) <br>
+
+🍎 *leg stretcher* 
+
+**Lecture 2 - Managing data and plotting**<br> 
+Time: 15.00-16.00 <br>
+Reading: [Slides](figs/larry.png) <br>
+
+☕ *tea break*
+
+**Lecture 3 - Statistical distributions, optimization and automatic differentiation**<br> 
+Time: 16.30-17.30 <br>
+Reading: [Slides](figs/larry.png) <br>
+
+🍓 *leg stretcher* 
+
+**Lecture 4 - Probabilistic programming using Turing.jl**<br> 
+Time: 17.30-18.30 <br>
+Reading: [Slides](figs/larry.png)<br>
+
+
+##### Julia and Turing
+<img src="misc/julialogo.svg" width="25"> [Install Julia](https://julialang.org/downloads/)<br>
+<img src="misc/vscodeicon.png" width="25"> [Install VS Code](https://code.visualstudio.com/)<br>
+<img src="misc/vsjulia.png" width="25"> [Install Julia extension for VS Code](https://code.visualstudio.com/docs/languages/julia) | [Guided Youtube video](https://www.youtube.com/watch?v=FcgIvWb7gO0&ab_channel=doggodotjl)<br>
+<img src="misc/turinglogo.jpg" width="25"> [Install and get started with Turing.jl](https://turing.ml/v0.22/docs/using-turing/get-started) | [Turing tutorials](https://turing.ml/v0.22/tutorials/)
+
