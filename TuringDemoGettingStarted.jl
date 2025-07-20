@@ -12,3 +12,5 @@ end
 
 chain = sample(gdemo(1.5, 2), NUTS(), 1000, progress=false)
 
+plot(chain)
+mean(chain[:m]), mean(chain[:s²])

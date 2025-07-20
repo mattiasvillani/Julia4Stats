@@ -7,7 +7,7 @@ knitr:
   opts_knit:
     verbose: false
 website:
-  #title: "Intro to Bayes"
+  #title: "Intro to Julia"
   navbar:
     #logo: /misc/Thomas_Bayes.gif
     background: primary
