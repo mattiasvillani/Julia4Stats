@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Mattias Villani">
 
-<title>Julia for Statistics - a tutorial</title>
+<title>Installing Julia and VS Code</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,27 +24,27 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-2fef5ea3f8957b3e4ecc936fc74692ca.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-b4dbfe15736685bc82683cc31e22d61c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-224e7de6437ed721449756871d922db4.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-b4dbfe15736685bc82683cc31e22d61c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-2fef5ea3f8957b3e4ecc936fc74692ca.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-b4dbfe15736685bc82683cc31e22d61c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-224e7de6437ed721449756871d922db4.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-b4dbfe15736685bc82683cc31e22d61c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -73,7 +74,7 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../styles.css">
 </head>
 
 <body class="nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
@@ -251,7 +252,7 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link" href="../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
 </ul>
@@ -271,9 +272,8 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Sections</h2>
    
   <ul>
-  <li><a href="#aim" id="toc-aim" class="nav-link active" data-scroll-target="#aim">Aim</a></li>
-  <li><a href="#teacher" id="toc-teacher" class="nav-link" data-scroll-target="#teacher">Teacher</a></li>
-  <li><a href="#workshop-plan-and-schedule" id="toc-workshop-plan-and-schedule" class="nav-link" data-scroll-target="#workshop-plan-and-schedule">Workshop plan and schedule</a></li>
+  <li><a href="#installing-julia" id="toc-installing-julia" class="nav-link active" data-scroll-target="#installing-julia">Installing Julia</a></li>
+  <li><a href="#a-first-try-with-julia-in-the-repl" id="toc-a-first-try-with-julia-in-the-repl" class="nav-link" data-scroll-target="#a-first-try-with-julia-in-the-repl">A first try with Julia in the REPL</a></li>
   </ul>
 </nav>
     </div>
@@ -283,13 +283,19 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Julia for Statistics - a tutorial</h1>
+<h1 class="title">Installing Julia and VS Code</h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Mattias Villani </p>
+          </div>
+  </div>
     
   
     
@@ -300,45 +306,76 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<!-- Place this tag in your head or just before your close body tag. -->
-<script async="" defer="" src="https://buttons.github.io/buttons.js"></script>
-<p><img src="misc/banner_image3.png" alt="AI generated banner image" class="center" width="100%"></p>
-<!-- Place this tag where you want the button to render. -->
-<p><a class="github-button" href="https://github.com/mattiasvillani/Julia4Stats" data-color-scheme="no-preference: dark; light: light; dark: dark;" data-size="large" data-show-count="true" aria-label="Star mattiasvillani/Julia4Stats on GitHub">Star</a></p>
-<section id="aim" class="level3">
-<h3 class="anchored" data-anchor-id="aim">Aim</h3>
-<p>This tutorial introduces the Julia programming language and its use for statistical analysis. The following topics will be covered:</p>
+<section id="installing-julia" class="level1">
+<h1>Installing Julia</h1>
+<p>The recommended way to install Julia is using a little tool called <code>juliaup</code> . Benefits of <code>juliaup</code> :</p>
 <ul>
-<li>introduction to the Julia programming language</li>
-<li>the package manager and tooling</li>
-<li>managing data in Julia</li>
-<li>plots for statistics</li>
-<li>statistical distributions and tools</li>
-<li>likelihood inference using numerical optimization</li>
-<li>probabilistic programming for statistical inference using Turing.jl</li>
+<li><p>makes the install really easy</p></li>
+<li><p>allows you to switch between different versions of Julia</p></li>
+<li><p>notifies when a new version is available</p></li>
 </ul>
+<p>Instructions on how to install juliaup are <a href="https://julialang.org/install/">here</a>. In short:</p>
+<ul>
+<li><p>On <strong>Mac/Linux</strong>: run the following command in terminal:</p>
+<pre><code>curl -fsSL https://install.julialang.org | sh</code></pre></li>
+<li><p>On <strong>Windows</strong>, type this in the terminal to install from Windows store:</p>
+<pre><code>winget install --name Julia --id 9NJNWW8PVKMN -e -s msstore</code></pre></li>
+</ul>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Avoid Linux repositories
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>It is not recommended to install Julia from repositories on Linux since the versions there can be rather old.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Uninstall juliaup
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Juliaup can be uninstalled with the terminal command: <code>juliaup self uninstall</code></p>
+</div>
+</div>
+<p>Julia can now be started by typing <code>julia</code> in the terminal (you may need to restart the shell/terminal so your system can find it). You should see something like:</p>
+<p><img src="figs/juliastart.png" class="img-fluid"></p>
+<p>This what is known as the console in the R world. In Julia we tend to call it the <strong>REPL</strong> (Read-Evaluate-Print Loop). We will soon use VS Code as our main working environment (IDE, similar to RStudio, but much more general). But let’s take a first dive in Julia directly in the REPL.</p>
 </section>
-<section id="teacher" class="level3">
-<h3 class="anchored" data-anchor-id="teacher">Teacher</h3>
-<p><img src="./misc/villani_foto.jpg" width="15%"><br>
-<a href="https://mattiasvillani.com">Mattias Villani</a><br> Professor of Statistics<br> Stockholm University</p>
-</section>
-<section id="workshop-plan-and-schedule" class="level3">
-<h3 class="anchored" data-anchor-id="workshop-plan-and-schedule">Workshop plan and schedule</h3>
-<hr>
-<p><strong>Lecture 1 - The Julia programming language and tooling</strong><br> Time: 14.00-15.00 <br> Reading: <a href="./slides/install.html">Installing Julia and first try in REPL</a> <br></p>
-<p>🍎 <em>leg stretcher</em></p>
-<p><strong>Lecture 2 - Managing data and plotting</strong><br> Time: 15.00-16.00 <br> Reading: <a href="figs/larry.png">Slides</a> <br></p>
-<p>☕ <em>tea break</em></p>
-<p><strong>Lecture 3 - Statistical distributions, optimization and automatic differentiation</strong><br> Time: 16.30-17.30 <br> Reading: <a href="figs/larry.png">Slides</a> <br></p>
-<p>🍓 <em>leg stretcher</em></p>
-<p><strong>Lecture 4 - Probabilistic programming using Turing.jl</strong><br> Time: 17.30-18.30 <br> Reading: <a href="figs/larry.png">Slides</a><br></p>
-<section id="julia-and-turing" class="level5">
-<h5 class="anchored" data-anchor-id="julia-and-turing">Julia and Turing</h5>
-<p><img src="misc/julialogo.svg" width="25"> <a href="https://julialang.org/install/">Install Julia</a><br> <img src="misc/vscodeicon.png" width="25"> <a href="https://code.visualstudio.com/">Install VS Code</a><br> <img src="misc/vsjulia.png" width="25"> <a href="https://code.visualstudio.com/docs/languages/julia">Install Julia extension for VS Code</a> | <a href="https://www.youtube.com/watch?v=FcgIvWb7gO0&amp;ab_channel=doggodotjl">Guided Youtube video</a> | <a href="https://www.julia-vscode.org/docs/stable/">Documentation</a><br> <img src="misc/turinglogo.jpg" width="25"> <a href="https://turing.ml/v0.22/docs/using-turing/get-started">Install and get started with Turing.jl</a> | <a href="https://turing.ml/v0.22/tutorials/">Turing tutorials</a></p>
+<section id="a-first-try-with-julia-in-the-repl" class="level1">
+<h1>A first try with Julia in the REPL</h1>
+<p>The REPL can be used to evaluate commands as in any interpreted language.</p>
+<p>Old commands can be found quite nicely in the REPL:</p>
+<ul>
+<li><p>arrow-up and arrow-down goes back in command history. Typing, for example, <code>myf</code> and then arrow-up cycles old commands that start with <code>myf</code>. Ctrl+r gives more advanced reverse-search.</p></li>
+<li><p>past commands can be edited and re-used.</p></li>
+</ul>
+<p><img src="figs/navigateREPL.gif" class="img-fluid" width="500"></p>
+<p>The REPL has several prompt modes, for example:</p>
+<ul>
+<li><p><strong>Julian mode</strong>, which is the default seen above.</p></li>
+<li><p><strong>Help mode</strong>, activated by typing <strong>?</strong> at the prompt. The prompt changes to <code>help?&gt;</code> and you can search for documentation about functions etc. Backspace takes you back to Julian mode.</p></li>
+<li><p><strong>Shell mode</strong>, activated by typing a semicolon <strong>;</strong>. The prompt changes to <code>shell&gt;</code> and you can use the usual shell commands for navigating directories, copying files etc. (On Windows, type <code>powershell</code> or <code>cmd</code> at <code>shell&gt;</code> to get access to the shell).</p></li>
+<li><p><strong>Pkg mode</strong>, activated by typing a right bracket <strong>]</strong>. This opens the package manager where Julia packages are added and managed.</p></li>
+<li><p><strong>Search mode</strong>, activate by <code>ctrl+r</code>, as explained above.</p>
+<p><img src="figs/REPLmodes.gif" class="img-fluid" width="500"></p></li>
+</ul>
+<p>Useful keys bindings (<a href="https://docs.julialang.org/en/v1/stdlib/REPL/#Key-bindings">here</a> are many more):</p>
+<ul>
+<li><p>Ctrl + C to interupt execution</p></li>
+<li><p>Ctrl + L to clear the REPL</p></li>
+</ul>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->

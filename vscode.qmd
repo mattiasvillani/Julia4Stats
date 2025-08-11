@@ -1,0 +1,30 @@
+---
+title: "(Julia in) VS Code"
+author: "Mattias Villani"
+editor: visual
+---
+
+## Code navigation in VS Code
+
+-   Cycle between open files in the editor: `Ctrl + Tab`
+
+<!-- -->
+
+-   Access the **command palette** in VS code: `Ctrl + Shift  + p` (`Cmd + Shift + p`)
+
++--------+---+-------------------+---+--------------+---+--------------------------------------------------------+---+------------------------------------------------------------------+
+| Prefix |   | Mode Name         |   | Scope        |   | Description                                            |   | Example                                                          |
++========+===+===================+===+==============+===+========================================================+===+==================================================================+
+| `>`    |   | Command Mode      |   | Global       |   | Run VS Code commands                                   |   | `> settings`                                                     |
+|        |   |                   |   |              |   |                                                        |   |                                                                  |
+|        |   |                   |   |              |   | This is the default mode.                              |   |                                                                  |
++--------+---+-------------------+---+--------------+---+--------------------------------------------------------+---+------------------------------------------------------------------+
+| `@`    |   | Symbol Navigation |   | Current file |   | Navigate to symbols, optionally sort or filter by type |   | @ myFunc\                                                        |
+|        |   |                   |   |              |   |                                                        |   | `@:` sorts objects by type, not by position in file like @ does. |
++--------+---+-------------------+---+--------------+---+--------------------------------------------------------+---+------------------------------------------------------------------+
+
+-   **Navigate in the editor** to previous cursor positions (even between files):
+
+    -   Go back to previous cursor position: `Alt + ←`
+
+    -   Go forward to next cursor position: `Alt + →`

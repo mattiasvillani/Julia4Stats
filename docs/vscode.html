@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Mattias Villani">
 
-<title>Julia for Statistics - a tutorial</title>
+<title>(Julia in) VS Code</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -41,9 +42,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-b4dbfe15736685bc82683cc31e22d61c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-224e7de6437ed721449756871d922db4.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-b4dbfe15736685bc82683cc31e22d61c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-00ed606cbf7377a2531ce6541f44ea6e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-e3b568e5b7c3295ff2c0594c3e06f3f0.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-00ed606cbf7377a2531ce6541f44ea6e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -251,7 +252,7 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link" href="./index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
 </ul>
@@ -271,9 +272,7 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Sections</h2>
    
   <ul>
-  <li><a href="#aim" id="toc-aim" class="nav-link active" data-scroll-target="#aim">Aim</a></li>
-  <li><a href="#teacher" id="toc-teacher" class="nav-link" data-scroll-target="#teacher">Teacher</a></li>
-  <li><a href="#workshop-plan-and-schedule" id="toc-workshop-plan-and-schedule" class="nav-link" data-scroll-target="#workshop-plan-and-schedule">Workshop plan and schedule</a></li>
+  <li><a href="#code-navigation-in-vs-code" id="toc-code-navigation-in-vs-code" class="nav-link active" data-scroll-target="#code-navigation-in-vs-code">Code navigation in VS Code</a></li>
   </ul>
 </nav>
     </div>
@@ -283,13 +282,19 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Julia for Statistics - a tutorial</h1>
+<h1 class="title">(Julia in) VS Code</h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Mattias Villani </p>
+          </div>
+  </div>
     
   
     
@@ -300,45 +305,76 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<!-- Place this tag in your head or just before your close body tag. -->
-<script async="" defer="" src="https://buttons.github.io/buttons.js"></script>
-<p><img src="misc/banner_image3.png" alt="AI generated banner image" class="center" width="100%"></p>
-<!-- Place this tag where you want the button to render. -->
-<p><a class="github-button" href="https://github.com/mattiasvillani/Julia4Stats" data-color-scheme="no-preference: dark; light: light; dark: dark;" data-size="large" data-show-count="true" aria-label="Star mattiasvillani/Julia4Stats on GitHub">Star</a></p>
-<section id="aim" class="level3">
-<h3 class="anchored" data-anchor-id="aim">Aim</h3>
-<p>This tutorial introduces the Julia programming language and its use for statistical analysis. The following topics will be covered:</p>
+<section id="code-navigation-in-vs-code" class="level2">
+<h2 class="anchored" data-anchor-id="code-navigation-in-vs-code">Code navigation in VS Code</h2>
 <ul>
-<li>introduction to the Julia programming language</li>
-<li>the package manager and tooling</li>
-<li>managing data in Julia</li>
-<li>plots for statistics</li>
-<li>statistical distributions and tools</li>
-<li>likelihood inference using numerical optimization</li>
-<li>probabilistic programming for statistical inference using Turing.jl</li>
+<li>Cycle between open files in the editor: <code>Ctrl + Tab</code></li>
 </ul>
-</section>
-<section id="teacher" class="level3">
-<h3 class="anchored" data-anchor-id="teacher">Teacher</h3>
-<p><img src="./misc/villani_foto.jpg" width="15%"><br>
-<a href="https://mattiasvillani.com">Mattias Villani</a><br> Professor of Statistics<br> Stockholm University</p>
-</section>
-<section id="workshop-plan-and-schedule" class="level3">
-<h3 class="anchored" data-anchor-id="workshop-plan-and-schedule">Workshop plan and schedule</h3>
-<hr>
-<p><strong>Lecture 1 - The Julia programming language and tooling</strong><br> Time: 14.00-15.00 <br> Reading: <a href="./slides/install.html">Installing Julia and first try in REPL</a> <br></p>
-<p>🍎 <em>leg stretcher</em></p>
-<p><strong>Lecture 2 - Managing data and plotting</strong><br> Time: 15.00-16.00 <br> Reading: <a href="figs/larry.png">Slides</a> <br></p>
-<p>☕ <em>tea break</em></p>
-<p><strong>Lecture 3 - Statistical distributions, optimization and automatic differentiation</strong><br> Time: 16.30-17.30 <br> Reading: <a href="figs/larry.png">Slides</a> <br></p>
-<p>🍓 <em>leg stretcher</em></p>
-<p><strong>Lecture 4 - Probabilistic programming using Turing.jl</strong><br> Time: 17.30-18.30 <br> Reading: <a href="figs/larry.png">Slides</a><br></p>
-<section id="julia-and-turing" class="level5">
-<h5 class="anchored" data-anchor-id="julia-and-turing">Julia and Turing</h5>
-<p><img src="misc/julialogo.svg" width="25"> <a href="https://julialang.org/install/">Install Julia</a><br> <img src="misc/vscodeicon.png" width="25"> <a href="https://code.visualstudio.com/">Install VS Code</a><br> <img src="misc/vsjulia.png" width="25"> <a href="https://code.visualstudio.com/docs/languages/julia">Install Julia extension for VS Code</a> | <a href="https://www.youtube.com/watch?v=FcgIvWb7gO0&amp;ab_channel=doggodotjl">Guided Youtube video</a> | <a href="https://www.julia-vscode.org/docs/stable/">Documentation</a><br> <img src="misc/turinglogo.jpg" width="25"> <a href="https://turing.ml/v0.22/docs/using-turing/get-started">Install and get started with Turing.jl</a> | <a href="https://turing.ml/v0.22/tutorials/">Turing tutorials</a></p>
+<!-- -->
+<ul>
+<li>Access the <strong>command palette</strong> in VS code: <code>Ctrl + Shift  + p</code> (<code>Cmd + Shift + p</code>)</li>
+</ul>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 4%">
+<col style="width: 2%">
+<col style="width: 10%">
+<col style="width: 2%">
+<col style="width: 7%">
+<col style="width: 2%">
+<col style="width: 29%">
+<col style="width: 2%">
+<col style="width: 35%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Prefix</th>
+<th></th>
+<th>Mode Name</th>
+<th></th>
+<th>Scope</th>
+<th></th>
+<th>Description</th>
+<th></th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>&gt;</code></td>
+<td></td>
+<td>Command Mode</td>
+<td></td>
+<td>Global</td>
+<td></td>
+<td><p>Run VS Code commands</p>
+<p>This is the default mode.</p></td>
+<td></td>
+<td><code>&gt; settings</code></td>
+</tr>
+<tr class="even">
+<td><code>@</code></td>
+<td></td>
+<td>Symbol Navigation</td>
+<td></td>
+<td>Current file</td>
+<td></td>
+<td>Navigate to symbols, optionally sort or filter by type</td>
+<td></td>
+<td>@ myFunc<br>
+<code>@:</code> sorts objects by type, not by position in file like @ does.</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><p><strong>Navigate in the editor</strong> to previous cursor positions (even between files):</p>
+<ul>
+<li><p>Go back to previous cursor position: <code>Alt + ←</code></p></li>
+<li><p>Go forward to next cursor position: <code>Alt + →</code></p></li>
+</ul></li>
+</ul>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->

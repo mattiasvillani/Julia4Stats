@@ -1,0 +1,79 @@
+---
+title: "Installing Julia and VS Code"
+author: "Mattias Villani" 
+editor: visual
+---
+
+# Installing Julia
+
+The recommended way to install Julia is using a little tool called `juliaup` . Benefits of `juliaup` :
+
+-   makes the install really easy
+
+-   allows you to switch between different versions of Julia
+
+-   notifies when a new version is available
+
+Instructions on how to install juliaup are [here](https://julialang.org/install/). In short:
+
+-   On **Mac/Linux**: run the following command in terminal:
+
+    ```         
+    curl -fsSL https://install.julialang.org | sh
+    ```
+
+-   On **Windows**, type this in the terminal to install from Windows store:
+
+    ```         
+    winget install --name Julia --id 9NJNWW8PVKMN -e -s msstore
+    ```
+
+::: callout-warning
+## Avoid Linux repositories
+
+It is not recommended to install Julia from repositories on Linux since the versions there can be rather old.
+:::
+
+::: callout-tip
+## Uninstall juliaup
+
+Juliaup can be uninstalled with the terminal command: `juliaup self uninstall`
+:::
+
+Julia can now be started by typing `julia` in the terminal (you may need to restart the shell/terminal so your system can find it). You should see something like:
+
+![](figs/juliastart.png)
+
+This what is known as the console in the R world. In Julia we tend to call it the **REPL** (Read-Evaluate-Print Loop). We will soon use VS Code as our main working environment (IDE, similar to RStudio, but much more general). But let's take a first dive in Julia directly in the REPL.
+
+# A first try with Julia in the REPL
+
+The REPL can be used to evaluate commands as in any interpreted language.
+
+Old commands can be found quite nicely in the REPL:
+
+-   arrow-up and arrow-down goes back in command history. Typing, for example, `myf` and then arrow-up cycles old commands that start with `myf`. Ctrl+r gives more advanced reverse-search.
+
+-   past commands can be edited and re-used.
+
+![](figs/navigateREPL.gif){width="500"}
+
+The REPL has several prompt modes, for example:
+
+-   **Julian mode**, which is the default seen above.
+
+-   **Help mode**, activated by typing **?** at the prompt. The prompt changes to `help?>` and you can search for documentation about functions etc. Backspace takes you back to Julian mode.
+
+-   **Shell mode**, activated by typing a semicolon **;**. The prompt changes to `shell>` and you can use the usual shell commands for navigating directories, copying files etc. (On Windows, type `powershell` or `cmd` at `shell>` to get access to the shell).
+
+-   **Pkg mode**, activated by typing a right bracket **\]**. This opens the package manager where Julia packages are added and managed.
+
+-   **Search mode**, activate by `ctrl+r`, as explained above.
+
+    ![](figs/REPLmodes.gif){width="500"}
+
+Useful keys bindings ([here](https://docs.julialang.org/en/v1/stdlib/REPL/#Key-bindings) are many more):
+
+-   Ctrl + C to interupt execution
+
+-   Ctrl + L to clear the REPL
