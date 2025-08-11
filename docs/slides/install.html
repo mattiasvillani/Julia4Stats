@@ -273,7 +273,10 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#installing-julia" id="toc-installing-julia" class="nav-link active" data-scroll-target="#installing-julia">Installing Julia</a></li>
-  <li><a href="#a-first-try-with-julia-in-the-repl" id="toc-a-first-try-with-julia-in-the-repl" class="nav-link" data-scroll-target="#a-first-try-with-julia-in-the-repl">A first try with Julia in the REPL</a></li>
+  <li><a href="#a-first-try-with-julia-in-the-repl" id="toc-a-first-try-with-julia-in-the-repl" class="nav-link" data-scroll-target="#a-first-try-with-julia-in-the-repl">A first try with Julia in the REPL</a>
+  <ul class="collapse">
+  <li><a href="#the-package-manager-a-first-look" id="toc-the-package-manager-a-first-look" class="nav-link" data-scroll-target="#the-package-manager-a-first-look">The package manager: a first look</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -366,7 +369,8 @@ Uninstall juliaup
 <li><p><strong>Help mode</strong>, activated by typing <strong>?</strong> at the prompt. The prompt changes to <code>help?&gt;</code> and you can search for documentation about functions etc. Backspace takes you back to Julian mode.</p></li>
 <li><p><strong>Shell mode</strong>, activated by typing a semicolon <strong>;</strong>. The prompt changes to <code>shell&gt;</code> and you can use the usual shell commands for navigating directories, copying files etc. (On Windows, type <code>powershell</code> or <code>cmd</code> at <code>shell&gt;</code> to get access to the shell).</p></li>
 <li><p><strong>Pkg mode</strong>, activated by typing a right bracket <strong>]</strong>. This opens the package manager where Julia packages are added and managed.</p></li>
-<li><p><strong>Search mode</strong>, activate by <code>ctrl+r</code>, as explained above.</p>
+<li><p><strong>Search mode</strong>, activate by <code>ctrl+r</code>, as explained above.</p></li>
+<li><p><strong>R mode</strong>. Later, when discuss how R and Julia can work together with the RCall.jl package, there will an R mode available by typing <strong>$</strong>. More later.</p>
 <p><img src="figs/REPLmodes.gif" class="img-fluid" width="500"></p></li>
 </ul>
 <p>Useful keys bindings (<a href="https://docs.julialang.org/en/v1/stdlib/REPL/#Key-bindings">here</a> are many more):</p>
@@ -374,8 +378,95 @@ Uninstall juliaup
 <li><p>Ctrl + C to interupt execution</p></li>
 <li><p>Ctrl + L to clear the REPL</p></li>
 </ul>
+<section id="the-package-manager-a-first-look" class="level2">
+<h2 class="anchored" data-anchor-id="the-package-manager-a-first-look">The package manager: a first look</h2>
+<p>Similar, but more extreme than R, most things in Julia are available in packages. Packages are typically named with a .jl ending, for example the Distributions.jl package contain many statistical distributions. Julia packages are hosted on GitHub and managed by the Julia <strong>General Registry</strong>.</p>
+<p>The package manager is most easily accessed by typing <code>]</code> to get into Pkg mode. The prompt changes to <code>(@v.11) pkg&gt;</code> which means that you are in package mode in the default environment v.11 (if you are using Julia 1.11, more on environments later). Some useful commands in Pkg mode:</p>
+<ul>
+<li><p><code>status</code>, shows the packages installed in the currently active environment</p></li>
+<li><p><code>add</code> <code>PkgName</code> (installs the PkgName.jl package, for example Distributions.jl)</p></li>
+<li><p><code>rm</code> <code>PkgName</code> (removes the PkgName.jl package)</p></li>
+</ul>
+<p>Here is comparison of package handling in R, Julia and Python.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 10%">
+<col style="width: 3%">
+<col style="width: 32%">
+<col style="width: 3%">
+<col style="width: 25%">
+<col style="width: 3%">
+<col style="width: 19%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td>Language</td>
+<td></td>
+<td>Repository</td>
+<td></td>
+<td>Install packages</td>
+<td></td>
+<td>Use packages</td>
+</tr>
+<tr class="even">
+<td><strong>R</strong></td>
+<td></td>
+<td>CRAN (Comprehensive R Archive Network)</td>
+<td></td>
+<td><code>install.packages("pkgname")</code></td>
+<td></td>
+<td><code>library(pkgname)</code></td>
+</tr>
+<tr class="odd">
+<td><strong>Julia</strong></td>
+<td></td>
+<td>General registry (hosted on GitHub)</td>
+<td></td>
+<td><code>] add PkgName</code></td>
+<td></td>
+<td><code>using</code> <code>PkgName</code></td>
+</tr>
+<tr class="even">
+<td><strong>Python</strong></td>
+<td></td>
+<td><strong>PyPI</strong> (Python Package Index)<br>
+or <strong>Conda</strong></td>
+<td></td>
+<td><code>pip install pkgname</code></td>
+<td></td>
+<td><code>import pkgname as pk</code></td>
+</tr>
+</tbody>
+</table>
+<p>Once a package has been <code>add</code>ed it can be used from the Julian prompt (just <code>backspace</code> out from Pkg mode) with the using command: <code>using PkgName</code> . This loads the package in memory and its functions and other objects can now be used.</p>
+<p>There are other ways to use a package, like <code>import</code>. The main difference is that</p>
+<ul>
+<li><p><code>using</code> exposes all exported function directly without needing to call then with the package name as prefix, e.g.&nbsp;<code>myfunc(3)</code>.</p></li>
+<li><p><code>import</code> does not expose exported function directly and requires a call to function to be prefixed with the package name, e.g.&nbsp;<code>PkgName.myfunc(3)</code>. This is closer to Python’s namespace convention, but namespaces are less essential in Julia due to multiple dispatch and Julias clever handling of function (method) name collisions.</p></li>
+<li><p>It is also possible to use only specific functions from a package: <code>using PkgName: myfunc, otherfunc</code>.</p></li>
+</ul>
+<div class="callout callout-style-simple callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><p><code>Add</code> the Distributions.jl package in the package manager. Type <code>status</code> after install to see that it indeed was added.</p></li>
+<li><p>Use the Distributions.jl package by the <code>using</code> command from the Julian prompt.</p></li>
+<li><p>Use the package to define a normal distribution object with mean 2 and and standard deviation 3. Go into help mode and search for <code>Normal</code> to see how this is done. Call the new object <code>dist</code>.</p></li>
+<li><p>Generate 10 random draws from this normal distribution using the <code>rand</code> function on the normal distribution object <code>dist</code>.</p></li>
+<li><p>Evaluate the pdf of this normal at <code>x=1</code> using the <code>pdf</code> function on the normal distribution object <code>dist</code>.</p></li>
+</ul>
+</div>
+</div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

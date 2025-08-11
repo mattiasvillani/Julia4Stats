@@ -70,6 +70,8 @@ The REPL has several prompt modes, for example:
 
 -   **Search mode**, activate by `ctrl+r`, as explained above.
 
+-   **R mode**. Later, when discuss how R and Julia can work together with the RCall.jl package, there will an R mode available by typing **\$**. More later.
+
     ![](figs/REPLmodes.gif){width="500"}
 
 Useful keys bindings ([here](https://docs.julialang.org/en/v1/stdlib/REPL/#Key-bindings) are many more):
@@ -77,3 +79,52 @@ Useful keys bindings ([here](https://docs.julialang.org/en/v1/stdlib/REPL/#Key-b
 -   Ctrl + C to interupt execution
 
 -   Ctrl + L to clear the REPL
+
+## The package manager: a first look
+
+Similar, but more extreme than R, most things in Julia are available in packages. Packages are typically named with a .jl ending, for example the Distributions.jl package contain many statistical distributions. Julia packages are hosted on GitHub and managed by the Julia **General Registry**.
+
+The package manager is most easily accessed by typing `]` to get into Pkg mode. The prompt changes to `(@v.11) pkg>` which means that you are in package mode in the default environment v.11 (if you are using Julia 1.11, more on environments later). Some useful commands in Pkg mode:
+
+-   `status`, shows the packages installed in the currently active environment
+
+-   `add` `PkgName` (installs the PkgName.jl package, for example Distributions.jl)
+
+-   `rm` `PkgName` (removes the PkgName.jl package)
+
+Here is comparison of package handling in R, Julia and Python.
+
++------------+---+----------------------------------------+---+-------------------------------+---+------------------------+
+| Language   |   | Repository                             |   | Install packages              |   | Use packages           |
++------------+---+----------------------------------------+---+-------------------------------+---+------------------------+
+| **R**      |   | CRAN (Comprehensive R Archive Network) |   | `install.packages("pkgname")` |   | `library(pkgname)`     |
++------------+---+----------------------------------------+---+-------------------------------+---+------------------------+
+| **Julia**  |   | General registry (hosted on GitHub)    |   | `] add PkgName`               |   | `using` `PkgName`      |
++------------+---+----------------------------------------+---+-------------------------------+---+------------------------+
+| **Python** |   | **PyPI** (Python Package Index)\       |   | `pip install pkgname`         |   | `import pkgname as pk` |
+|            |   | or **Conda**                           |   |                               |   |                        |
++------------+---+----------------------------------------+---+-------------------------------+---+------------------------+
+
+Once a package has been `add`ed it can be used from the Julian prompt (just `backspace` out from Pkg mode) with the using command: `using PkgName` . This loads the package in memory and its functions and other objects can now be used.
+
+There are other ways to use a package, like `import`. The main difference is that
+
+-    `using` exposes all exported function directly without needing to call then with the package name as prefix, e.g. `myfunc(3)`.
+
+-    `import` does not expose exported function directly and requires a call to function to be prefixed with the package name, e.g. `PkgName.myfunc(3)`. This is closer to Python's namespace convention, but namespaces are less essential in Julia due to multiple dispatch and Julias clever handling of function (method) name collisions.
+
+-   It is also possible to use only specific functions from a package: `using PkgName: myfunc, otherfunc`.
+
+::: {.callout-important appearance="simple"}
+## Exercise
+
+-   `Add` the Distributions.jl package in the package manager. Type `status` after install to see that it indeed was added.
+
+-   Use the Distributions.jl package by the `using` command from the Julian prompt.
+
+-   Use the package to define a normal distribution object with mean 2 and and standard deviation 3. Go into help mode and search for `Normal` to see how this is done. Call the new object `dist`.
+
+-   Generate 10 random draws from this normal distribution using the `rand` function on the normal distribution object `dist`.
+
+-   Evaluate the pdf of this normal at `x=1` using the `pdf` function on the normal distribution object `dist`.
+:::
