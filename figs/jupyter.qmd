@@ -1,0 +1,7 @@
+---
+title: "Jupyter notebook"
+author: "Mattias Villani"
+editor: visual
+---
+
+![](subpages/Jupyter.png)

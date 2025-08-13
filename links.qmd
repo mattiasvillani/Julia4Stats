@@ -1,0 +1,13 @@
+---
+title: "Julia Links"
+author: "Mattias Villani"
+editor: visual
+---
+
+<img src="misc/julialogo.svg" width="25"/> [Install Julia](https://julialang.org/install/)
+
+<img src="misc/vscodeicon.png" width="25"/> [Install VS Code](https://code.visualstudio.com/)
+
+<img src="misc/vsjulia.png" width="25"/> [Install Julia extension for VS Code](https://code.visualstudio.com/docs/languages/julia) \| [Guided Youtube video](https://www.youtube.com/watch?v=FcgIvWb7gO0&ab_channel=doggodotjl) \| [Documentation](https://www.julia-vscode.org/docs/stable/)
+
+<img src="misc/turinglogo.jpg" width="25"/> [Install and get started with Turing.jl](https://turing.ml/v0.22/docs/using-turing/get-started) \| [Turing tutorials](https://turing.ml/v0.22/tutorials/)

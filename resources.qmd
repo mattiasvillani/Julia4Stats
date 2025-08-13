@@ -1,0 +1,41 @@
+---
+title: "Julia resources"
+author: "Mattias Villani"
+editor: visual
+---
+
+#### General
+
+-   [The Julia Academy](https://github.com/JuliaAcademy) - great collection of learning resources.
+
+#### Books
+
+Here is a [list of books](https://julialang.org/learning/books/).
+
+-   [Julia for Data Analysis](https://www.manning.com/books/julia-for-data-analysis)
+
+-   [Hands-On Design Patterns and Best Practices](https://www.amazon.com/dp/183864881X)
+
+-   [Julia High Performance](https://www.packtpub.com/en-us/product/julia-high-performance-9781788298117)
+
+-   [Data Science using Julia](https://juliadatascience.io/)
+
+-   [Julia Quick Syntax Reference](https://link.springer.com/book/10.1007/979-8-8688-0965-1#toc)
+
+#### Online courses
+
+-   [Learn Julia in 4 hours](https://www.youtube.com/watch?v=KlorfxsdWDw) (for beginners to programming)
+
+-   [Julia for Data Science](https://juliaacademy.com/p/julia-for-data-science)
+
+#### Podcasts
+
+-   [Talk Julia](https://www.youtube.com/@TalkJulia)
+
+-   [Julia dispatch](https://www.youtube.com/@JuliaDispatch)
+
+#### Videos
+
+[Julia in 100 seconds](https://www.youtube.com/watch?v=JYs_94znYy0)
+
+[VS code in 100 seconds](https://www.youtube.com/watch?v=KMxo3T_MTvY)

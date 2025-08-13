@@ -6,9 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Mattias Villani">
 
-<title>Getting started with Julia and VS Code</title>
+<title>notesturingdocs</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,65 +20,30 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../">
-<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../site_libs/quarto-html/popper.min.js"></script>
-<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-2fef5ea3f8957b3e4ecc936fc74692ca.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
-<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-b4dbfe15736685bc82683cc31e22d61c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-224e7de6437ed721449756871d922db4.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/bootstrap/bootstrap-b4dbfe15736685bc82683cc31e22d61c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-2fef5ea3f8957b3e4ecc936fc74692ca.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-b4dbfe15736685bc82683cc31e22d61c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-224e7de6437ed721449756871d922db4.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-b4dbfe15736685bc82683cc31e22d61c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -109,7 +73,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 
 
-<link rel="stylesheet" href="../styles.css">
+<link rel="stylesheet" href="styles.css">
 </head>
 
 <body class="nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
@@ -287,7 +251,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../index.html"> 
+    <a class="nav-link" href="./index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
 </ul>
@@ -302,279 +266,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Sections</h2>
-   
-  <ul>
-  <li><a href="#installing-julia" id="toc-installing-julia" class="nav-link active" data-scroll-target="#installing-julia"><img src="figs/julialogo.svg" width="30" height="27"> Installing Julia</a></li>
-  <li><a href="#the-julia-repl-console" id="toc-the-julia-repl-console" class="nav-link" data-scroll-target="#the-julia-repl-console"><img src="figs/terminalicon.png" class="img-fluid" width="30"> The Julia REPL (console)</a></li>
-  <li><a href="#the-package-manager-a-first-look" id="toc-the-package-manager-a-first-look" class="nav-link" data-scroll-target="#the-package-manager-a-first-look"><img src="figs/pkgicon.png" class="img-fluid" width="30"> The package manager: a first look</a></li>
-  <li><a href="#running-programs" id="toc-running-programs" class="nav-link" data-scroll-target="#running-programs"><img src="figs/terminalicon.png" class="img-fluid" width="30"> Running programs</a></li>
-  <li><a href="#vs-code---the-rstudio-for-julia" id="toc-vs-code---the-rstudio-for-julia" class="nav-link" data-scroll-target="#vs-code---the-rstudio-for-julia"><img src="../misc/vscodeicon.png" class="img-fluid" width="25"> VS code - the Rstudio for Julia</a></li>
-  </ul>
-</nav>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Getting started with Julia and VS Code</h1>
-</div>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
 
 
 
-<div class="quarto-title-meta">
-
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Mattias Villani </p>
-          </div>
-  </div>
-    
-  
-    
-  </div>
-  
 
 
-</header>
 
 
-<section id="installing-julia" class="level2">
-<h2 class="anchored" data-anchor-id="installing-julia"><img src="figs/julialogo.svg" width="30" height="27"> Installing Julia</h2>
-<p>The recommended way to install Julia is using a little tool called <code>juliaup</code> . Benefits of <code>juliaup</code> :</p>
-<ul>
-<li><p>easy install of Julia</p></li>
-<li><p>allows you to switch between different versions of Julia (see <code>juliaup --help</code>)</p></li>
-<li><p>notifies when a new Julia version is available.</p></li>
-</ul>
-<p>Instructions on how to install juliaup are <a href="https://julialang.org/install/">here</a>. In short:</p>
-<ul>
-<li><p><img src="figs/linux.png" class="img-fluid" width="20"> <strong>Linux</strong>: run the following command in terminal:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-fsSL</span> https://install.julialang.org <span class="kw">|</span> <span class="fu">sh</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
-<li><p><img src="figs/mac.png" class="img-fluid" width="25"><strong>Mac</strong>: run the following command in terminal:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-fsSL</span> https://install.julialang.org <span class="kw">|</span> <span class="fu">sh</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
-<li><p><img src="figs/windows.png" class="img-fluid" width="20"> <strong>Windows</strong>, type this in the terminal to install from Windows store:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">winget</span> install <span class="at">--name</span> Julia <span class="at">--id</span> 9NJNWW8PVKMN <span class="at">-e</span> <span class="at">-s</span> msstore</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
-</ul>
-<div class="callout callout-style-default callout-warning callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Avoid Linux repositories
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>It is not recommended to install Julia from repositories on Linux since the versions there can be rather old.</p>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Uninstall juliaup
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Juliaup can be uninstalled with the terminal command: <code>juliaup self uninstall</code></p>
-</div>
-</div>
-<p>Julia can now be started by typing <code>julia</code> in the terminal (you may need to restart the shell/terminal so your system can find it). You should see something like this:</p>
-<p><img src="figs/juliastart.png" class="img-fluid"></p>
-<p>This what is known as the console in the R world. In Julia we tend to call it the <strong>REPL</strong> (Read-Evaluate-Print Loop). The REPL is where you can interactively execute code and view the output. We will soon use VS Code as our main working environment (IDE, similar to RStudio, but much more general), but let’s take a first dive into Julia directly in the REPL.</p>
-</section>
-<section id="the-julia-repl-console" class="level2">
-<h2 class="anchored" data-anchor-id="the-julia-repl-console"><img src="figs/terminalicon.png" class="img-fluid" width="30"> The Julia REPL (console)</h2>
-<p>The REPL can be used to evaluate commands as in any interpreted language.</p>
-<p>Old commands can be found quite nicely in the REPL:</p>
-<ul>
-<li><p>arrow-up and arrow-down goes back in command history. Typing, for example, <code>myf</code> and then arrow-up cycles old commands that start with <code>myf</code>. Ctrl+r gives more advanced reverse-search.</p></li>
-<li><p>past commands can be edited and re-used.</p></li>
-</ul>
-<p><img src="figs/navigateREPL.gif" class="img-fluid" width="500"></p>
-<p>The REPL has several prompt modes, for example:</p>
-<ul>
-<li><p><strong>Julian mode</strong>, which is the default seen above.</p></li>
-<li><p><strong>Help mode</strong>, activated by typing <strong>?</strong> at the prompt. The prompt changes to <code>help?&gt;</code> and you can search for documentation about functions etc. Backspace takes you back to Julian mode.</p></li>
-<li><p><strong>Shell mode</strong>, activated by typing a semicolon <strong>;</strong>. The prompt changes to <code>shell&gt;</code> and you can use the usual shell commands for navigating directories, copying files etc. (On Windows, type <code>powershell</code> or <code>cmd</code> at <code>shell&gt;</code> to get access to the shell).</p></li>
-<li><p><strong>Pkg mode</strong>, activated by typing a right bracket <strong>]</strong>. This opens the package manager where Julia packages are added and managed.</p></li>
-<li><p><strong>Search mode</strong>, activated by <code>ctrl+r</code>, as explained above.</p></li>
-<li><p><strong>R mode</strong>. Later, when discuss how R and Julia can work together with the RCall.jl package, there will an R mode available by typing <strong>$</strong> which opens an R prompt. More later.</p></li>
-</ul>
-<p><img src="figs/REPLmodes.gif" class="img-fluid" width="500"></p>
-<p>Useful keys bindings (<a href="https://docs.julialang.org/en/v1/stdlib/REPL/#Key-bindings">here</a> are many more):</p>
-<ul>
-<li><p>Ctrl + C to interupt execution</p></li>
-<li><p>Ctrl + L to clear the REPL</p></li>
-</ul>
-</section>
-<section id="the-package-manager-a-first-look" class="level2">
-<h2 class="anchored" data-anchor-id="the-package-manager-a-first-look"><img src="figs/pkgicon.png" class="img-fluid" width="30"> The package manager: a first look</h2>
-<p>Similar to R, but a bit more extreme, most things in Julia are available in packages. Packages are typically named with a .jl ending, for example the <em>Distributions.jl</em> package contains many statistical distributions. Julia packages are hosted on GitHub and managed by the Julia <strong>General Registry</strong>.</p>
-<p>Here are some of the most common packages for Statistics:</p>
-<ul>
-<li><p><a href="https://docs.julialang.org/en/v1/stdlib/Statistics/">Statistics.jl</a> (mean, variance, quantile etc)</p></li>
-<li><p><a href="https://juliastats.org/Distributions.jl/stable/">Distributions.jl</a> (most standard statistical distributions, with rand, pdf, cdf etc)</p></li>
-<li><p><a href="https://docs.julialang.org/en/v1/stdlib/LinearAlgebra/">LinearAlgebra.jl</a></p></li>
-<li><p><a href="https://dataframes.juliadata.org/stable/">DataFrames.jl</a> (tabular data manipulation)</p></li>
-<li><p><a href="https://tidierorg.github.io/Tidier.jl/dev/">Tidier.jl</a> (R’s tidyverse, Julia-style)</p></li>
-<li><p><a href="https://docs.juliaplots.org/stable/">Plots.jl</a> (one of the most widely used plotting systems)</p></li>
-<li><p><a href="https://julianlsolvers.github.io/Optim.jl/stable/">Optim.jl</a> (numerical optimization)</p></li>
-<li><p><a href="https://juliastats.org/GLM.jl/v0.11/">GLM.jl</a> (generalized linear models using R’s formula syntax)</p></li>
-<li><p><a href="https://turinglang.org/">Turing.jl</a> (probabilistic programming, similar to Stan)</p></li>
-<li><p><a href="https://juliainterop.github.io/RCall.jl/stable/">RCall.jl</a> (using R code in Julia)</p></li>
-<li><p><a href="https://juliadiff.org/DifferentiationInterface.jl/DifferentiationInterface/stable/">DifferentiationInterface.jl</a> (interface to Julia’s many autodiff libraries)</p></li>
-<li><p><a href="https://github.com/JuliaStats/RDatasets.jl">RDatasets.jl</a> (the R datasets that we all love, in Julia)</p></li>
-</ul>
-<p>The package manager is most easily accessed by typing <code>]</code> to get into Pkg mode. The prompt changes to <code>(@v.11) pkg&gt;</code> which means that you are in package mode in the default environment v.11 (if you are using Julia 1.11, more on environments later).</p>
-<p>Some useful commands in Pkg mode:</p>
-<ul>
-<li><p><code>status</code>, shows the packages installed in the currently active environment</p></li>
-<li><p><code>add</code> <code>PkgName</code> (installs the PkgName.jl package, for example Distributions.jl)</p></li>
-<li><p><code>rm</code> <code>PkgName</code> (removes the PkgName.jl package)</p></li>
-<li><p><code>update</code> (checks registry and updates packages)</p></li>
-</ul>
-<p>When we write, for example, <code>] add Distributions</code> we mean to type <code>]</code> and then <code>add Distributions</code> on the Pkg prompt.</p>
-<p>Once a package has been <code>add</code>ed it can be used from the Julian prompt (just <code>backspace</code> out from Pkg mode) with the using command: <code>using PkgName</code> . This loads the package in memory and its functions and other objects can now be used.</p>
-<p>There are other ways to use a package, like <code>import</code>. The main difference is that</p>
-<ul>
-<li><p><code>using</code> exposes all exported function directly without needing to call then with the package name as prefix, e.g.&nbsp;<code>myfunc(3)</code>.</p></li>
-<li><p><code>import</code> does not expose exported function directly and requires a call to function to be prefixed with the package name, e.g.&nbsp;<code>PkgName.myfunc(3)</code>. This is closer to Python’s namespace convention, but namespaces are less essential in Julia due to multiple dispatch and Julias clever handling of function (method) name collisions.</p></li>
-<li><p>It is also possible to use only specific functions from a package: <code>using PkgName: myfunc, otherfunc</code>.</p>
-<p>Here is comparison of package handling in R, Julia and Python.</p>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 8%">
-<col style="width: 6%">
-<col style="width: 26%">
-<col style="width: 6%">
-<col style="width: 21%">
-<col style="width: 6%">
-<col style="width: 20%">
-</colgroup>
-<tbody>
-<tr class="odd">
-<td>Language</td>
-<td></td>
-<td>Repository</td>
-<td></td>
-<td>Install packages</td>
-<td></td>
-<td>Use packages</td>
-</tr>
-<tr class="even">
-<td><strong>R</strong></td>
-<td></td>
-<td>CRAN (Comprehensive R Archive Network)</td>
-<td></td>
-<td><code>install.packages("pkgname")</code></td>
-<td></td>
-<td><code>library(pkgname)</code></td>
-</tr>
-<tr class="odd">
-<td><strong>Julia</strong></td>
-<td></td>
-<td>General registry (hosted on GitHub)</td>
-<td></td>
-<td><code>] add PkgName</code></td>
-<td></td>
-<td><p><code>using</code> <code>PkgName</code></p>
-<p><code>import PkgName</code></p>
-<p><code>import PkgName: myfunc</code></p></td>
-</tr>
-<tr class="even">
-<td><strong>Python</strong></td>
-<td></td>
-<td><strong>PyPI</strong> (Python Package Index)<br>
-or <strong>Conda</strong></td>
-<td></td>
-<td><p><code>pip install pkgname</code></p>
-<p><code>conda install pkgname</code></p></td>
-<td></td>
-<td><p><code>from pkgname import *</code></p>
-<p><code>import pkgname as pk</code></p>
-<p><code>from pkgname import myfunc</code></p></td>
-</tr>
-</tbody>
-</table></li>
-</ul>
-<div class="callout callout-style-simple callout-important callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Exercise
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<ul>
-<li><p><code>Add</code> the Distributions.jl package in the package manager. Type <code>status</code> after install to see that it indeed was added.</p></li>
-<li><p>Use the Distributions.jl package by the <code>using</code> command from the Julian prompt.</p></li>
-<li><p>Use the package to define a normal distribution object with mean 2 and and standard deviation 3. Go into help mode and search for <code>Normal</code> to see how this is done. Call the new object <code>dist</code>.</p></li>
-<li><p>Generate 10 random draws from this normal distribution using the <code>rand</code> function on the normal distribution object <code>dist</code>.</p></li>
-<li><p>Evaluate the pdf of this normal at <code>x=1</code> using the <code>pdf</code> function on the normal distribution object <code>dist</code>.</p></li>
-</ul>
-</div>
-</div>
-</section>
-<section id="running-programs" class="level2">
-<h2 class="anchored" data-anchor-id="running-programs"><img src="figs/terminalicon.png" class="img-fluid" width="30"> Running programs</h2>
-<p>We can write Julia code in any text editor and then execute it in the terminal with the <code>julia</code> command. Here is a small Julia example program (<code>plotfunc.jl</code>) that plots the square function using the <code>Plots.jl</code> package (which needs to added first) and finally saves the graph to a pdf file.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># adding Plots.jl package programatically (needed if it is not already installed)</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> <span class="bu">Pkg;</span> Pkg.add("Plots")</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Plots</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the function that does the work </span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">plotfunction</span>(func, a, b)</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  xgrid <span class="op">=</span> <span class="fu">range</span>(a, b, length <span class="op">=</span> <span class="fl">100</span>)</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  plt <span class="op">=</span> <span class="fu">plot</span>(xgrid, <span class="fu">func</span>.(xgrid), color <span class="op">=</span> <span class="op">:</span>blue, xlabel <span class="op">=</span> <span class="st">"x"</span>, ylabel <span class="op">=</span> <span class="st">"f(x)"</span>)</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> plt</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Use the function to produce the plot</span></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>plt <span class="op">=</span> <span class="fu">plotfunction</span>(x <span class="op">-&gt;</span> x<span class="op">^</span><span class="fl">2</span>, <span class="op">-</span><span class="fl">2</span>, <span class="fl">2</span>) <span class="co"># x -&gt; x^2 defines an anonymous function</span></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="co"># save plot to file</span></span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="fu">savefig</span>(plt, <span class="st">"myplot.pdf"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>We can run this code in terminal with the command</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">julia</span> plotfunc.jl</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="callout callout-style-simple callout-important callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Exercise
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Copy the code above to a text file and run it using the command above. Check the pdf file.</p>
-</div>
-</div>
-</section>
-<section id="vs-code---the-rstudio-for-julia" class="level2">
-<h2 class="anchored" data-anchor-id="vs-code---the-rstudio-for-julia"><img src="../misc/vscodeicon.png" class="img-fluid" width="25"> VS code - the Rstudio for Julia</h2>
-<section id="vs-code" class="level4">
-<h4 class="anchored" data-anchor-id="vs-code">VS code</h4>
-<p>The most common way to work with Julia is using the <a href="https://code.visualstudio.com/">VS code</a> IDE (similar to RStudio, but more general). VS code is free and open source. It can be installed from <a href="https://code.visualstudio.com/Download">here</a>. There are many many extensions or plug-ins for VS code for doing mostly anything you want. Here is a <a href="https://www.youtube.com/watch?v=KMxo3T_MTvY">100 sec video about VS code</a>.</p>
-<p>The most important command in VS code is <code>ctrl+shift+p</code> which opens the <strong>Command palette</strong>. From there you can type thing like <em>settings</em> to access all the settings, execute code etc.</p>
-</section>
-<section id="julia-in-vs-code" class="level4">
-<h4 class="anchored" data-anchor-id="julia-in-vs-code">Julia in VS Code</h4>
-<p>The most important extension for Julia is the official <a href="https://code.visualstudio.com/docs/languages/julia">Julia extension</a>, which brings together the editor, Julia REPL, plot pane, debugging tools, and much more in one app. Once you open a .jl file in the editor, VS code will give you proper syntax highlighting. Here is <a href="https://www.youtube.com/watch?v=pi2G96_HPHc">2+ minute getting started video</a>. With the Julia extension installed, try <code>ctrl+shift+p</code> and type <em>julia</em> in the command palette to see some of the commands that you can use for Julia in VS code.</p>
-
-
-</section>
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

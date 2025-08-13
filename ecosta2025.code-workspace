@@ -1,0 +1,15 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+    "editor.rulers": [
+        92
+    ],
+	"editor.wordWrapColumn": 92,
+	"editor.occurrencesHighlight": "off",
+	"editor.matchBrackets": "never",
+	}
+}

@@ -1,30 +1,63 @@
 ---
-title: "(Julia in) VS Code"
+title: "VS Code"
 author: "Mattias Villani"
 editor: visual
 ---
 
-## Code navigation in VS Code
+## Useful commands and navigation in VS Code
 
--   Cycle between open files in the editor: `Ctrl + Tab`
+-   Access the **command palette** in VS code: `Ctrl + Shift  + p`
 
-<!-- -->
++--------+-----+-------------------+-----+--------------+-----+--------------------------------------------------------+-----+-------------------------------------------------------------------+
+| Prefix |     | Mode Name         |     | Scope        |     | Description                                            |     | Example                                                           |
++========+=====+===================+=====+==============+=====+========================================================+=====+===================================================================+
+| `>`    |     | Command Mode      |     | Global       |     | Run VS Code commands                                   |     | `> settings`                                                      |
+|        |     |                   |     |              |     |                                                        |     |                                                                   |
+|        |     |                   |     |              |     | This is the default mode.                              |     |                                                                   |
++--------+-----+-------------------+-----+--------------+-----+--------------------------------------------------------+-----+-------------------------------------------------------------------+
+| `@`    |     | Symbol Navigation |     | Current file |     | Navigate to symbols, optionally sort or filter by type |     | \@ myFunc\                                                        |
+|        |     |                   |     |              |     |                                                        |     | `@:` sorts objects by type, not by position in file like \@ does. |
++--------+-----+-------------------+-----+--------------+-----+--------------------------------------------------------+-----+-------------------------------------------------------------------+
 
--   Access the **command palette** in VS code: `Ctrl + Shift  + p` (`Cmd + Shift + p`)
-
-+--------+---+-------------------+---+--------------+---+--------------------------------------------------------+---+------------------------------------------------------------------+
-| Prefix |   | Mode Name         |   | Scope        |   | Description                                            |   | Example                                                          |
-+========+===+===================+===+==============+===+========================================================+===+==================================================================+
-| `>`    |   | Command Mode      |   | Global       |   | Run VS Code commands                                   |   | `> settings`                                                     |
-|        |   |                   |   |              |   |                                                        |   |                                                                  |
-|        |   |                   |   |              |   | This is the default mode.                              |   |                                                                  |
-+--------+---+-------------------+---+--------------+---+--------------------------------------------------------+---+------------------------------------------------------------------+
-| `@`    |   | Symbol Navigation |   | Current file |   | Navigate to symbols, optionally sort or filter by type |   | @ myFunc\                                                        |
-|        |   |                   |   |              |   |                                                        |   | `@:` sorts objects by type, not by position in file like @ does. |
-+--------+---+-------------------+---+--------------+---+--------------------------------------------------------+---+------------------------------------------------------------------+
+-   **Cycle between open files** in the editor: `Ctrl + Tab`
 
 -   **Navigate in the editor** to previous cursor positions (even between files):
 
     -   Go back to previous cursor position: `Alt + ←`
 
     -   Go forward to next cursor position: `Alt + →`
+
+-   Toggle visibility of the terminal area: `ctrl + j`
+
+-   **Making VS code like RStudio**'s window panes by placing the REPL in the editor area:
+
+    -   `ctrl+shift+p` to open command panel
+
+    -   Type `settings` and select the option *Preferences: Open User Settings* (not the JSON version)
+
+    -   In the *Search settings* box: type `terminal defaultlocation` to filter down to the setting that we want to change.
+
+    -   In *Terminal \> Integrated: Default Location*, select `Editor` in the dropdown menu.\
+        You can now move the editor around freely by drag and drop of the window.
+
+        ![](figs/vscode_rstudiostyle.png){width="781"}
+
+## Useful commands in Julia for VS Code
+
+-   [Here](https://code.visualstudio.com/docs/languages/julia) is the documentation for the Julia extension.
+
+## Useful extensions
+
+-   [Julia](https://marketplace.visualstudio.com/items?itemName=julialang.language-julia) - Official support for the Julia language in VS code.
+-   [R](https://marketplace.visualstudio.com/items?itemName=REditorSupport.r) - Work with R in VS code.
+-   [Python](https://marketplace.visualstudio.com/items?itemName=ms-python.python) - Python language support.
+-   [LaTeX workshop](https://marketplace.visualstudio.com/items?itemName=James-Yu.latex-workshop) - LaTeX support in VS code.
+-   [vscode-icons](https://marketplace.visualstudio.com/items?itemName=vscode-icons-team.vscode-icons) - brings nice symbols to folders and files.
+-   [Subtle Match Brackets](https://marketplace.visualstudio.com/items?itemName=rafamel.subtle-brackets) - nicer handling of matching brackets in the editor.
+-   [Live Preview](https://marketplace.visualstudio.com/items?itemName=ms-vscode.live-server) - live preview of HTML directly in VS code.
+-   [Markdown all in one](https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one) - Markdown support in VS code.
+-   [Quarto](https://marketplace.visualstudio.com/items?itemName=quarto.quarto) - Quarto support.
+-   [Code Runner](https://marketplace.visualstudio.com/items?itemName=formulahendry.code-runner) - run code in many different languages in VS code (not needed to run Julia code however since it has its own runner in Julia for VS code extension).
+-   [Excel Viewer](https://marketplace.visualstudio.com/items?itemName=GrapeCity.gc-excelviewer) - Editors and previews for CSV files and Excel spreadsheets in Visual Studio Code.
+-   [Git Lens](https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens) - supercharge your Git experience in VS code.
+-   [VS code Spotify](https://marketplace.visualstudio.com/items?itemName=shyykoserhiy.vscode-spotify) - Play music in VS code.

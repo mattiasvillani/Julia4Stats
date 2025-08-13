@@ -1,0 +1,9 @@
+---
+title: "Julia + R + Python = True"
+author: "Mattias Villani"
+editor: visual
+---
+
+The [RCall.jl](https://juliainterop.github.io/RCall.jl/stable/) package makes it possible to call R from Julia.
+
+The [JuliaCall](https://cran.r-project.org/web/packages/JuliaCall/index.html) R package makes it possible to call Julia from R. [Tutorial on JuliaCall](https://hwborchers.github.io/).
