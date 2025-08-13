@@ -1,0 +1,41 @@
+---
+title: "Working with data"
+author: "Mattias Villani"
+editor: visual
+---
+
+## Read and writing data in Julia
+
+::: callout-tip
+## Packages used
+
+![](figs/dataframes_logo.png){width="30"} [CSV.jl](https://csv.juliadata.org/stable/)
+
+![](figs/dataframes_logo.png){width="30"} [DataFrames.jl](https://dataframes.juliadata.org/stable/)
+:::
+
+-   CSV files can be
+
+## Managing data
+
+::: callout-tip
+## Packages used
+
+![](figs/dataframes_logo.png){width="30"} [DataFrames.jl](https://dataframes.juliadata.org/stable/)
+
+![](figs/dataframes_logo.png){width="30"} [DataFramesMeta.jl](https://juliadata.org/DataFramesMeta.jl/stable/)
+
+![](figs/tidierdata_logo.png){width="30"} [TidierData.jl](https://tidierorg.github.io/TidierData.jl/latest/)
+
+![](figs/Rdatasets_logo.png){width="30"} [RDatasets.jl](https://github.com/JuliaStats/RDatasets.jl)
+:::
+
+## Plotting data
+
+::: callout-tip
+## Packages used
+
+![](figs/plots_logo.png){width="30"} [Plots.jl](https://docs.juliaplots.org/stable/)
+
+![](figs/tidierplots_logo.png){width="30" height="34"} [TidierPlots.jl](https://tidierorg.github.io/TidierPlots.jl/latest/)
+:::

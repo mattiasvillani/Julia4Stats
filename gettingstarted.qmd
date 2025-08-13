@@ -8,6 +8,8 @@ editor: visual
 
 -   Julia is a high-level programming language for **numerical computing**.
 
+-   First version in 2012, Version 1.0 in 2018. Version 1.11 now.
+
 -   High-level programming with a syntax like Python.
 
 -   **Fast**, almost like C/C++, if done right.
@@ -18,7 +20,11 @@ editor: visual
 
 -   Multiple dispatch with sophisticated type system makes the Julia **highly composable**.
 
--   Many, many other things.
+![](images/clipboard-2782725170.jpeg){width="121"}![](images/clipboard-2658870739.jpeg){width="125"}![](images/clipboard-1358662862.jpeg){width="125"}![](images/clipboard-1716984901.jpeg){width="125"}
+
+## ![](figs/julialogo.svg){width="30" height="27"} Come for the speed, stay for the rest
+
+![](figs/benchmarks.svg)
 
 ## ![](figs/julialogo.svg){width="30" height="27"} Why Julia (for a Statistician)? 
 
@@ -330,3 +336,7 @@ Julia can be used in all major notebook systems:
   <img src="figs/pluto.png" width="70%" alt="Pluto.jl screenshot">
 </details>
 ```
+
+## 💻 Live demo
+
+Live demo of basic Julia roughly based on [this script](code/gettingstarted.jl).

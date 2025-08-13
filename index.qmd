@@ -39,16 +39,17 @@ Statistics<br> Stockholm University
 **Lecture 1 - The Julia programming language and tooling**<br>
 Time: 14.00-15.00 <br>
 Reading: [Getting started with Julia](gettingstarted.qmd) <br>
+Live demo: [Basic Julia](code/gettingstarted.jl)
 
 🍎 *leg stretcher* 
 
-**Lecture 2 - Managing data and plotting**<br> 
+**Lecture 2 - Working with data in Julia**<br> 
 Time: 15.00-16.00 <br>
-Reading: [Slides](figs/larry.png) <br>
+Reading: [Read, managing and plotting data](workingwithdata.qmd) <br>
 
 ☕ *tea break*
 
-**Lecture 3 - Statistical distributions, optimization and automatic differentiation**<br> 
+**Lecture 3 - Statistics in Julia**<br> 
 Time: 16.30-17.30 <br>
 Reading: [Slides](figs/larry.png) <br>
 
