@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Mattias Villani">
 
-<title>Julia for Statistics - a tutorial</title>
+<title>Statistics with Julia</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +20,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -274,7 +310,7 @@ nav#TOC {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link" href="./index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
 </ul>
@@ -294,10 +330,9 @@ nav#TOC {
     <h2 id="toc-title">Contents</h2>
    
   <ul>
-  <li><a href="#aim" id="toc-aim" class="nav-link active" data-scroll-target="#aim">Aim</a></li>
-  <li><a href="#instructor" id="toc-instructor" class="nav-link" data-scroll-target="#instructor">Instructor</a></li>
-  <li><a href="#workshop-plan-and-schedule" id="toc-workshop-plan-and-schedule" class="nav-link" data-scroll-target="#workshop-plan-and-schedule">Workshop plan and schedule</a></li>
-  <li><a href="#more-material" id="toc-more-material" class="nav-link" data-scroll-target="#more-material">More material</a></li>
+  <li><a href="#statistical-distributions" id="toc-statistical-distributions" class="nav-link active" data-scroll-target="#statistical-distributions">Statistical distributions</a></li>
+  <li><a href="#optimization-and-autodiff" id="toc-optimization-and-autodiff" class="nav-link" data-scroll-target="#optimization-and-autodiff">Optimization and Autodiff</a></li>
+  <li><a href="#working-with-r-in-julia" id="toc-working-with-r-in-julia" class="nav-link" data-scroll-target="#working-with-r-in-julia">Working with R in Julia</a></li>
   </ul>
 </nav>
     </div>
@@ -307,13 +342,19 @@ nav#TOC {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Julia for Statistics - a tutorial</h1>
+<h1 class="title">Statistics with Julia</h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Mattias Villani </p>
+          </div>
+  </div>
     
   
     
@@ -324,43 +365,61 @@ nav#TOC {
 </header>
 
 
-<!-- Place this tag in your head or just before your close body tag. -->
-<script async="" defer="" src="https://buttons.github.io/buttons.js"></script>
-<p><img src="misc/banner_image3.png" alt="AI generated banner image" class="center" width="100%"></p>
-<!-- Place this tag where you want the button to render. -->
-<p><a class="github-button" href="https://github.com/mattiasvillani/Julia4Stats" data-color-scheme="no-preference: dark; light: light; dark: dark;" data-size="large" data-show-count="true" aria-label="Star mattiasvillani/Julia4Stats on GitHub">Star</a></p>
-<section id="aim" class="level3">
-<h3 class="anchored" data-anchor-id="aim">Aim</h3>
-<p>This tutorial introduces the Julia programming language and its use for statistical analysis. The following topics will be covered:</p>
+<section id="statistical-distributions" class="level2">
+<h2 class="anchored" data-anchor-id="statistical-distributions">Statistical distributions</h2>
 <ul>
-<li>introduction to the Julia programming language</li>
-<li>the package manager and tooling</li>
-<li>managing data in Julia</li>
-<li>plots for statistics</li>
-<li>statistical distributions and tools</li>
-<li>likelihood inference using numerical optimization</li>
-<li>probabilistic programming for statistical inference using Turing.jl</li>
+<li><p>Julia has a fantastic unified system for statistical distributions, implemented mainly in the <code>Distributions.jl</code> package.</p></li>
+<li><p>Similar to Python, but different from R, <strong>distributions are objects</strong>.</p></li>
+<li><p>We can call functions on a <code>dist = Normal()</code> object, for example</p>
+<ul>
+<li><p><code>pdf(dist, 2.0)</code> computes the pdf at <code>x=2.0</code></p></li>
+<li><p><code>cdf(dist, 2.0)</code> computes the cdf at <code>x=2.0</code></p></li>
+<li><p><code>rand(dist)</code> generates random numbers from N(0,1)</p></li>
+<li><p><code>mean(dist)</code> and <code>var(dist)</code> returns the mean and variance.</p></li>
+</ul>
+<div id="b9b107c4" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Distributions</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>dist <span class="op">=</span> <span class="fu">Normal</span>(<span class="fl">1</span>,<span class="fl">3</span>) </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">pdf</span>(dist, <span class="fl">0</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cdf</span>(dist, <span class="fl">0</span>) </span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(dist, <span class="fl">0.5</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">rand</span>(dist, <span class="fl">10</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="2">
+<pre><code>10-element Vector{Float64}:
+  2.1540353732959083
+  1.7214466684941134
+ -0.9836629254822372
+ -1.4790014735025556
+  5.13886268285973
+ -3.1147530698455066
+  6.48192801370562
+  2.966911092385057
+ -4.378027923278169
+  3.5509214581890323</code></pre>
+</div>
+</div></li>
+<li><p>Scale-locations families are generated by addition and multiplication</p>
+<div id="38d29871" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Distributions</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fl">1</span> <span class="op">+</span> <span class="fl">2</span><span class="fu">*TDist</span>(<span class="fl">3</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">TDist</span>(μ, σ, ν) <span class="op">=</span> μ <span class="op">+</span> <span class="fu">σ*TDist</span>(ν)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">TDist</span>(<span class="fl">3</span>)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>dist <span class="op">=</span> <span class="fu">TDist</span>(<span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="fu">pdf</span>(dist, <span class="fl">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="3">
+<pre><code>0.1565904555044143</code></pre>
+</div>
+</div></li>
 </ul>
 </section>
-<section id="instructor" class="level3">
-<h3 class="anchored" data-anchor-id="instructor">Instructor</h3>
-<p><img src="./misc/villani_foto.jpg" width="15%"><br>
-<a href="https://mattiasvillani.com">Mattias Villani</a><br> Professor of Statistics<br> Stockholm University</p>
+<section id="optimization-and-autodiff" class="level2">
+<h2 class="anchored" data-anchor-id="optimization-and-autodiff">Optimization and Autodiff</h2>
+<p>The <a href="https://julianlsolvers.github.io/Optim.jl/stable/">Optim.jl</a> package is the main package for numerical function optimization.</p>
 </section>
-<section id="workshop-plan-and-schedule" class="level3">
-<h3 class="anchored" data-anchor-id="workshop-plan-and-schedule">Workshop plan and schedule</h3>
-<hr>
-<p><strong>Lecture 1 - The Julia programming language and tooling</strong><br> Time: 14.00-15.00 <br> Reading: <a href="./gettingstarted.html">Getting started with Julia</a> <br> Live demo: <a href="code/gettingstarted.jl">Basic Julia</a></p>
-<p>🍎 <em>leg stretcher</em></p>
-<p><strong>Lecture 2 - Working with data in Julia</strong><br> Time: 15.00-16.00 <br> Reading: <a href="./workingwithdata.html">Read, managing and plotting data</a> <br> Live demo: <a href="code/workingwithdata_dataframes.jl">DataFrames.jl</a> | <a href="code/workingwithdata_tidier.jl">Tidier.jl</a> | <a href="code/plotting.jl">Plots</a></p>
-<p>☕ <em>tea break</em></p>
-<p><strong>Lecture 3 - Statistics in Julia</strong><br> Time: 16.30-17.30 <br> Reading: <a href="./dist_optim_R.html">Distributions, Optimization, Interop with R and Python</a> <br> Live demo: <a href="code/distributions.jl">Distributions</a> | <a href="code/optimization.jl">Optimization</a> | <a href="code/interop.jl">Working with R and Python</a></p>
-<p>🍓 <em>leg stretcher</em></p>
-<p><strong>Lecture 4 - Probabilistic programming using Turing.jl</strong><br> Time: 17.30-18.30 <br> Reading: <a href="./turing.html">Probabilistic programming with Turing.jl</a><br></p>
-</section>
-<section id="more-material" class="level3">
-<h3 class="anchored" data-anchor-id="more-material">More material</h3>
-<p><a href="./resources.html">Books, courses and podcasts etc about Julia</a><br> <a href="./links.html">A collection of Julia links</a><br> <a href="./building_packages.html">Writing Julia packages</a><br> <a href="./packagemanager.html">Working with environments</a></p>
+<section id="working-with-r-in-julia" class="level2">
+<h2 class="anchored" data-anchor-id="working-with-r-in-julia">Working with R in Julia</h2>
+<p>The <a href="https://juliainterop.github.io/RCall.jl/stable/">Rcall.jl</a> package makes it possible to use R code, functions and packages from a Julia program.</p>
 
 
 </section>

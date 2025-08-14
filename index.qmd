@@ -52,14 +52,14 @@ Live demo: [DataFrames.jl](code/workingwithdata_dataframes.jl) | [Tidier.jl](cod
 
 **Lecture 3 - Statistics in Julia**<br> 
 Time: 16.30-17.30 <br>
-Reading: [Slides](figs/larry.png) <br>
+Reading: [Distributions, Optimization, Interop with R and Python](dist_optim_R.qmd) <br>
 Live demo: [Distributions](code/distributions.jl) |  [Optimization](code/optimization.jl) | [Working with R and Python](code/interop.jl)
 
 🍓 *leg stretcher* 
 
 **Lecture 4 - Probabilistic programming using Turing.jl**<br> 
 Time: 17.30-18.30 <br>
-Reading: [Slides](figs/larry.png)<br>
+Reading: [Probabilistic programming with Turing.jl](turing.qmd)<br>
 
 
 ### More material
