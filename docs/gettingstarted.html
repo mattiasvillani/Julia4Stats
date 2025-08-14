@@ -107,6 +107,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
+<style>
+/* Quarto right-margin TOC container */
+#quarto-margin-sidebar {
+  position: static !important;
+  top: auto !important;
+  max-height: none !important;
+  overflow: visible !important;
+}
+/* If your build uses Bootstrap's sticky helper inside the margin sidebar */
+#quarto-margin-sidebar .sticky-top {
+  position: static !important;
+  top: auto !important;
+}
+/* Fallback for older class names */
+.toc-sidebar, .toc-column {
+  position: static !important;
+  top: auto !important;
+}
+/* Keep the TOC itself non-sticky just in case */
+nav#TOC {
+  position: static !important;
+}
+</style>
 
 
 <link rel="stylesheet" href="styles.css">
@@ -304,17 +327,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Sections</h2>
+    <h2 id="toc-title">Contents</h2>
    
   <ul>
   <li><a href="#what-is-julia" id="toc-what-is-julia" class="nav-link active" data-scroll-target="#what-is-julia"><img src="figs/julialogo.svg" width="30" height="27"> What is Julia?</a></li>
-  <li><a href="#come-for-the-speed-stay-for-the-rest" id="toc-come-for-the-speed-stay-for-the-rest" class="nav-link" data-scroll-target="#come-for-the-speed-stay-for-the-rest"><img src="figs/julialogo.svg" width="30" height="27"> Come for the speed, stay for the rest</a></li>
-  <li><a href="#why-julia-for-a-statistician" id="toc-why-julia-for-a-statistician" class="nav-link" data-scroll-target="#why-julia-for-a-statistician"><img src="figs/julialogo.svg" width="30" height="27"> Why Julia (for a Statistician)?</a></li>
+  <li><a href="#julia-is-fast" id="toc-julia-is-fast" class="nav-link" data-scroll-target="#julia-is-fast"><img src="figs/julialogo.svg" width="30" height="27"> Julia is fast</a></li>
+  <li><a href="#why-julia-for-statistics" id="toc-why-julia-for-statistics" class="nav-link" data-scroll-target="#why-julia-for-statistics"><img src="figs/julialogo.svg" width="30" height="27"> Why Julia (for Statistics)?</a></li>
   <li><a href="#installing-julia" id="toc-installing-julia" class="nav-link" data-scroll-target="#installing-julia"><img src="figs/julialogo.svg" width="30" height="27"> Installing Julia</a></li>
   <li><a href="#the-julia-repl-console" id="toc-the-julia-repl-console" class="nav-link" data-scroll-target="#the-julia-repl-console"><img src="figs/terminalicon.png" class="img-fluid" width="30"> The Julia REPL (console)</a></li>
-  <li><a href="#the-package-manager-a-first-look" id="toc-the-package-manager-a-first-look" class="nav-link" data-scroll-target="#the-package-manager-a-first-look"><img src="figs/pkgicon.png" class="img-fluid" width="30"> The package manager: a first look</a></li>
+  <li><a href="#the-package-manager" id="toc-the-package-manager" class="nav-link" data-scroll-target="#the-package-manager"><img src="figs/pkgicon.png" class="img-fluid" width="30"> The package manager</a></li>
   <li><a href="#running-programs" id="toc-running-programs" class="nav-link" data-scroll-target="#running-programs"><img src="figs/terminalicon.png" class="img-fluid" width="30"> Running programs</a></li>
-  <li><a href="#vs-code---the-rstudio-for-julia" id="toc-vs-code---the-rstudio-for-julia" class="nav-link" data-scroll-target="#vs-code---the-rstudio-for-julia"><img src="./misc/vscodeicon.png" class="img-fluid" width="25"> VS code - the Rstudio for Julia</a></li>
+  <li><a href="#vs-code---rstudio-for-julia" id="toc-vs-code---rstudio-for-julia" class="nav-link" data-scroll-target="#vs-code---rstudio-for-julia"><img src="./misc/vscodeicon.png" class="img-fluid" width="25"> VS code - Rstudio for Julia</a></li>
   <li><a href="#notebooks" id="toc-notebooks" class="nav-link" data-scroll-target="#notebooks"><img src="figs/Jupyter_logo.png" class="img-fluid" width="25"> Notebooks</a></li>
   <li><a href="#live-demo" id="toc-live-demo" class="nav-link" data-scroll-target="#live-demo">💻 Live demo</a></li>
   </ul>
@@ -358,16 +381,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p><strong>Fast</strong>, almost like C/C++, if done right.</p></li>
 <li><p><strong>Just-in-time (JIT) compiled</strong>. Code is compiled to machine code on the fly.</p></li>
 <li><p>Numerical linear algebra similar to Matlab.</p></li>
-<li><p>Multiple dispatch with sophisticated type system makes the Julia <strong>highly composable</strong>.</p></li>
+<li><p>Macros inspired by Lisp.</p></li>
+<li><p><strong>Multiple dispatch</strong> with sophisticated <strong>type system</strong> makes Julia <strong>highly composable</strong>.</p></li>
 </ul>
-<p><img src="images/clipboard-2782725170.jpeg" class="img-fluid" width="121"><img src="images/clipboard-2658870739.jpeg" class="img-fluid" width="125"><img src="images/clipboard-1358662862.jpeg" class="img-fluid" width="125"><img src="images/clipboard-1716984901.jpeg" class="img-fluid" width="125"></p>
+<p><img src="images/clipboard-1358662862.jpeg" class="img-fluid" width="125"><img src="images/clipboard-2658870739.jpeg" class="img-fluid" width="125"><img src="images/clipboard-2782725170.jpeg" class="img-fluid" width="121"><img src="images/clipboard-1716984901.jpeg" class="img-fluid" width="125"></p>
 </section>
-<section id="come-for-the-speed-stay-for-the-rest" class="level2">
-<h2 class="anchored" data-anchor-id="come-for-the-speed-stay-for-the-rest"><img src="figs/julialogo.svg" width="30" height="27"> Come for the speed, stay for the rest</h2>
+<section id="julia-is-fast" class="level2">
+<h2 class="anchored" data-anchor-id="julia-is-fast"><img src="figs/julialogo.svg" width="30" height="27"> Julia is fast</h2>
 <p><img src="figs/benchmarks.svg" class="img-fluid"></p>
 </section>
-<section id="why-julia-for-a-statistician" class="level2">
-<h2 class="anchored" data-anchor-id="why-julia-for-a-statistician"><img src="figs/julialogo.svg" width="30" height="27"> Why Julia (for a Statistician)?</h2>
+<section id="why-julia-for-statistics" class="level2">
+<h2 class="anchored" data-anchor-id="why-julia-for-statistics"><img src="figs/julialogo.svg" width="30" height="27"> Why Julia (for Statistics)?</h2>
 <ul>
 <li><p><strong>Speed</strong>. No need for a two language combo (R/Python <strong>and</strong> C++).</p></li>
 <li><p><strong>Good packages</strong> for Statistics and Data Analysis.</p></li>
@@ -406,7 +430,7 @@ Avoid Linux repositories
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>It is not recommended to install Julia from repositories on Linux since the versions there can be rather old.</p>
+<p>It is not recommended to install Julia from repositories on Linux since the versions can be rather old.</p>
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled">
@@ -424,15 +448,19 @@ Uninstall juliaup
 </div>
 <p>Julia can now be started by typing <code>julia</code> in the terminal (you may need to restart the shell/terminal so your system can find it). You should see something like this:</p>
 <p><img src="figs/juliastart.png" class="img-fluid"></p>
-<p>This what is known as the console in the R world. In Julia we tend to call it the <strong>REPL</strong> (Read-Evaluate-Print Loop). The REPL is where you can interactively execute code and view the output. We will soon use VS Code as our main working environment (IDE, similar to RStudio, but much more general), but let’s take a first dive into Julia directly in the REPL.</p>
 </section>
 <section id="the-julia-repl-console" class="level2">
 <h2 class="anchored" data-anchor-id="the-julia-repl-console"><img src="figs/terminalicon.png" class="img-fluid" width="30"> The Julia REPL (console)</h2>
-<p>The REPL can be used to evaluate commands as in any interpreted language.</p>
-<p>Old commands can be found quite nicely in the REPL:</p>
 <ul>
-<li><p>arrow-up and arrow-down goes back in command history. Typing, for example, <code>myf</code> and then arrow-up cycles old commands that start with <code>myf</code>. Ctrl+r gives more advanced reverse-search.</p></li>
-<li><p>past commands can be edited and re-used.</p></li>
+<li><p>The Julia <strong>REPL</strong> (Read-Evaluate-Print Loop) is where you can <strong>interactively execute code</strong> and view the output (Console in R).</p></li>
+<li><p>We will soon use VS Code as our main working environment (IDE, similar to RStudio), with the REPL as one component.</p></li>
+</ul>
+<p>The Julia REPL is very good:</p>
+<ul>
+<li><p>arrow-up and arrow-down goes back in <strong>command history</strong>.</p></li>
+<li><p><strong>filtered search in history</strong>. Start typing a word and then arrow-up will cycles though old commands that start with those letters.</p></li>
+<li><p>Ctrl+r gives more advanced <strong>reverse-search</strong>.</p></li>
+<li><p><strong>Past commands can be edited</strong> and re-used.</p></li>
 </ul>
 <p><img src="figs/navigateREPL.gif" class="img-fluid" width="500"></p>
 <p>The REPL has several prompt modes, for example:</p>
@@ -450,7 +478,7 @@ Uninstall juliaup
 <li><p>Ctrl + C to interupt execution</p></li>
 <li><p>Ctrl + L to clear the REPL</p></li>
 </ul>
-<div class="callout callout-style-simple callout-note callout-titled">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -468,9 +496,13 @@ Exercise
 </div>
 </div>
 </section>
-<section id="the-package-manager-a-first-look" class="level2">
-<h2 class="anchored" data-anchor-id="the-package-manager-a-first-look"><img src="figs/pkgicon.png" class="img-fluid" width="30"> The package manager: a first look</h2>
-<p>Similar to R, but a bit more extreme, most things in Julia are available in packages. Packages are typically named with a .jl ending, for example the <em>Distributions.jl</em> package contains many statistical distributions. Julia packages are hosted on GitHub and managed by the Julia <strong>General Registry</strong>.</p>
+<section id="the-package-manager" class="level2">
+<h2 class="anchored" data-anchor-id="the-package-manager"><img src="figs/pkgicon.png" class="img-fluid" width="30"> The package manager</h2>
+<ul>
+<li><p>Similar to R, but a bit more extreme, most things in Julia are available in <strong>packages</strong>.</p></li>
+<li><p>Packages are typically named with a .jl ending, for example the <em>Distributions.jl</em> package contains many statistical distributions.</p></li>
+<li><p>Julia packages are hosted on <strong>GitHub</strong> and managed by the Julia <strong>General Registry</strong>.</p></li>
+</ul>
 <p>Here are some of the most common packages for Statistics:</p>
 <ul>
 <li><p><a href="https://docs.julialang.org/en/v1/stdlib/Statistics/">Statistics.jl</a> (mean, variance, quantile etc)</p></li>
@@ -504,13 +536,13 @@ Exercise
 <p>Here is comparison of package handling in R, Julia and Python.</p>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 8%">
-<col style="width: 6%">
-<col style="width: 27%">
-<col style="width: 6%">
-<col style="width: 21%">
-<col style="width: 6%">
-<col style="width: 20%">
+<col style="width: 9%">
+<col style="width: 2%">
+<col style="width: 30%">
+<col style="width: 2%">
+<col style="width: 23%">
+<col style="width: 2%">
+<col style="width: 23%">
 </colgroup>
 <tbody>
 <tr class="odd">
@@ -558,7 +590,7 @@ or <strong>Conda</strong></td>
 </tbody>
 </table></li>
 </ul>
-<div class="callout callout-style-simple callout-note callout-titled">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -599,7 +631,7 @@ Exercise
 <span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="fu">savefig</span>(plt, <span class="st">"myplot.pdf"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>We can run this code in terminal with the command</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">julia</span> plotfunc.jl</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="callout callout-style-simple callout-note callout-titled">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -613,8 +645,8 @@ Exercise
 </div>
 </div>
 </section>
-<section id="vs-code---the-rstudio-for-julia" class="level2">
-<h2 class="anchored" data-anchor-id="vs-code---the-rstudio-for-julia"><img src="./misc/vscodeicon.png" class="img-fluid" width="25"> VS code - the Rstudio for Julia</h2>
+<section id="vs-code---rstudio-for-julia" class="level2">
+<h2 class="anchored" data-anchor-id="vs-code---rstudio-for-julia"><img src="./misc/vscodeicon.png" class="img-fluid" width="25"> VS code - Rstudio for Julia</h2>
 <section id="vs-code" class="level4">
 <h4 class="anchored" data-anchor-id="vs-code">VS code</h4>
 <p>The most common way to work with Julia is using the <a href="https://code.visualstudio.com/">VS code</a> IDE (similar to RStudio, but more general). VS code is free and open source. It can be installed from <a href="https://code.visualstudio.com/Download">here</a>. There are many many extensions or plug-ins for VS code for doing mostly anything you want. Here is a <a href="https://www.youtube.com/watch?v=KMxo3T_MTvY">100 sec video about VS code</a>. The <a href="https://code.visualstudio.com/docs/getstarted/getting-started">official getting started guide</a> is quite good.</p>
@@ -636,7 +668,7 @@ Exercise
 <p><img src="figs/JuliaShortcuts1.png" class="img-fluid" width="651"></p>
 <p><code>shift + enter</code> or <code>shift + ctrl</code> on a line in the editor starts the Julia REPL automatically. However, if you close the REPL, you have to use the command <u>Julia: Restart REPL</u> to start a new one.</p>
 <p>If you prefer to not have the output inline in the editor, go to Julia extension settings and search for <em>Execution: Result Type</em>, and set it to REPL.</p>
-<div class="callout callout-style-simple callout-note callout-titled">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -679,8 +711,13 @@ Exercise
 <section id="live-demo" class="level2">
 <h2 class="anchored" data-anchor-id="live-demo">💻 Live demo</h2>
 <p>Live demo of basic Julia roughly based on <a href="code/gettingstarted.jl">this script</a>.</p>
+<section id="julia-type-hierarchy-for-number-type" class="level4">
+<h4 class="anchored" data-anchor-id="julia-type-hierarchy-for-number-type">Julia type hierarchy for Number type</h4>
+<p><img src="figs/numbertypes.png" class="img-fluid"></p>
+<p>Source: <a href="https://discourse.julialang.org/t/diagram-with-all-julia-types/5018">cormullion</a>?</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

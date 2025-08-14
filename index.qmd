@@ -46,12 +46,14 @@ Live demo: [Basic Julia](code/gettingstarted.jl)
 **Lecture 2 - Working with data in Julia**<br> 
 Time: 15.00-16.00 <br>
 Reading: [Read, managing and plotting data](workingwithdata.qmd) <br>
+Live demo: [DataFrames.jl](code/workingwithdata_dataframes.jl) | [Tidier.jl](code/workingwithdata_tidier.jl) | [Plots](code/plotting.jl)
 
 ☕ *tea break*
 
 **Lecture 3 - Statistics in Julia**<br> 
 Time: 16.30-17.30 <br>
 Reading: [Slides](figs/larry.png) <br>
+Live demo: [Distributions](code/distributions.jl) |  [Optimization](code/optimization.jl) | [Working with R and Python](code/interop.jl)
 
 🍓 *leg stretcher* 
 
@@ -64,6 +66,6 @@ Reading: [Slides](figs/larry.png)<br>
 [Books, courses and podcasts etc about Julia](resources.qmd)<br>
 [A collection of Julia links](links.qmd)<br>
 [Writing Julia packages](building_packages.qmd)<br>
-[Working with environments](env.qmd)
+[Working with environments](packagemanager.qmd)
 
 

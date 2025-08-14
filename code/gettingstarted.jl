@@ -18,6 +18,12 @@ for i in 1:10
     println("Hello, World! $i") # String interpolation with $-sign
 end
 
+a = 1
+while a < 10
+    println("a is $a")
+    a += 1
+end
+
 # Python-style enumerate loop
 for (counter, item) in enumerate(["a", "b", "c"])
     println("Item $counter is $item")
@@ -33,8 +39,10 @@ function myfunc(x)
 end
 myfunc(3)
 
+mysimplefunc(x) = x^2 + 2x + 1 # Shorter syntax for simple functions
+
 # Function with multiple arguments and default values
-function f(x,y = 1)
+function f(x, y = 1)
     return x^2 + y^2
 end
 f(4,2)
@@ -67,6 +75,7 @@ A[:,:,1] # Accessing the first "slice" of the 3D array
 A[2,2,1] # Accessing the element at row 2, column 2, slice 1
 I(3) # Identity matrix of size 3x3
 
+
 A = randn(10,3)
 C = rand(3,3)
 b = [1, 2, 3]
@@ -81,7 +90,10 @@ eigvecs(D)
 kron(A, D) # Kronecker product of A with itself
 Symmetric(D) # Makes A symmetric if it isn't because of floating point numerics
 
-# Unicode works in Julia: type \alpha and Tab to get α
+F = [A; C] # Concatenating matrices vertically, same as vcat(A, C)
+[A randn(10,2)] # Concatenating matrices horizontally, same as hcat(A, randn(10,2))
+
+# Unicode is allowed in Julia: type \alpha and Tab to get α
 n = 100
 x = randn(n) # covariate data
 X = [ones(n) x]
@@ -122,7 +134,10 @@ quantile(v, [0.025,0.5,0.975]) # Quantiles of vector v
 
 # Broadcasting
 x = [1, 2, 3]
-sin(x)              # gives an error sin(x) is not defined for arrays
+y = [4, 5, 6]
+x*y                     # error: x*y is not defined for vectors x'*y is
+x .* y                  # element-wise multiplication with dot operator
+sin(x)                  # gives an error sin(x) is not defined for arrays
 sin.(x) # broadcasting with dot operator. The sin function is applied to each element of x.
 sin.(cos.(x))           # fused broadcasting, only one loop is created.
 sin.(A)                 # Broadcasting works for matrices and arrays as well.
@@ -157,6 +172,39 @@ addEmUp(1.0, 2 + 3*im) # Works now, dispatched to the generic method with type A
 
 addEmUp(3, "hej")      # Does not work, dispatches to the generic method and fails.
 
-Int <: Real # Int is a subtype of Real
-Real <: Any # Real is a subtype of Any
+Int <: Real     # Int is a subtype of Real
+Real <: Number  # Real is a subtype of Number
+Number <: Any   # Real is a subtype of Any
 Real <: Complex
+Complex <: Number
+String <: Number
+
+# Julia is JIT compiled, so important that compiler can infer types (type stable)
+function clipzero(x)
+    if x < 0
+        return 0
+    else
+        return x
+    end
+end
+clipzero(2)     # Returns Int64
+clipzero(2.0)   # Returns Float64
+clipzero(-2)    # Returns Int64
+clipzero(-2.0)  # Returns Int64
+# The return value TYPE depends on the VALUE of the input.
+
+@code_warntype clipzero(2.0) # Function is type not type stable. Red text!
+
+function clipzero_stable(x)
+    if x < 0
+        return zero(x) # zero(x) returns the same type as x
+    else
+        return x
+    end
+end
+clipzero_stable(2)     # Returns Int64
+clipzero_stable(2.0)   # Returns Float64
+clipzero_stable(-2)    # Returns Int64
+clipzero_stable(-2.0)  # Returns Float64
+
+@code_warntype clipzero_stable(2.0) # Function is type stable. No red text!

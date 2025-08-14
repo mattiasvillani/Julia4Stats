@@ -4,21 +4,63 @@
     "href": "index.html",
     "title": "Julia for Statistics - a tutorial",
     "section": "",
-    "text": "Star\n\nAim\nThis tutorial introduces the Julia programming language and its use for statistical analysis. The following topics will be covered:\n\nintroduction to the Julia programming language\nthe package manager and tooling\nmanaging data in Julia\nplots for statistics\nstatistical distributions and tools\nlikelihood inference using numerical optimization\nprobabilistic programming for statistical inference using Turing.jl\n\n\n\nInstructor\n\nMattias Villani Professor of Statistics Stockholm University\n\n\nWorkshop plan and schedule\n\nLecture 1 - The Julia programming language and tooling Time: 14.00-15.00  Reading: Getting started with Julia  Live demo: Basic Julia\n🍎 leg stretcher\nLecture 2 - Working with data in Julia Time: 15.00-16.00  Reading: Read, managing and plotting data \n☕ tea break\nLecture 3 - Statistics in Julia Time: 16.30-17.30  Reading: Slides \n🍓 leg stretcher\nLecture 4 - Probabilistic programming using Turing.jl Time: 17.30-18.30  Reading: Slides\n\n\nMore material\nBooks, courses and podcasts etc about Julia A collection of Julia links Writing Julia packages Working with environments"
+    "text": "Star\n\nAim\nThis tutorial introduces the Julia programming language and its use for statistical analysis. The following topics will be covered:\n\nintroduction to the Julia programming language\nthe package manager and tooling\nmanaging data in Julia\nplots for statistics\nstatistical distributions and tools\nlikelihood inference using numerical optimization\nprobabilistic programming for statistical inference using Turing.jl\n\n\n\nInstructor\n\nMattias Villani Professor of Statistics Stockholm University\n\n\nWorkshop plan and schedule\n\nLecture 1 - The Julia programming language and tooling Time: 14.00-15.00  Reading: Getting started with Julia  Live demo: Basic Julia\n🍎 leg stretcher\nLecture 2 - Working with data in Julia Time: 15.00-16.00  Reading: Read, managing and plotting data  Live demo: DataFrames.jl | Tidier.jl | Plots\n☕ tea break\nLecture 3 - Statistics in Julia Time: 16.30-17.30  Reading: Slides  Live demo: Distributions | Optimization | Working with R and Python\n🍓 leg stretcher\nLecture 4 - Probabilistic programming using Turing.jl Time: 17.30-18.30  Reading: Slides\n\n\nMore material\nBooks, courses and podcasts etc about Julia A collection of Julia links Writing Julia packages Working with environments"
   },
   {
-    "objectID": "slides/install.html",
-    "href": "slides/install.html",
-    "title": "Getting started with Julia and VS Code",
+    "objectID": "workingwithdata.html",
+    "href": "workingwithdata.html",
+    "title": "Working with data",
     "section": "",
-    "text": "The recommended way to install Julia is using a little tool called juliaup . Benefits of juliaup :\n\neasy install of Julia\nallows you to switch between different versions of Julia (see juliaup --help)\nnotifies when a new Julia version is available.\n\nInstructions on how to install juliaup are here. In short:\n\n Linux: run the following command in terminal:\ncurl -fsSL https://install.julialang.org | sh\nMac: run the following command in terminal:\ncurl -fsSL https://install.julialang.org | sh\n Windows, type this in the terminal to install from Windows store:\nwinget install --name Julia --id 9NJNWW8PVKMN -e -s msstore\n\n\n\n\n\n\n\nAvoid Linux repositories\n\n\n\nIt is not recommended to install Julia from repositories on Linux since the versions there can be rather old.\n\n\n\n\n\n\n\n\nUninstall juliaup\n\n\n\nJuliaup can be uninstalled with the terminal command: juliaup self uninstall\n\n\nJulia can now be started by typing julia in the terminal (you may need to restart the shell/terminal so your system can find it). You should see something like this:\n\nThis what is known as the console in the R world. In Julia we tend to call it the REPL (Read-Evaluate-Print Loop). The REPL is where you can interactively execute code and view the output. We will soon use VS Code as our main working environment (IDE, similar to RStudio, but much more general), but let’s take a first dive into Julia directly in the REPL."
+    "text": "CSV files can be read with the CSV.jl package:\n\nusing CSV, DataFrames\ntitanic = CSV.read(\"data/titanic.csv\", DataFrame);\nfirst(titanic, 3)\n\n3×8 DataFrame\n\n\n\nRow\nsurvived\npclass\nname\nsex\nage\nsibling/spouse\nparent/child\nfare\n\n\n\nInt64\nInt64\nString\nString7\nFloat64\nInt64\nInt64\nFloat64\n\n\n\n\n1\n0\n3\nMr. Owen Harris Braund\nmale\n22.0\n1\n0\n7.25\n\n\n2\n1\n1\nMrs. John Bradley (Florence Briggs Thayer) Cumings\nfemale\n38.0\n1\n0\n71.2833\n\n\n3\n1\n3\nMiss. Laina Heikkinen\nfemale\n26.0\n0\n0\n7.925\n\n\n\n\n\n\n\nUse CSV.Rows or CSV.Chunks for reading only some observations at the time.\nWith StringEncodings.jl package, CSV can handle other character encodings.\nData can be read from an internet url with the help of the standard library Downloads.jl:\n\n\nusing CSV, DataFrames, Downloads\nurl = \"https://github.com/mattiasvillani/Julia4Stats/raw/main/data/titanic.csv\";\nhttp_response = Downloads.download(url);\ntitanic = CSV.read(http_response, DataFrame);\nfirst(titanic, 3)\n\n3×8 DataFrame\n\n\n\nRow\nsurvived\npclass\nname\nsex\nage\nsibling/spouse\nparent/child\nfare\n\n\n\nInt64\nInt64\nString\nString7\nFloat64\nInt64\nInt64\nFloat64\n\n\n\n\n1\n0\n3\nMr. Owen Harris Braund\nmale\n22.0\n1\n0\n7.25\n\n\n2\n1\n1\nMrs. John Bradley (Florence Briggs Thayer) Cumings\nfemale\n38.0\n1\n0\n71.2833\n\n\n3\n1\n3\nMiss. Laina Heikkinen\nfemale\n26.0\n0\n0\n7.925"
   },
   {
-    "objectID": "slides/install.html#the-package-manager-a-first-look",
-    "href": "slides/install.html#the-package-manager-a-first-look",
-    "title": "Getting started with Julia and VS Code",
-    "section": " The package manager: a first look",
-    "text": "The package manager: a first look\nSimilar to R, but a bit more extreme, most things in Julia are available in packages. Packages are typically named with a .jl ending, for example the Distributions.jl package contains many statistical distributions. Julia packages are hosted on GitHub and managed by the Julia General Registry.\nHere are some of the most common packages for Statistics:\n\nStatistics.jl (mean, variance, quantile etc)\nDistributions.jl (most standard statistical distributions, with rand, pdf, cdf etc)\nLinearAlgebra.jl\nDataFrames.jl (tabular data manipulation)\nTidier.jl (R’s tidyverse, Julia-style)\nPlots.jl (one of the most widely used plotting systems)\nOptim.jl (numerical optimization)\nGLM.jl (generalized linear models using R’s formula syntax)\nTuring.jl (probabilistic programming, similar to Stan)\nRCall.jl (using R code in Julia)\nDifferentiationInterface.jl (interface to Julia’s many autodiff libraries)\nRDatasets.jl (the R datasets that we all love, in Julia)\n\nThe package manager is most easily accessed by typing ] to get into Pkg mode. The prompt changes to (@v.11) pkg&gt; which means that you are in package mode in the default environment v.11 (if you are using Julia 1.11, more on environments later).\nSome useful commands in Pkg mode:\n\nstatus, shows the packages installed in the currently active environment\nadd PkgName (installs the PkgName.jl package, for example Distributions.jl)\nrm PkgName (removes the PkgName.jl package)\nupdate (checks registry and updates packages)\n\nWhen we write, for example, ] add Distributions we mean to type ] and then add Distributions on the Pkg prompt.\nOnce a package has been added it can be used from the Julian prompt (just backspace out from Pkg mode) with the using command: using PkgName . This loads the package in memory and its functions and other objects can now be used.\nThere are other ways to use a package, like import. The main difference is that\n\nusing exposes all exported function directly without needing to call then with the package name as prefix, e.g. myfunc(3).\nimport does not expose exported function directly and requires a call to function to be prefixed with the package name, e.g. PkgName.myfunc(3). This is closer to Python’s namespace convention, but namespaces are less essential in Julia due to multiple dispatch and Julias clever handling of function (method) name collisions.\nIt is also possible to use only specific functions from a package: using PkgName: myfunc, otherfunc.\nHere is comparison of package handling in R, Julia and Python.\n\n\n\n\n\n\n\n\n\n\n\n\nLanguage\n\nRepository\n\nInstall packages\n\nUse packages\n\n\nR\n\nCRAN (Comprehensive R Archive Network)\n\ninstall.packages(\"pkgname\")\n\nlibrary(pkgname)\n\n\nJulia\n\nGeneral registry (hosted on GitHub)\n\n] add PkgName\n\nusing PkgName\nimport PkgName\nimport PkgName: myfunc\n\n\nPython\n\nPyPI (Python Package Index)\nor Conda\n\npip install pkgname\nconda install pkgname\n\nfrom pkgname import *\nimport pkgname as pk\nfrom pkgname import myfunc\n\n\n\n\n\n\n\n\n\n\nExercise\n\n\n\n\nAdd the Distributions.jl package in the package manager. Type status after install to see that it indeed was added.\nUse the Distributions.jl package by the using command from the Julian prompt.\nUse the package to define a normal distribution object with mean 2 and and standard deviation 3. Go into help mode and search for Normal to see how this is done. Call the new object dist.\nGenerate 10 random draws from this normal distribution using the rand function on the normal distribution object dist.\nEvaluate the pdf of this normal at x=1 using the pdf function on the normal distribution object dist."
+    "objectID": "workingwithdata.html#read-and-writing-data-in-julia",
+    "href": "workingwithdata.html#read-and-writing-data-in-julia",
+    "title": "Working with data",
+    "section": "",
+    "text": "CSV files can be read with the CSV.jl package:\n\nusing CSV, DataFrames\ntitanic = CSV.read(\"data/titanic.csv\", DataFrame);\nfirst(titanic, 3)\n\n3×8 DataFrame\n\n\n\nRow\nsurvived\npclass\nname\nsex\nage\nsibling/spouse\nparent/child\nfare\n\n\n\nInt64\nInt64\nString\nString7\nFloat64\nInt64\nInt64\nFloat64\n\n\n\n\n1\n0\n3\nMr. Owen Harris Braund\nmale\n22.0\n1\n0\n7.25\n\n\n2\n1\n1\nMrs. John Bradley (Florence Briggs Thayer) Cumings\nfemale\n38.0\n1\n0\n71.2833\n\n\n3\n1\n3\nMiss. Laina Heikkinen\nfemale\n26.0\n0\n0\n7.925\n\n\n\n\n\n\n\nUse CSV.Rows or CSV.Chunks for reading only some observations at the time.\nWith StringEncodings.jl package, CSV can handle other character encodings.\nData can be read from an internet url with the help of the standard library Downloads.jl:\n\n\nusing CSV, DataFrames, Downloads\nurl = \"https://github.com/mattiasvillani/Julia4Stats/raw/main/data/titanic.csv\";\nhttp_response = Downloads.download(url);\ntitanic = CSV.read(http_response, DataFrame);\nfirst(titanic, 3)\n\n3×8 DataFrame\n\n\n\nRow\nsurvived\npclass\nname\nsex\nage\nsibling/spouse\nparent/child\nfare\n\n\n\nInt64\nInt64\nString\nString7\nFloat64\nInt64\nInt64\nFloat64\n\n\n\n\n1\n0\n3\nMr. Owen Harris Braund\nmale\n22.0\n1\n0\n7.25\n\n\n2\n1\n1\nMrs. John Bradley (Florence Briggs Thayer) Cumings\nfemale\n38.0\n1\n0\n71.2833\n\n\n3\n1\n3\nMiss. Laina Heikkinen\nfemale\n26.0\n0\n0\n7.925"
+  },
+  {
+    "objectID": "workingwithdata.html#managing-data",
+    "href": "workingwithdata.html#managing-data",
+    "title": "Working with data",
+    "section": "Managing data",
+    "text": "Managing data\n DataFrames.jl is the original dataframe package in Julia.\n\nConstruct DataFrame (labeled matrix/table) using different approaches.\n\n\nusing DataFrames\ndf = DataFrame(\n    name = [\"Alice\", \"Bob\", \"Charlie\"],\n    age  = [25, 30, 35],\n    score = [88, 92, 95]\n)\n\n3×3 DataFrame\n\n\n\nRow\nname\nage\nscore\n\n\n\nString\nInt64\nInt64\n\n\n\n\n1\nAlice\n25\n88\n\n\n2\nBob\n30\n92\n\n\n3\nCharlie\n35\n95\n\n\n\n\n\n\n\nDataFrames.jl has some data wrangling functions like transform, filter, combine etc.\n\n\ndf2 = transform(df, :age =&gt; (x -&gt; 2x) =&gt; :age_doubled)\n\n3×4 DataFrame\n\n\n\nRow\nname\nage\nscore\nage_doubled\n\n\n\nString\nInt64\nInt64\nInt64\n\n\n\n\n1\nAlice\n25\n88\n50\n\n\n2\nBob\n30\n92\n60\n\n\n3\nCharlie\n35\n95\n70\n\n\n\n\n\n\nThe data frame can be modfied in place with the Julia convention to use exclamation mark (!) to denote a mutating function:\n\ntransform!(df, :age =&gt; (x -&gt; 2x) =&gt; :age_doubled)      # Modify df in place\n\n3×4 DataFrame\n\n\n\nRow\nname\nage\nscore\nage_doubled\n\n\n\nString\nInt64\nInt64\nInt64\n\n\n\n\n1\nAlice\n25\n88\n50\n\n\n2\nBob\n30\n92\n60\n\n\n3\nCharlie\n35\n95\n70\n\n\n\n\n\n\nWe can select a subset of the variables\n\ndf_selected = select(df, :name, :age_doubled)\n\n3×2 DataFrame\n\n\n\nRow\nname\nage_doubled\n\n\n\nString\nInt64\n\n\n\n\n1\nAlice\n50\n\n\n2\nBob\n60\n\n\n3\nCharlie\n70\n\n\n\n\n\n\nOr filter out observations:\n\ndf_filtered = filter(:age =&gt; &gt;(28), df)\n\n2×4 DataFrame\n\n\n\nRow\nname\nage\nscore\nage_doubled\n\n\n\nString\nInt64\nInt64\nInt64\n\n\n\n\n1\nBob\n30\n92\n60\n\n\n2\nCharlie\n35\n95\n70\n\n\n\n\n\n\n DataFramesMeta.jl uses Julia macros to @chain (pipe) together data manipulations, inspired by tidyverse in R.\n\nusing DataFramesMeta\ndf_extra = DataFrame(\n    name = [\"Alice\", \"Bob\", \"Diana\"],\n    city = [\"Stockholm\", \"Gothenburg\", \"Malmö\"]\n)\nresult = @chain df begin\n    @transform(:age_doubled = 2 .* :age)\n    @subset(_, :score .&gt; 90)       # pipes to first argument, here explicitly using _\n    @select(:name, :score, :age_doubled) \n    leftjoin(df_extra, on = :name)          # normal DataFrames function\nend\n\n2×4 DataFrame\n\n\n\nRow\nname\nscore\nage_doubled\ncity\n\n\n\nString\nInt64\nInt64\nString?\n\n\n\n\n1\nBob\n92\n60\nGothenburg\n\n\n2\nCharlie\n95\n70\nmissing\n\n\n\n\n\n\n TidierData.jl is a Julia re-implementation of the dplyr and tidyr packages from R.\n Tidier.jl is meta package, similar to the tidyverse package in R.\nusing CSV, DataFrames, Tidier\n\n# Read data from a URL using the standard library Downloads\nurl = \"https://github.com/mattiasvillani/Julia4Stats/raw/main/data/titanic.csv\";\nhttp_response = Downloads.download(url);\ntitanic = CSV.read(http_response, DataFrame)\n\n## TidierData.jl for data wrangling using @chain macro\ntitanic2 = @chain titanic begin\n    @mutate(survived = survived == 1)\n    @mutate(first_class = pclass == 1)\n    @filter(fare &gt; 10)\n    @select(name, survived, age, sex, first_class)\nend"
+  },
+  {
+    "objectID": "workingwithdata.html#plotting-data",
+    "href": "workingwithdata.html#plotting-data",
+    "title": "Working with data",
+    "section": "Plotting data",
+    "text": "Plotting data\n Plots.jl - probably the most widely used\n Makie.jl - gaining popularity, advanced features\n TidierPlots.jl - Julia implementation of R’s ggplot2.\n Plotly.jl interface to the plot.ly library.\nand many many more."
+  },
+  {
+    "objectID": "workingwithdata.html#plots",
+    "href": "workingwithdata.html#plots",
+    "title": "Working with data",
+    "section": "Plots",
+    "text": "Plots\n Plots.jl - a meta plotting package with many backends\n Makie.jl - gaining popularity, advanced features\n TidierPlots.jl - Julia implementation of R’s ggplot2.\n Plotly.jl interface to the plot.ly library.\nand many many more.\nHere is an example using Plots.jl to plot the mtcars data from Rdatasets.jl\n\nusing Plots, LaTeXStrings, RDatasets, GLM\n\nmtcars = dataset(\"datasets\", \"mtcars\")\n\n# Make a scatter plot of Horsepower vs Miles per gallon\nscatter(mtcars.HP, mtcars.MPG, \n     xlabel = \"Horsepower\", ylabel = \"Miles per gallon\",\n     title = \"MPG vs Horsepower\", label = \"Data points\", \n     legend = :topright, color = :blue)\n\n# Fit a linear model using GLM.jl\nusing GLM\nlm_model = lm(@formula(MPG ~ HP), mtcars)\n\n# Add the fitted line to the plot, note the mutating plot! function\nplot!(mtcars.HP, predict(lm_model), \n     label = \"Fitted line\", color = :red, linewidth = 2)  \n\n# Add a LaTeX string to the title\nβhat = round.(coef(lm_model), digits = 3)\nplot!(title = L\"\\beta_0 = %$(βhat[1])\"* \" and \"* L\"\\beta_1 = %$(βhat[2])\")"
+  },
+  {
+    "objectID": "workingwithdata.html#some-random-examples",
+    "href": "workingwithdata.html#some-random-examples",
+    "title": "Working with data",
+    "section": "Some random examples",
+    "text": "Some random examples"
+  },
+  {
+    "objectID": "workingwithdata.html#makie.jl-example",
+    "href": "workingwithdata.html#makie.jl-example",
+    "title": "Working with data",
+    "section": "Makie.jl example",
+    "text": "Makie.jl example"
+  },
+  {
+    "objectID": "workingwithdata.html#switching-backends",
+    "href": "workingwithdata.html#switching-backends",
+    "title": "Working with data",
+    "section": "Switching backends",
+    "text": "Switching backends\nLet us first plot surface in Plots.jl:\n\nusing Plots, LaTeXStrings\n\n# Plot a surface with the gr backend\ngr()\nxs = range(-4, 4; length=150)\nys = range(-4, 4; length=150)\nf(x, y) = sin(x) * cos(y) * exp(-(x^2 + y^2)/8)\nPlots.surface(xs, ys, f; xlabel = L\"x\", ylabel = L\"y\", zlabel = L\"f(x,y)\", \n    legend=false, camera = (30, 60))\n\n\n\n\n  \n    \n  \n\n\n\n  \n    \n  \n\n\n  \n    \n  \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNow we switch backend to PlotlyJS to get an interactive plot where we can pan, zoom and rotate:\n\nimport PlotlyJS\nplotlyjs() # swithing to plotlyjs for interactive Plots\nPlots.surface(xs, ys, f; xlabel = \"x\", ylabel = \"y\", zlabel = \"f(x,y)\", \n    legend=false, camera = (30, 60))"
   },
   {
     "objectID": "vscode.html",
@@ -26,223 +68,6 @@
     "title": "VS Code",
     "section": "",
     "text": "Access the command palette in VS code: Ctrl + Shift  + p\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPrefix\n\nMode Name\n\nScope\n\nDescription\n\nExample\n\n\n\n\n&gt;\n\nCommand Mode\n\nGlobal\n\nRun VS Code commands\nThis is the default mode.\n\n&gt; settings\n\n\n@\n\nSymbol Navigation\n\nCurrent file\n\nNavigate to symbols, optionally sort or filter by type\n\n@ myFunc\n@: sorts objects by type, not by position in file like @ does.\n\n\n\n\nCycle between open files in the editor: Ctrl + Tab\nNavigate in the editor to previous cursor positions (even between files):\n\nGo back to previous cursor position: Alt + ←\nGo forward to next cursor position: Alt + →\n\nToggle visibility of the terminal area: ctrl + j\nMaking VS code like RStudio’s window panes by placing the REPL in the editor area:\n\nctrl+shift+p to open command panel\nType settings and select the option Preferences: Open User Settings (not the JSON version)\nIn the Search settings box: type terminal defaultlocation to filter down to the setting that we want to change.\nIn Terminal &gt; Integrated: Default Location, select Editor in the dropdown menu.\nYou can now move the editor around freely by drag and drop of the window."
-  },
-  {
-    "objectID": "vscode.html#code-navigation-in-vs-code",
-    "href": "vscode.html#code-navigation-in-vs-code",
-    "title": "(Julia in) VS Code",
-    "section": "",
-    "text": "Cycle between open files in the editor: Ctrl + Tab\n\n\n\nAccess the command palette in VS code: Ctrl + Shift  + p (Cmd + Shift + p)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPrefix\n\nMode Name\n\nScope\n\nDescription\n\nExample\n\n\n\n\n&gt;\n\nCommand Mode\n\nGlobal\n\nRun VS Code commands\nThis is the default mode.\n\n&gt; settings\n\n\n@\n\nSymbol Navigation\n\nCurrent file\n\nNavigate to symbols, optionally sort or filter by type\n\n@ myFunc\n@: sorts objects by type, not by position in file like @ does.\n\n\n\n\nNavigate in the editor to previous cursor positions (even between files):\n\nGo back to previous cursor position: Alt + ←\nGo forward to next cursor position: Alt + →"
-  },
-  {
-    "objectID": "slides/install.html#installing-julia",
-    "href": "slides/install.html#installing-julia",
-    "title": "Getting started with Julia and VS Code",
-    "section": "",
-    "text": "The recommended way to install Julia is using a little tool called juliaup . Benefits of juliaup :\n\neasy install of Julia\nallows you to switch between different versions of Julia (see juliaup --help)\nnotifies when a new Julia version is available.\n\nInstructions on how to install juliaup are here. In short:\n\n Linux: run the following command in terminal:\ncurl -fsSL https://install.julialang.org | sh\nMac: run the following command in terminal:\ncurl -fsSL https://install.julialang.org | sh\n Windows, type this in the terminal to install from Windows store:\nwinget install --name Julia --id 9NJNWW8PVKMN -e -s msstore\n\n\n\n\n\n\n\nAvoid Linux repositories\n\n\n\nIt is not recommended to install Julia from repositories on Linux since the versions there can be rather old.\n\n\n\n\n\n\n\n\nUninstall juliaup\n\n\n\nJuliaup can be uninstalled with the terminal command: juliaup self uninstall\n\n\nJulia can now be started by typing julia in the terminal (you may need to restart the shell/terminal so your system can find it). You should see something like this:\n\nThis what is known as the console in the R world. In Julia we tend to call it the REPL (Read-Evaluate-Print Loop). The REPL is where you can interactively execute code and view the output. We will soon use VS Code as our main working environment (IDE, similar to RStudio, but much more general), but let’s take a first dive into Julia directly in the REPL."
-  },
-  {
-    "objectID": "slides/install.html#the-julia-repl-console",
-    "href": "slides/install.html#the-julia-repl-console",
-    "title": "Getting started with Julia and VS Code",
-    "section": " The Julia REPL (console)",
-    "text": "The Julia REPL (console)\nThe REPL can be used to evaluate commands as in any interpreted language.\nOld commands can be found quite nicely in the REPL:\n\narrow-up and arrow-down goes back in command history. Typing, for example, myf and then arrow-up cycles old commands that start with myf. Ctrl+r gives more advanced reverse-search.\npast commands can be edited and re-used.\n\n\nThe REPL has several prompt modes, for example:\n\nJulian mode, which is the default seen above.\nHelp mode, activated by typing ? at the prompt. The prompt changes to help?&gt; and you can search for documentation about functions etc. Backspace takes you back to Julian mode.\nShell mode, activated by typing a semicolon ;. The prompt changes to shell&gt; and you can use the usual shell commands for navigating directories, copying files etc. (On Windows, type powershell or cmd at shell&gt; to get access to the shell).\nPkg mode, activated by typing a right bracket ]. This opens the package manager where Julia packages are added and managed.\nSearch mode, activated by ctrl+r, as explained above.\nR mode. Later, when discuss how R and Julia can work together with the RCall.jl package, there will an R mode available by typing $ which opens an R prompt. More later.\n\n\nUseful keys bindings (here are many more):\n\nCtrl + C to interupt execution\nCtrl + L to clear the REPL"
-  },
-  {
-    "objectID": "slides/install.html#vs-code---the-working-environment-ide-for-most-of-us",
-    "href": "slides/install.html#vs-code---the-working-environment-ide-for-most-of-us",
-    "title": "Installing Julia and VS Code",
-    "section": "VS code - the working environment (IDE) for most of us",
-    "text": "VS code - the working environment (IDE) for most of us"
-  },
-  {
-    "objectID": "slides/install.html#vs-code---the-working-environment-ide",
-    "href": "slides/install.html#vs-code---the-working-environment-ide",
-    "title": "Installing Julia and VS Code",
-    "section": " VS code - the working environment (IDE)",
-    "text": "VS code - the working environment (IDE)\n\nVS code\nThe most common way to work with Julia is using the VS code IDE (similar to RStudio, but more general). VS code is free and open source. It can be installed from here. There are many many extensions or plug-ins for VS code for doing mostly anything you want. Here is a 100 sec video about VS code.\nThe most important command in VS code is ctrl+shift+p which opens the Command palette. From there you can type thing like settings to access all the settings, execute code etc.\n\n\nJulia in VS Code\nThe most important extension for Julia is the official Julia extension, which brings together the editor, Julia REPL, plot pane, debugging tools, and much more in one app. Here is 2+ minute getting started video. Once the Julia extension is installed try ctrl+shift+p and type Julia in the command palette to see some of the commands that you can use for Julia in VS code."
-  },
-  {
-    "objectID": "slides/install.html#running-programs",
-    "href": "slides/install.html#running-programs",
-    "title": "Getting started with Julia and VS Code",
-    "section": " Running programs",
-    "text": "Running programs\nWe can write Julia code in any text editor and then execute it in the terminal with the julia command. Here is a small Julia example program (plotfunc.jl) that plots the square function using the Plots.jl package (which needs to added first) and finally saves the graph to a pdf file.\n# adding Plots.jl package programatically (needed if it is not already installed)\nimport Pkg; Pkg.add(\"Plots\")\nusing Plots\n\n# Define the function that does the work \nfunction plotfunction(func, a, b)\n  xgrid = range(a, b, length = 100)\n  plt = plot(xgrid, func.(xgrid), color = :blue, xlabel = \"x\", ylabel = \"f(x)\")\n  return plt\nend\n\n# Use the function to produce the plot\nplt = plotfunction(x -&gt; x^2, -2, 2) # x -&gt; x^2 defines an anonymous function\n\n# save plot to file\nsavefig(plt, \"myplot.pdf\")\nWe can run this code in terminal with the command\njulia plotfunc.jl\n\n\n\n\n\n\nExercise\n\n\n\nCopy the code above to a text file and run it using the command above. Check the pdf file."
-  },
-  {
-    "objectID": "slides/install.html#vs-code---the-rstudio-for-julia",
-    "href": "slides/install.html#vs-code---the-rstudio-for-julia",
-    "title": "Getting started with Julia and VS Code",
-    "section": " VS code - the Rstudio for Julia",
-    "text": "VS code - the Rstudio for Julia\n\nVS code\nThe most common way to work with Julia is using the VS code IDE (similar to RStudio, but more general). VS code is free and open source. It can be installed from here. There are many many extensions or plug-ins for VS code for doing mostly anything you want. Here is a 100 sec video about VS code.\nThe most important command in VS code is ctrl+shift+p which opens the Command palette. From there you can type thing like settings to access all the settings, execute code etc.\n\n\nJulia in VS Code\nThe most important extension for Julia is the official Julia extension, which brings together the editor, Julia REPL, plot pane, debugging tools, and much more in one app. Once you open a .jl file in the editor, VS code will give you proper syntax highlighting. Here is 2+ minute getting started video. With the Julia extension installed, try ctrl+shift+p and type julia in the command palette to see some of the commands that you can use for Julia in VS code."
-  },
-  {
-    "objectID": "resources.html",
-    "href": "resources.html",
-    "title": "Julia resources",
-    "section": "",
-    "text": "General\n\nThe Julia Academy - great collection of learning resources.\n\n\n\nBooks\nHere is a list of books.\n\nJulia for Data Analysis\nHands-On Design Patterns and Best Practices\nJulia High Performance\nData Science using Julia\nJulia Quick Syntax Reference\n\n\n\nOnline courses\n\nLearn Julia in 4 hours (for beginners to programming)\nJulia for Data Science\n\n\n\nPodcasts\n\nTalk Julia\nJulia dispatch\n\n\n\nVideos\nJulia in 100 seconds\nVS code in 100 seconds"
-  },
-  {
-    "objectID": "interop.html",
-    "href": "interop.html",
-    "title": "Julia + R + Python = True",
-    "section": "",
-    "text": "The RCall.jl package makes it possible to call R from Julia.\nThe JuliaCall R package makes it possible to call Julia from R. Tutorial on JuliaCall."
-  },
-  {
-    "objectID": "install.html",
-    "href": "install.html",
-    "title": "Getting started with Julia",
-    "section": "",
-    "text": "Julia is a high-level programming language for numerical computing.\nHigh-level programming with a syntax like Python.\nFast, almost like C/C++, if done right.\nJust-in-time (JIT) compiled. Code is compiled to machine code on the fly.\nNumerical linear algebra similar to Matlab.\nMultiple dispatch with sophisticated type system makes the Julia highly composable.\nMany, many other things."
-  },
-  {
-    "objectID": "install.html#installing-julia",
-    "href": "install.html#installing-julia",
-    "title": "Getting started with Julia",
-    "section": " Installing Julia",
-    "text": "Installing Julia\nThe recommended way to install Julia is using a little tool called juliaup . Benefits of juliaup :\n\neasy install of Julia\nallows you to switch between different versions of Julia (see juliaup --help)\nnotifies when a new Julia version is available.\n\nInstructions on how to install juliaup are here. In short:\n\n Linux: run the following command in terminal:\ncurl -fsSL https://install.julialang.org | sh\nMac: run the following command in terminal:\ncurl -fsSL https://install.julialang.org | sh\n Windows, type this in the terminal to install from Windows store:\nwinget install --name Julia --id 9NJNWW8PVKMN -e -s msstore\n\n\n\n\n\n\n\nAvoid Linux repositories\n\n\n\nIt is not recommended to install Julia from repositories on Linux since the versions there can be rather old.\n\n\n\n\n\n\n\n\nUninstall juliaup\n\n\n\nJuliaup can be uninstalled with the terminal command: juliaup self uninstall\n\n\nJulia can now be started by typing julia in the terminal (you may need to restart the shell/terminal so your system can find it). You should see something like this:\n\nThis what is known as the console in the R world. In Julia we tend to call it the REPL (Read-Evaluate-Print Loop). The REPL is where you can interactively execute code and view the output. We will soon use VS Code as our main working environment (IDE, similar to RStudio, but much more general), but let’s take a first dive into Julia directly in the REPL."
-  },
-  {
-    "objectID": "install.html#the-julia-repl-console",
-    "href": "install.html#the-julia-repl-console",
-    "title": "Getting started with Julia",
-    "section": " The Julia REPL (console)",
-    "text": "The Julia REPL (console)\nThe REPL can be used to evaluate commands as in any interpreted language.\nOld commands can be found quite nicely in the REPL:\n\narrow-up and arrow-down goes back in command history. Typing, for example, myf and then arrow-up cycles old commands that start with myf. Ctrl+r gives more advanced reverse-search.\npast commands can be edited and re-used.\n\n\nThe REPL has several prompt modes, for example:\n\nJulian mode, which is the default seen above.\nHelp mode, activated by typing ? at the prompt. The prompt changes to help?&gt; and you can search for documentation about functions etc. Backspace takes you back to Julian mode.\nShell mode, activated by typing a semicolon ;. The prompt changes to shell&gt; and you can use the usual shell commands for navigating directories, copying files etc. (On Windows, type powershell or cmd at shell&gt; to get access to the shell).\nPkg mode, activated by typing a right bracket ]. This opens the package manager where Julia packages are added and managed.\nSearch mode, activated by ctrl+r, as explained above.\nR mode. Later, when discuss how R and Julia can work together with the RCall.jl package, there will an R mode available by typing $ which opens an R prompt. More later.\n\n\nUseful keys bindings (here are many more):\n\nCtrl + C to interupt execution\nCtrl + L to clear the REPL"
-  },
-  {
-    "objectID": "install.html#the-package-manager-a-first-look",
-    "href": "install.html#the-package-manager-a-first-look",
-    "title": "Getting started with Julia",
-    "section": " The package manager: a first look",
-    "text": "The package manager: a first look\nSimilar to R, but a bit more extreme, most things in Julia are available in packages. Packages are typically named with a .jl ending, for example the Distributions.jl package contains many statistical distributions. Julia packages are hosted on GitHub and managed by the Julia General Registry.\nHere are some of the most common packages for Statistics:\n\nStatistics.jl (mean, variance, quantile etc)\nDistributions.jl (most standard statistical distributions, with rand, pdf, cdf etc)\nLinearAlgebra.jl\nDataFrames.jl (tabular data manipulation)\nTidier.jl (R’s tidyverse, Julia-style)\nPlots.jl (one of the most widely used plotting systems)\nOptim.jl (numerical optimization)\nGLM.jl (generalized linear models using R’s formula syntax)\nTuring.jl (probabilistic programming, similar to Stan)\nRCall.jl (using R code in Julia)\nDifferentiationInterface.jl (interface to Julia’s many autodiff libraries)\nRDatasets.jl (the R datasets that we all love, in Julia)\n\nThe package manager is most easily accessed by typing ] to get into Pkg mode. The prompt changes to (@v.11) pkg&gt; which means that you are in package mode in the default environment v.11 (if you are using Julia 1.11, more on environments later).\nSome useful commands in Pkg mode:\n\nstatus, shows the packages installed in the currently active environment\nadd PkgName (installs the PkgName.jl package, for example Distributions.jl)\nrm PkgName (removes the PkgName.jl package)\nupdate (checks registry and updates packages)\n\nWhen we write, for example, ] add Distributions we mean to type ] and then add Distributions on the Pkg prompt.\nOnce a package has been added it can be used from the Julian prompt (just backspace out from Pkg mode) with the using command: using PkgName . This loads the package in memory and its functions and other objects can now be used.\nThere are other ways to use a package, like import. The main difference is that\n\nusing exposes all exported function directly without needing to call then with the package name as prefix, e.g. myfunc(3).\nimport does not expose exported function directly and requires a call to function to be prefixed with the package name, e.g. PkgName.myfunc(3). This is closer to Python’s namespace convention, but namespaces are less essential in Julia due to multiple dispatch and Julias clever handling of function (method) name collisions.\nIt is also possible to use only specific functions from a package: using PkgName: myfunc, otherfunc.\nHere is comparison of package handling in R, Julia and Python.\n\n\n\n\n\n\n\n\n\n\n\n\nLanguage\n\nRepository\n\nInstall packages\n\nUse packages\n\n\nR\n\nCRAN (Comprehensive R Archive Network)\n\ninstall.packages(\"pkgname\")\n\nlibrary(pkgname)\n\n\nJulia\n\nGeneral registry (hosted on GitHub)\n\n] add PkgName\n\nusing PkgName\nimport PkgName\nimport PkgName: myfunc\n\n\nPython\n\nPyPI (Python Package Index)\nor Conda\n\npip install pkgname\nconda install pkgname\n\nfrom pkgname import *\nimport pkgname as pk\nfrom pkgname import myfunc\n\n\n\n\n\n\n\n\n\n\nExercise\n\n\n\n\nAdd the Distributions.jl package in the package manager. Type status after install to see that it indeed was added.\nUse the Distributions.jl package by the using command from the Julian prompt.\nUse the package to define a normal distribution object with mean 2 and and standard deviation 3. Go into help mode and search for Normal to see how this is done. Call the new object dist.\nGenerate 10 random draws from this normal distribution using the rand function on the normal distribution object dist.\nEvaluate the pdf of this normal at x=1 using the pdf function on the normal distribution object dist."
-  },
-  {
-    "objectID": "install.html#running-programs",
-    "href": "install.html#running-programs",
-    "title": "Getting started with Julia",
-    "section": " Running programs",
-    "text": "Running programs\nWe can write Julia code in any text editor and then execute it in the terminal with the julia command. Here is a small Julia example program (plotfunc.jl) that plots the square function using the Plots.jl package (which needs to added first) and finally saves the graph to a pdf file.\n# adding Plots.jl package programatically (needed if it is not already installed)\nimport Pkg; Pkg.add(\"Plots\")\nusing Plots\n\n# Define the function that does the work \nfunction plotfunction(func, a, b)\n  xgrid = range(a, b, length = 100)\n  plt = plot(xgrid, func.(xgrid), color = :blue, xlabel = \"x\", ylabel = \"f(x)\")\n  return plt\nend\n\n# Use the function to produce the plot\nplt = plotfunction(x -&gt; x^2, -2, 2) # x -&gt; x^2 defines an anonymous function\n\n# save plot to file\nsavefig(plt, \"myplot.pdf\")\nWe can run this code in terminal with the command\njulia plotfunc.jl\n\n\n\n\n\n\nExercise\n\n\n\nCopy the code above to a text file and run it using the command above. Check the pdf file."
-  },
-  {
-    "objectID": "install.html#vs-code---the-rstudio-for-julia",
-    "href": "install.html#vs-code---the-rstudio-for-julia",
-    "title": "Getting started with Julia",
-    "section": " VS code - the Rstudio for Julia",
-    "text": "VS code - the Rstudio for Julia\n\nVS code\nThe most common way to work with Julia is using the VS code IDE (similar to RStudio, but more general). VS code is free and open source. It can be installed from here. There are many many extensions or plug-ins for VS code for doing mostly anything you want. Here is a 100 sec video about VS code.\nThe most important command in VS code is ctrl+shift+p which opens the Command palette. From there you can type thing like settings to access all the settings, execute code etc.\nCtrl + Tab cycles between open files in the editor.\n\n\nJulia in VS Code\nThe most important extension for Julia is the official Julia extension, which brings together the editor, Julia REPL, plot pane, debugging tools, and much more in one app. Once you open a .jl file in the editor, VS code will give you proper syntax highlighting. Here is 2+ minute getting started video. With the Julia extension installed, try ctrl+shift+p and type julia in the command palette to see some of the commands that you can use for Julia in VS code."
-  },
-  {
-    "objectID": "install.html#notebooks",
-    "href": "install.html#notebooks",
-    "title": "Getting started with Julia",
-    "section": " Notebooks",
-    "text": "Notebooks\nJulia can be used in all major notebook systems:\n Jupyter (The Ju in Jupyter stands for Julia). Install the IJulia package in Julia first.\n\n  Screenshot Jupyter notebook\n  \n\n Google Colab. Change to Julia in the Edit/Notebook settings menu.\n\n  Screenshot Google Colab notebook\n  \n\n Quarto. Install the R package JuliaCall in R first. Add engine: julia to YAML.\n\n  Screenshot Quarto notebook\n  \n\n Pluto.jl This is a reactive notebook system in Julia. Run from Julia or online.\n\n  Screenshot Pluto.jl notebook"
-  },
-  {
-    "objectID": "juliaquarto.html",
-    "href": "juliaquarto.html",
-    "title": "Julia in Quarto",
-    "section": "",
-    "text": "This is just to show that Julia can be run from Quarto documents.\n\nusing Pkg\nPkg.instantiate()\n\nFirst we add some packages and load them:\n\nimport Pkg; Pkg.add(\"Distributions\"); Pkg.add(\"Plots\");\nusing Distributions, Plots;\n\n\n   Resolving \npackage versions...\n\n  No Changes to `~/Dropbox/Teaching/Julia/Ecosta2025Tutorial/Project.toml`\n\n  No Changes to `~/Dropbox/Teaching/Julia/Ecosta2025Tutorial/Manifest.toml`\n\n   Resolving package versions...\n\n  No Changes to `~/Dropbox/Teaching/Julia/Ecosta2025Tutorial/Project.toml`\n\n  No Changes to `~/Dropbox/Teaching/Julia/Ecosta2025Tutorial/Manifest.toml`\n\n\n\n\nNext, lets generate random numbers and plot\n\ndist = Normal(2,3);\nx = rand(dist, 1000);\nhistogram(x)"
-  },
-  {
-    "objectID": "install.html#what-is-julia",
-    "href": "install.html#what-is-julia",
-    "title": "Getting started with Julia",
-    "section": "",
-    "text": "Julia is a high-level programming language for numerical computing.\nHigh-level programming with a syntax like Python.\nFast, almost like C/C++, if done right.\nJust-in-time (JIT) compiled. Code is compiled to machine code on the fly.\nNumerical linear algebra similar to Matlab.\nMultiple dispatch with sophisticated type system makes the Julia highly composable.\nMany, many other things."
-  },
-  {
-    "objectID": "install.html#why-julia-for-a-statistician",
-    "href": "install.html#why-julia-for-a-statistician",
-    "title": "Getting started with Julia",
-    "section": " Why Julia (for a Statistician)?",
-    "text": "Why Julia (for a Statistician)?\n\nSpeed. No need for a two language combo (R/Python and C++).\nGood packages for Statistics and Data Analysis.\nWonderful handling of statistical distributions.\nStrong linear algebra with beautiful syntax.\nParallel computing built in from the start.\nUnicode (e.g. greek letters in code) makes clear algorithms.\nEasy to use R/Python/C/Fortran code from Julia."
-  },
-  {
-    "objectID": "gettingstarted.html",
-    "href": "gettingstarted.html",
-    "title": "Getting started with Julia",
-    "section": "",
-    "text": "Julia is a high-level programming language for numerical computing.\nFirst version in 2012, Version 1.0 in 2018. Version 1.11 now.\nHigh-level programming with a syntax like Python.\nFast, almost like C/C++, if done right.\nJust-in-time (JIT) compiled. Code is compiled to machine code on the fly.\nNumerical linear algebra similar to Matlab.\nMultiple dispatch with sophisticated type system makes the Julia highly composable."
-  },
-  {
-    "objectID": "gettingstarted.html#what-is-julia",
-    "href": "gettingstarted.html#what-is-julia",
-    "title": "Getting started with Julia",
-    "section": "",
-    "text": "Julia is a high-level programming language for numerical computing.\nFirst version in 2012, Version 1.0 in 2018. Version 1.11 now.\nHigh-level programming with a syntax like Python.\nFast, almost like C/C++, if done right.\nJust-in-time (JIT) compiled. Code is compiled to machine code on the fly.\nNumerical linear algebra similar to Matlab.\nMultiple dispatch with sophisticated type system makes the Julia highly composable."
-  },
-  {
-    "objectID": "gettingstarted.html#why-julia-for-a-statistician",
-    "href": "gettingstarted.html#why-julia-for-a-statistician",
-    "title": "Getting started with Julia",
-    "section": " Why Julia (for a Statistician)?",
-    "text": "Why Julia (for a Statistician)?\n\nSpeed. No need for a two language combo (R/Python and C++).\nGood packages for Statistics and Data Analysis.\nWonderful handling of statistical distributions.\nStrong linear algebra with beautiful syntax.\nParallel computing built in from the start.\nUnicode (e.g. greek letters in code) makes clear algorithms.\nEasy to use R/Python/C/Fortran code from Julia."
-  },
-  {
-    "objectID": "gettingstarted.html#installing-julia",
-    "href": "gettingstarted.html#installing-julia",
-    "title": "Getting started with Julia",
-    "section": " Installing Julia",
-    "text": "Installing Julia\nThe recommended way to install Julia is using a little tool called juliaup . Benefits of juliaup :\n\neasy install of Julia\nallows you to switch between different versions of Julia (see juliaup --help)\nnotifies when a new Julia version is available.\n\nInstructions on how to install juliaup are here. In short:\n\n Linux: run the following command in terminal:\ncurl -fsSL https://install.julialang.org | sh\nMac: run the following command in terminal:\ncurl -fsSL https://install.julialang.org | sh\n Windows, type this in the terminal to install from Windows store:\nwinget install --name Julia --id 9NJNWW8PVKMN -e -s msstore\n\n\n\n\n\n\n\nAvoid Linux repositories\n\n\n\nIt is not recommended to install Julia from repositories on Linux since the versions there can be rather old.\n\n\n\n\n\n\n\n\nUninstall juliaup\n\n\n\nJuliaup can be uninstalled with the terminal command: juliaup self uninstall\n\n\nJulia can now be started by typing julia in the terminal (you may need to restart the shell/terminal so your system can find it). You should see something like this:\n\nThis what is known as the console in the R world. In Julia we tend to call it the REPL (Read-Evaluate-Print Loop). The REPL is where you can interactively execute code and view the output. We will soon use VS Code as our main working environment (IDE, similar to RStudio, but much more general), but let’s take a first dive into Julia directly in the REPL."
-  },
-  {
-    "objectID": "gettingstarted.html#the-julia-repl-console",
-    "href": "gettingstarted.html#the-julia-repl-console",
-    "title": "Getting started with Julia",
-    "section": " The Julia REPL (console)",
-    "text": "The Julia REPL (console)\nThe REPL can be used to evaluate commands as in any interpreted language.\nOld commands can be found quite nicely in the REPL:\n\narrow-up and arrow-down goes back in command history. Typing, for example, myf and then arrow-up cycles old commands that start with myf. Ctrl+r gives more advanced reverse-search.\npast commands can be edited and re-used.\n\n\nThe REPL has several prompt modes, for example:\n\nJulian mode, which is the default seen above.\nHelp mode, activated by typing ? at the prompt. The prompt changes to help?&gt; and you can search for documentation about functions etc. Backspace takes you back to Julian mode.\nShell mode, activated by typing a semicolon ;. The prompt changes to shell&gt; and you can use the usual shell commands for navigating directories, copying files etc. (On Windows, type powershell or cmd at shell&gt; to get access to the shell).\nPkg mode, activated by typing a right bracket ]. This opens the package manager where Julia packages are added and managed.\nSearch mode, activated by ctrl+r, as explained above.\nR mode. Later, when discuss how R and Julia can work together with the RCall.jl package, there will an R mode available by typing $ which opens an R prompt. More later.\n\n\nUseful keys bindings (here are many more):\n\nCtrl + C to interupt execution\nCtrl + L to clear the REPL\n\n\n\n\n\n\n\nExercise\n\n\n\n\nGet into help mode and read about the sin function.\nDrop into shell mode and change directory to somewhere else on your computer. Then go back to Julian mode (backspace) and check with pwd() that you indeed changed directory. Go back to shell mode and change the directory back to where you where before this exercise.\nGo into package mode and type status to see if you have any packages installed. (probably not if you have a fresh install)."
-  },
-  {
-    "objectID": "gettingstarted.html#the-package-manager-a-first-look",
-    "href": "gettingstarted.html#the-package-manager-a-first-look",
-    "title": "Getting started with Julia",
-    "section": " The package manager: a first look",
-    "text": "The package manager: a first look\nSimilar to R, but a bit more extreme, most things in Julia are available in packages. Packages are typically named with a .jl ending, for example the Distributions.jl package contains many statistical distributions. Julia packages are hosted on GitHub and managed by the Julia General Registry.\nHere are some of the most common packages for Statistics:\n\nStatistics.jl (mean, variance, quantile etc)\nDistributions.jl (most standard statistical distributions, with rand, pdf, cdf etc)\nLinearAlgebra.jl\nDataFrames.jl (tabular data manipulation)\nTidier.jl (R’s tidyverse, Julia-style)\nPlots.jl (one of the most widely used plotting systems)\nOptim.jl (numerical optimization)\nGLM.jl (generalized linear models using R’s formula syntax)\nTuring.jl (probabilistic programming, similar to Stan)\nRCall.jl (using R code in Julia)\nDifferentiationInterface.jl (interface to Julia’s many autodiff libraries)\nRDatasets.jl (the R datasets that we all love, in Julia)\n\nThe package manager is most easily accessed by typing ] to get into Pkg mode. The prompt changes to (@v.11) pkg&gt; which means that you are in package mode in the default environment v.11 (if you are using Julia 1.11, more on environments later).\nSome useful commands in Pkg mode:\n\nstatus, shows the packages installed in the currently active environment\nadd PkgName (installs the PkgName.jl package, for example Distributions.jl)\nrm PkgName (removes the PkgName.jl package)\nupdate (checks registry and updates packages)\n\nWhen we write, for example, ] add Distributions we mean to type ] and then add Distributions on the Pkg prompt.\nOnce a package has been added it can be used from the Julian prompt (just backspace out from Pkg mode) with the using command: using PkgName . This loads the package in memory and its functions and other objects can now be used.\nThere are other ways to use a package, like import. The main difference is that\n\nusing exposes all exported function directly without needing to call then with the package name as prefix, e.g. myfunc(3).\nimport does not expose exported function directly and requires a call to function to be prefixed with the package name, e.g. PkgName.myfunc(3). This is closer to Python’s namespace convention, but namespaces are less essential in Julia due to multiple dispatch and Julias clever handling of function (method) name collisions.\nIt is also possible to use only specific functions from a package: using PkgName: myfunc, otherfunc.\nHere is comparison of package handling in R, Julia and Python.\n\n\n\n\n\n\n\n\n\n\n\n\nLanguage\n\nRepository\n\nInstall packages\n\nUse packages\n\n\nR\n\nCRAN (Comprehensive R Archive Network)\n\ninstall.packages(\"pkgname\")\n\nlibrary(pkgname)\n\n\nJulia\n\nGeneral registry (hosted on GitHub)\n\n] add PkgName\n\nusing PkgName\nimport PkgName\nimport PkgName: myfunc\n\n\nPython\n\nPyPI (Python Package Index)\nor Conda\n\npip install pkgname\nconda install pkgname\n\nfrom pkgname import *\nimport pkgname as pk\nfrom pkgname import myfunc\n\n\n\n\n\n\n\n\n\n\nExercise\n\n\n\n\nAdd the Distributions.jl package in the package manager. Type status after install to see that it indeed was added.\nUse the Distributions.jl package by the using command from the Julian prompt.\nUse the package to define a normal distribution object with mean 2 and and standard deviation 3. Go into help mode and search for Normal to see how this is done. Call the new object dist.\nGenerate 10 random draws from this normal distribution using the rand function on the normal distribution object dist.\nEvaluate the pdf of this normal at x=1 using the pdf function on the normal distribution object dist."
-  },
-  {
-    "objectID": "gettingstarted.html#running-programs",
-    "href": "gettingstarted.html#running-programs",
-    "title": "Getting started with Julia",
-    "section": " Running programs",
-    "text": "Running programs\nWe can write Julia code in any text editor and then execute it in the terminal with the julia command. Here is a small Julia example program (plotfunc.jl) that plots the square function using the Plots.jl package (which needs to added first) and finally saves the graph to a pdf file.\n# adding Plots.jl package programatically (needed if it is not already installed)\nimport Pkg; Pkg.add(\"Plots\")\nusing Plots\n\n# Define the function that does the work \nfunction plotfunction(func, a, b)\n  xgrid = range(a, b, length = 100)\n  plt = plot(xgrid, func.(xgrid), color = :blue, xlabel = \"x\", ylabel = \"f(x)\")\n  return plt\nend\n\n# Use the function to produce the plot\nplt = plotfunction(x -&gt; x^2, -2, 2) # x -&gt; x^2 defines an anonymous function\n\n# save plot to file\nsavefig(plt, \"myplot.pdf\")\nWe can run this code in terminal with the command\njulia plotfunc.jl\n\n\n\n\n\n\nExercise\n\n\n\nCopy the code above to a text file name plotfunc.jl and run it using the command above. Check the pdf file."
-  },
-  {
-    "objectID": "gettingstarted.html#vs-code---the-rstudio-for-julia",
-    "href": "gettingstarted.html#vs-code---the-rstudio-for-julia",
-    "title": "Getting started with Julia",
-    "section": " VS code - the Rstudio for Julia",
-    "text": "VS code - the Rstudio for Julia\n\nVS code\nThe most common way to work with Julia is using the VS code IDE (similar to RStudio, but more general). VS code is free and open source. It can be installed from here. There are many many extensions or plug-ins for VS code for doing mostly anything you want. Here is a 100 sec video about VS code. The official getting started guide is quite good.\nThe most important command in VS code is ctrl+shift+p which opens the Command palette. From there you can type thing like settings to access all the settings, execute code etc.\n\n\nJulia in VS Code\nThe most important extension for Julia is the official Julia extension, which brings together the editor, Julia REPL, plot pane, debugging tools, and much more in one app. Once you open a .jl file in the editor, VS code will give you proper syntax highlighting. Here is 2+ minute getting started video. With the Julia extension installed, try ctrl+shift+p and type julia in the command palette to see some of the commands that you can use for Julia in VS code.\nThe official documention is here.\nHere are some useful commands, keyboard shortcuts and extensions in VS code.\n\nJulia code in VS code can be run in three basic modes:\n\nRun a file in a separate terminal: from command palette: Julia: Run File in New Process or from the Play button in the top right corner of the editor.\nDebug mode.\nRun interatively in the REPL inside VS code.\n\n\n\nshift + enter or shift + ctrl on a line in the editor starts the Julia REPL automatically. However, if you close the REPL, you have to use the command Julia: Restart REPL to start a new one.\nIf you prefer to not have the output inline in the editor, go to Julia extension settings and search for Execution: Result Type, and set it to REPL.\n\n\n\n\n\n\nExercise\n\n\n\nOpen the plotfunc.jl file from a previous exercise in VS Code and run it again using the command Julia: Run File in New Process\nNow, run each line in plotfunc.jl interactively in the VS code Julia REPL."
-  },
-  {
-    "objectID": "gettingstarted.html#notebooks",
-    "href": "gettingstarted.html#notebooks",
-    "title": "Getting started with Julia",
-    "section": " Notebooks",
-    "text": "Notebooks\nJulia can be used in all major notebook systems:\n Jupyter (The Ju in Jupyter stands for Julia). Install the IJulia package in Julia first.\n\n  Screenshot Jupyter notebook\n  \n\n Google Colab. Change to Julia in the Edit/Notebook settings menu.\n\n  Screenshot Google Colab notebook\n  \n\n Quarto. Install the R package JuliaCall in R first. Add engine: julia to YAML.\n\n  Screenshot Quarto notebook\n  \n\n Pluto.jl This is a reactive notebook system in Julia. Run from Julia or online.\n\n  Screenshot Pluto.jl notebook"
-  },
-  {
-    "objectID": "building_packages.html",
-    "href": "building_packages.html",
-    "title": "Writing Julia packages",
-    "section": "",
-    "text": "It is quite easy to write packages in Julia, and many developers write small packages quite often.\nThere are well-developed packages for writing package documentation:\n\nDocumenter.jl is like roxygen2 for R. It turns documented code into a (html) manual.\nThe Literate.jl package is very useful for turning scripts into markdown files, often used for documented examples in a package. Literate.jl can return a markdown, a Jupyter or Quarto notebook, or a scrubbed Julia file without the markdown/comments.\n\nThe generate(“ExamplePackage”) command in the Package manager REPL initializes a new package.\nThe default package is very bare bone. Better to use a template from PkgTemplates.jl that sets up the author, license, Julia version, and Github actions for testing the code and building documentation automatically when pushed to Github. Here is an example template used to generate a package.\nusing PkgTemplates\nmyTemplate = Template(; \n    user=\"mattiasvillani\",\n    authors=[\"Mattias Villani\"],\n    julia=v\"1.11\",\n    plugins=[\n        License(; name=\"MIT\"),\n        Git(; manifest=true, ssh=true),\n        GitHubActions(; x86=true),\n        Codecov(),\n        Documenter{GitHubActions}(),\n        Develop(),\n    ],\n)\ngenerate(\"ExamplePackage\", myTemplate)\n\nThis generates the following folder structure for the package:\n\nThe folder structure contains:\n\nsrc is the main folder for the source code, with the package’s main module in the ExamplePackage.jl file.\ndocs is for the documentation, where the file make.jl contains what is needed to build the documentation. Run it to build the docs.\ntest is for unit tests.\nThe package also gets its own enviroment as seen by the generated Project.toml and Manifest.toml files.\nThe LICENSE and README.md files will determine the license and readme page once the package is pushed to Github.\nThe code also sets up a local git repository (in the hidden directory .git) with a remote address to a github repository (that you have to create on Github) named PackageName.jl. Note that the added .jl, which is standard for repo names on Github.\nUse the Revise.jl package so that changes in your package is picked up by Julia. Revise.jl is a no-brainer, everyone uses it. Most of us put a using Revise in the startup.jl filethat Julia reads before starting Julia (this file lives in ~/.julia/config/startup.jl on Linux, but you need to create the folder and file first time). Revise is however used automatically when developing with the Julia extension for VS Code."
-  },
-  {
-    "objectID": "vscode.html#useful-commands-and-navigation",
-    "href": "vscode.html#useful-commands-and-navigation",
-    "title": "VS Code",
-    "section": "",
-    "text": "Cycle between open files in the editor: Ctrl + Tab\nAccess the command palette in VS code: Ctrl + Shift  + p (Cmd + Shift + p)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPrefix\n\nMode Name\n\nScope\n\nDescription\n\nExample\n\n\n\n\n&gt;\n\nCommand Mode\n\nGlobal\n\nRun VS Code commands\nThis is the default mode.\n\n&gt; settings\n\n\n@\n\nSymbol Navigation\n\nCurrent file\n\nNavigate to symbols, optionally sort or filter by type\n\n@ myFunc\n@: sorts objects by type, not by position in file like @ does.\n\n\n\n\nNavigate in the editor to previous cursor positions (even between files):\n\nGo back to previous cursor position: Alt + ←\nGo forward to next cursor position: Alt + →"
-  },
-  {
-    "objectID": "vscode.html#useful-extensions",
-    "href": "vscode.html#useful-extensions",
-    "title": "VS Code",
-    "section": "Useful extensions",
-    "text": "Useful extensions\n\nJulia - Official support for the Julia language in VS code.\nR - Work with R in VS code.\nPython - Python language support.\nLaTeX workshop - LaTeX support in VS code.\nvscode-icons - brings nice symbols to folders and files.\nSubtle Match Brackets - nicer handling of matching brackets in the editor.\nLive Preview - live preview of HTML directly in VS code.\nMarkdown all in one - Markdown support in VS code.\nQuarto - Quarto support.\nCode Runner - run code in many different languages in VS code (not needed to run Julia code however since it has its own runner in Julia for VS code extension).\nExcel Viewer - Editors and previews for CSV files and Excel spreadsheets in Visual Studio Code.\nGit Lens - supercharge your Git experience in VS code.\nVS code Spotify - Play music in VS code."
   },
   {
     "objectID": "vscode.html#useful-commands-and-navigation-in-vs-code",
@@ -259,32 +84,39 @@
     "text": "Useful commands in Julia for VS Code\n\nHere is the documentation for the Julia extension."
   },
   {
-    "objectID": "workingwithdata.html",
-    "href": "workingwithdata.html",
-    "title": "Working with data",
+    "objectID": "vscode.html#useful-extensions",
+    "href": "vscode.html#useful-extensions",
+    "title": "VS Code",
+    "section": "Useful extensions",
+    "text": "Useful extensions\n\nJulia - Official support for the Julia language in VS code.\nR - Work with R in VS code.\nPython - Python language support.\nLaTeX workshop - LaTeX support in VS code.\nvscode-icons - brings nice symbols to folders and files.\nSubtle Match Brackets - nicer handling of matching brackets in the editor.\nLive Preview - live preview of HTML directly in VS code.\nMarkdown all in one - Markdown support in VS code.\nQuarto - Quarto support.\nCode Runner - run code in many different languages in VS code (not needed to run Julia code however since it has its own runner in Julia for VS code extension).\nExcel Viewer - Editors and previews for CSV files and Excel spreadsheets in Visual Studio Code.\nGit Lens - supercharge your Git experience in VS code.\nVS code Spotify - Play music in VS code."
+  },
+  {
+    "objectID": "interop.html",
+    "href": "interop.html",
+    "title": "Julia + R + Python = True",
     "section": "",
-    "text": "Packages used\n\n\n\n CSV.jl\n DataFrames.jl\n\n\n\nCSV files can be"
+    "text": "The RCall.jl package makes it possible to call R from Julia.\nThe JuliaCall R package makes it possible to call Julia from R. Tutorial on JuliaCall."
   },
   {
-    "objectID": "workingwithdata.html#read-and-writing-data",
-    "href": "workingwithdata.html#read-and-writing-data",
-    "title": "Working with data",
+    "objectID": "resources.html",
+    "href": "resources.html",
+    "title": "Julia resources",
     "section": "",
-    "text": "Packages used\n\n\n\n CSV.jl\n DataFrames.jl"
+    "text": "The Julia Academy - great collection of learning resources."
   },
   {
-    "objectID": "workingwithdata.html#managing-data",
-    "href": "workingwithdata.html#managing-data",
-    "title": "Working with data",
-    "section": "Managing data",
-    "text": "Managing data\n\n\n\n\n\n\nPackages used\n\n\n\n DataFrames.jl\n DataFramesMeta.jl\n TidierData.jl\n RDatasets.jl"
+    "objectID": "resources.html#cheat-sheets",
+    "href": "resources.html#cheat-sheets",
+    "title": "Julia resources",
+    "section": "Cheat sheets",
+    "text": "Cheat sheets\n\nhttps://cheatsheet.juliadocs.org/\n\n\nBooks\nHere is a list of books.\n\nJulia for Data Analysis\nHands-On Design Patterns and Best Practices\nJulia High Performance\nData Science using Julia\nJulia Quick Syntax Reference\n\n\n\nOnline courses\n\nJulia for Data Science\nLearn Julia in 4 hours (for beginners to programming)\nIntroduction to Computational thinking at MIT (using Julia throughout)\nAdvanced Scientific Computing (open source software development using Julia)\n\n\n\nPodcasts\n\nTalk Julia\nJulia dispatch\n\n\n\nVideos\nJulia in 100 seconds\nVS code in 100 seconds"
   },
   {
-    "objectID": "workingwithdata.html#plotting-data",
-    "href": "workingwithdata.html#plotting-data",
-    "title": "Working with data",
-    "section": "Plotting data",
-    "text": "Plotting data\n\n\n\n\n\n\nPackages used\n\n\n\n Plots.jl\n TidierPlots.jl"
+    "objectID": "building_packages.html",
+    "href": "building_packages.html",
+    "title": "Writing Julia packages",
+    "section": "",
+    "text": "It is quite easy to write packages in Julia, and many developers write small packages quite often.\nThere are well-developed packages for writing package documentation:\n\nDocumenter.jl is like roxygen2 for R. It turns documented code into a (html) manual.\nThe Literate.jl package is very useful for turning scripts into markdown files, often used for documented examples in a package. Literate.jl can return a markdown, a Jupyter or Quarto notebook, or a scrubbed Julia file without the markdown/comments.\n\nThe generate(“ExamplePackage”) command in the Package manager REPL initializes a new package.\nThe default package is very bare bone. Better to use a template from PkgTemplates.jl that sets up the author, license, Julia version, and Github actions for testing the code and building documentation automatically when pushed to Github. Here is an example template used to generate a package.\nusing PkgTemplates\nmyTemplate = Template(; \n    user=\"mattiasvillani\",\n    authors=[\"Mattias Villani\"],\n    julia=v\"1.11\",\n    plugins=[\n        License(; name=\"MIT\"),\n        Git(; manifest=true, ssh=true),\n        GitHubActions(; x86=true),\n        Codecov(),\n        Documenter{GitHubActions}(),\n        Develop(),\n    ],\n)\ngenerate(\"ExamplePackage\", myTemplate)\n\nThis generates the following folder structure for the package:\n\nThe folder structure contains:\n\nsrc is the main folder for the source code, with the package’s main module in the ExamplePackage.jl file.\ndocs is for the documentation, where the file make.jl contains what is needed to build the documentation. Run it to build the docs.\ntest is for unit tests.\nThe package also gets its own enviroment as seen by the generated Project.toml and Manifest.toml files.\nThe LICENSE and README.md files will determine the license and readme page once the package is pushed to Github.\nThe code also sets up a local git repository (in the hidden directory .git) with a remote address to a github repository (that you have to create on Github) named PackageName.jl. Note that the added .jl, which is standard for repo names on Github.\nUse the Revise.jl package so that changes in your package is picked up by Julia. Revise.jl is a no-brainer, everyone uses it. Most of us put a using Revise in the startup.jl filethat Julia reads before starting Julia (this file lives in ~/.julia/config/startup.jl on Linux, but you need to create the folder and file first time). Revise is however used automatically when developing with the Julia extension for VS Code."
   },
   {
     "objectID": "links.html",
@@ -294,24 +126,115 @@
     "text": "Install Julia\n Install VS Code\n Install Julia extension for VS Code | Guided Youtube video | Documentation\n Install and get started with Turing.jl | Turing tutorials"
   },
   {
-    "objectID": "gettingstarted.html#come-for-the-speed-stay-for-the-rest",
-    "href": "gettingstarted.html#come-for-the-speed-stay-for-the-rest",
+    "objectID": "gettingstarted.html",
+    "href": "gettingstarted.html",
     "title": "Getting started with Julia",
-    "section": " Come for the speed, stay for the rest",
-    "text": "Come for the speed, stay for the rest"
+    "section": "",
+    "text": "Julia is a high-level programming language for numerical computing.\nFirst version in 2012, Version 1.0 in 2018. Version 1.11 now.\nHigh-level programming with a syntax like Python.\nFast, almost like C/C++, if done right.\nJust-in-time (JIT) compiled. Code is compiled to machine code on the fly.\nNumerical linear algebra similar to Matlab.\nMacros inspired by Lisp.\nMultiple dispatch with sophisticated type system makes Julia highly composable."
   },
   {
-    "objectID": "workingwithdata.html#read-and-writing-data-in-julia",
-    "href": "workingwithdata.html#read-and-writing-data-in-julia",
-    "title": "Working with data",
+    "objectID": "gettingstarted.html#what-is-julia",
+    "href": "gettingstarted.html#what-is-julia",
+    "title": "Getting started with Julia",
     "section": "",
-    "text": "Packages used\n\n\n\n CSV.jl\n DataFrames.jl\n\n\n\nCSV files can be"
+    "text": "Julia is a high-level programming language for numerical computing.\nFirst version in 2012, Version 1.0 in 2018. Version 1.11 now.\nHigh-level programming with a syntax like Python.\nFast, almost like C/C++, if done right.\nJust-in-time (JIT) compiled. Code is compiled to machine code on the fly.\nNumerical linear algebra similar to Matlab.\nMacros inspired by Lisp.\nMultiple dispatch with sophisticated type system makes Julia highly composable."
+  },
+  {
+    "objectID": "gettingstarted.html#julia-is-fast",
+    "href": "gettingstarted.html#julia-is-fast",
+    "title": "Getting started with Julia",
+    "section": " Julia is fast",
+    "text": "Julia is fast"
+  },
+  {
+    "objectID": "gettingstarted.html#why-julia-for-statistics",
+    "href": "gettingstarted.html#why-julia-for-statistics",
+    "title": "Getting started with Julia",
+    "section": " Why Julia (for Statistics)?",
+    "text": "Why Julia (for Statistics)?\n\nSpeed. No need for a two language combo (R/Python and C++).\nGood packages for Statistics and Data Analysis.\nWonderful handling of statistical distributions.\nStrong linear algebra with beautiful syntax.\nParallel computing built in from the start.\nUnicode (e.g. greek letters in code) makes clear algorithms.\nEasy to use R/Python/C/Fortran code from Julia."
+  },
+  {
+    "objectID": "gettingstarted.html#installing-julia",
+    "href": "gettingstarted.html#installing-julia",
+    "title": "Getting started with Julia",
+    "section": " Installing Julia",
+    "text": "Installing Julia\nThe recommended way to install Julia is using a little tool called juliaup . Benefits of juliaup :\n\neasy install of Julia\nallows you to switch between different versions of Julia (see juliaup --help)\nnotifies when a new Julia version is available.\n\nInstructions on how to install juliaup are here. In short:\n\n Linux: run the following command in terminal:\ncurl -fsSL https://install.julialang.org | sh\nMac: run the following command in terminal:\ncurl -fsSL https://install.julialang.org | sh\n Windows, type this in the terminal to install from Windows store:\nwinget install --name Julia --id 9NJNWW8PVKMN -e -s msstore\n\n\n\n\n\n\n\nAvoid Linux repositories\n\n\n\nIt is not recommended to install Julia from repositories on Linux since the versions can be rather old.\n\n\n\n\n\n\n\n\nUninstall juliaup\n\n\n\nJuliaup can be uninstalled with the terminal command: juliaup self uninstall\n\n\nJulia can now be started by typing julia in the terminal (you may need to restart the shell/terminal so your system can find it). You should see something like this:"
+  },
+  {
+    "objectID": "gettingstarted.html#the-julia-repl-console",
+    "href": "gettingstarted.html#the-julia-repl-console",
+    "title": "Getting started with Julia",
+    "section": " The Julia REPL (console)",
+    "text": "The Julia REPL (console)\n\nThe Julia REPL (Read-Evaluate-Print Loop) is where you can interactively execute code and view the output (Console in R).\nWe will soon use VS Code as our main working environment (IDE, similar to RStudio), with the REPL as one component.\n\nThe Julia REPL is very good:\n\narrow-up and arrow-down goes back in command history.\nfiltered search in history. Start typing a word and then arrow-up will cycles though old commands that start with those letters.\nCtrl+r gives more advanced reverse-search.\nPast commands can be edited and re-used.\n\n\nThe REPL has several prompt modes, for example:\n\nJulian mode, which is the default seen above.\nHelp mode, activated by typing ? at the prompt. The prompt changes to help?&gt; and you can search for documentation about functions etc. Backspace takes you back to Julian mode.\nShell mode, activated by typing a semicolon ;. The prompt changes to shell&gt; and you can use the usual shell commands for navigating directories, copying files etc. (On Windows, type powershell or cmd at shell&gt; to get access to the shell).\nPkg mode, activated by typing a right bracket ]. This opens the package manager where Julia packages are added and managed.\nSearch mode, activated by ctrl+r, as explained above.\nR mode. Later, when discuss how R and Julia can work together with the RCall.jl package, there will an R mode available by typing $ which opens an R prompt. More later.\n\n\nUseful keys bindings (here are many more):\n\nCtrl + C to interupt execution\nCtrl + L to clear the REPL\n\n\n\n\n\n\n\nExercise\n\n\n\n\nGet into help mode and read about the sin function.\nDrop into shell mode and change directory to somewhere else on your computer. Then go back to Julian mode (backspace) and check with pwd() that you indeed changed directory. Go back to shell mode and change the directory back to where you where before this exercise.\nGo into package mode and type status to see if you have any packages installed. (probably not if you have a fresh install)."
+  },
+  {
+    "objectID": "gettingstarted.html#the-package-manager",
+    "href": "gettingstarted.html#the-package-manager",
+    "title": "Getting started with Julia",
+    "section": " The package manager",
+    "text": "The package manager\n\nSimilar to R, but a bit more extreme, most things in Julia are available in packages.\nPackages are typically named with a .jl ending, for example the Distributions.jl package contains many statistical distributions.\nJulia packages are hosted on GitHub and managed by the Julia General Registry.\n\nHere are some of the most common packages for Statistics:\n\nStatistics.jl (mean, variance, quantile etc)\nDistributions.jl (most standard statistical distributions, with rand, pdf, cdf etc)\nLinearAlgebra.jl\nDataFrames.jl (tabular data manipulation)\nTidier.jl (R’s tidyverse, Julia-style)\nPlots.jl (one of the most widely used plotting systems)\nOptim.jl (numerical optimization)\nGLM.jl (generalized linear models using R’s formula syntax)\nTuring.jl (probabilistic programming, similar to Stan)\nRCall.jl (using R code in Julia)\nDifferentiationInterface.jl (interface to Julia’s many autodiff libraries)\nRDatasets.jl (the R datasets that we all love, in Julia)\n\nThe package manager is most easily accessed by typing ] to get into Pkg mode. The prompt changes to (@v.11) pkg&gt; which means that you are in package mode in the default environment v.11 (if you are using Julia 1.11, more on environments later).\nSome useful commands in Pkg mode:\n\nstatus, shows the packages installed in the currently active environment\nadd PkgName (installs the PkgName.jl package, for example Distributions.jl)\nrm PkgName (removes the PkgName.jl package)\nupdate (checks registry and updates packages)\n\nWhen we write, for example, ] add Distributions we mean to type ] and then add Distributions on the Pkg prompt.\nOnce a package has been added it can be used from the Julian prompt (just backspace out from Pkg mode) with the using command: using PkgName . This loads the package in memory and its functions and other objects can now be used.\nThere are other ways to use a package, like import. The main difference is that\n\nusing exposes all exported function directly without needing to call then with the package name as prefix, e.g. myfunc(3).\nimport does not expose exported function directly and requires a call to function to be prefixed with the package name, e.g. PkgName.myfunc(3). This is closer to Python’s namespace convention, but namespaces are less essential in Julia due to multiple dispatch and Julias clever handling of function (method) name collisions.\nIt is also possible to use only specific functions from a package: using PkgName: myfunc, otherfunc.\nHere is comparison of package handling in R, Julia and Python.\n\n\n\n\n\n\n\n\n\n\n\n\nLanguage\n\nRepository\n\nInstall packages\n\nUse packages\n\n\nR\n\nCRAN (Comprehensive R Archive Network)\n\ninstall.packages(\"pkgname\")\n\nlibrary(pkgname)\n\n\nJulia\n\nGeneral registry (hosted on GitHub)\n\n] add PkgName\n\nusing PkgName\nimport PkgName\nimport PkgName: myfunc\n\n\nPython\n\nPyPI (Python Package Index)\nor Conda\n\npip install pkgname\nconda install pkgname\n\nfrom pkgname import *\nimport pkgname as pk\nfrom pkgname import myfunc\n\n\n\n\n\n\n\n\n\n\nExercise\n\n\n\n\nAdd the Distributions.jl package in the package manager. Type status after install to see that it indeed was added.\nUse the Distributions.jl package by the using command from the Julian prompt.\nUse the package to define a normal distribution object with mean 2 and and standard deviation 3. Go into help mode and search for Normal to see how this is done. Call the new object dist.\nGenerate 10 random draws from this normal distribution using the rand function on the normal distribution object dist.\nEvaluate the pdf of this normal at x=1 using the pdf function on the normal distribution object dist."
+  },
+  {
+    "objectID": "gettingstarted.html#running-programs",
+    "href": "gettingstarted.html#running-programs",
+    "title": "Getting started with Julia",
+    "section": " Running programs",
+    "text": "Running programs\nWe can write Julia code in any text editor and then execute it in the terminal with the julia command. Here is a small Julia example program (plotfunc.jl) that plots the square function using the Plots.jl package (which needs to added first) and finally saves the graph to a pdf file.\n# adding Plots.jl package programatically (needed if it is not already installed)\nimport Pkg; Pkg.add(\"Plots\")\nusing Plots\n\n# Define the function that does the work \nfunction plotfunction(func, a, b)\n  xgrid = range(a, b, length = 100)\n  plt = plot(xgrid, func.(xgrid), color = :blue, xlabel = \"x\", ylabel = \"f(x)\")\n  return plt\nend\n\n# Use the function to produce the plot\nplt = plotfunction(x -&gt; x^2, -2, 2) # x -&gt; x^2 defines an anonymous function\n\n# save plot to file\nsavefig(plt, \"myplot.pdf\")\nWe can run this code in terminal with the command\njulia plotfunc.jl\n\n\n\n\n\n\nExercise\n\n\n\nCopy the code above to a text file name plotfunc.jl and run it using the command above. Check the pdf file."
+  },
+  {
+    "objectID": "gettingstarted.html#vs-code---rstudio-for-julia",
+    "href": "gettingstarted.html#vs-code---rstudio-for-julia",
+    "title": "Getting started with Julia",
+    "section": " VS code - Rstudio for Julia",
+    "text": "VS code - Rstudio for Julia\n\nVS code\nThe most common way to work with Julia is using the VS code IDE (similar to RStudio, but more general). VS code is free and open source. It can be installed from here. There are many many extensions or plug-ins for VS code for doing mostly anything you want. Here is a 100 sec video about VS code. The official getting started guide is quite good.\nThe most important command in VS code is ctrl+shift+p which opens the Command palette. From there you can type thing like settings to access all the settings, execute code etc.\n\n\nJulia in VS Code\nThe most important extension for Julia is the official Julia extension, which brings together the editor, Julia REPL, plot pane, debugging tools, and much more in one app. Once you open a .jl file in the editor, VS code will give you proper syntax highlighting. Here is 2+ minute getting started video. With the Julia extension installed, try ctrl+shift+p and type julia in the command palette to see some of the commands that you can use for Julia in VS code.\nThe official documention is here.\nHere are some useful commands, keyboard shortcuts and extensions in VS code.\n\nJulia code in VS code can be run in three basic modes:\n\nRun a file in a separate terminal: from command palette: Julia: Run File in New Process or from the Play button in the top right corner of the editor.\nDebug mode.\nRun interatively in the REPL inside VS code.\n\n\n\nshift + enter or shift + ctrl on a line in the editor starts the Julia REPL automatically. However, if you close the REPL, you have to use the command Julia: Restart REPL to start a new one.\nIf you prefer to not have the output inline in the editor, go to Julia extension settings and search for Execution: Result Type, and set it to REPL.\n\n\n\n\n\n\nExercise\n\n\n\nOpen the plotfunc.jl file from a previous exercise in VS Code and run it again using the command Julia: Run File in New Process\nNow, run each line in plotfunc.jl interactively in the VS code Julia REPL."
+  },
+  {
+    "objectID": "gettingstarted.html#notebooks",
+    "href": "gettingstarted.html#notebooks",
+    "title": "Getting started with Julia",
+    "section": " Notebooks",
+    "text": "Notebooks\nJulia can be used in all major notebook systems:\n Jupyter (The Ju in Jupyter stands for Julia). Install the IJulia package in Julia first.\n\n  Screenshot Jupyter notebook\n  \n\n Google Colab. Change to Julia in the Edit/Notebook settings menu.\n\n  Screenshot Google Colab notebook\n  \n\n Quarto. Install the R package JuliaCall in R first. Add engine: julia to YAML.\n\n  Screenshot Quarto notebook\n  \n\n Pluto.jl This is a reactive notebook system in Julia. Run from Julia or online.\n\n  Screenshot Pluto.jl notebook"
   },
   {
     "objectID": "gettingstarted.html#live-demo",
     "href": "gettingstarted.html#live-demo",
     "title": "Getting started with Julia",
     "section": "💻 Live demo",
-    "text": "💻 Live demo\nLive demo of basic Julia roughly based on this script."
+    "text": "💻 Live demo\nLive demo of basic Julia roughly based on this script.\n\nJulia type hierarchy for Number type\n\nSource: cormullion?"
+  },
+  {
+    "objectID": "distributions.html",
+    "href": "distributions.html",
+    "title": "Statistics with Julia",
+    "section": "",
+    "text": "Julia has a fantastic unified system for statistical distributions, implemented mainly in the Distributions.jl package.\nSimilar to Python, but different from R, distributions are objects.\nWe can call functions on a dist = Normal() object, for example\n\npdf(dist, 2.0) computes the pdf at x=2.0\ncdf(dist, 2.0) computes the cdf at x=2.0\nrand(dist) generates random numbers from N(0,1)\nmean(dist) and var(dist) returns the mean and variance.\n\n\nusing Distributions\ndist = Normal(1,3) \npdf(dist, 0)\ncdf(dist, 0) \nquantile(dist, 0.5)\nrand(dist, 10) \n\n10-element Vector{Float64}:\n  3.85518075958924\n  0.3929149904692296\n  5.591344959436813\n -4.352515525717326\n -2.481811222302205\n -1.092084900621999\n -1.3110149146960683\n  0.32403752369845795\n  0.8145392548148882\n  0.904832550064212\n\n\nScale-locations families are generated by addition and multiplication\n\nusing Distributions\n\n1 + 2*TDist(3)\nTDist(μ, σ, ν) = μ + σ*TDist(ν)\nTDist(3)\ndist = TDist(1, 2, 3)\npdf(dist, 0)\n\n0.1565904555044143"
+  },
+  {
+    "objectID": "distributions.html#statistical-distributions",
+    "href": "distributions.html#statistical-distributions",
+    "title": "Statistics with Julia",
+    "section": "",
+    "text": "Julia has a fantastic unified system for statistical distributions, implemented mainly in the Distributions.jl package.\nSimilar to Python, but different from R, distributions are objects.\nWe can call functions on a dist = Normal() object, for example\n\npdf(dist, 2.0) computes the pdf at x=2.0\ncdf(dist, 2.0) computes the cdf at x=2.0\nrand(dist) generates random numbers from N(0,1)\nmean(dist) and var(dist) returns the mean and variance.\n\n\nusing Distributions\ndist = Normal(1,3) \npdf(dist, 0)\ncdf(dist, 0) \nquantile(dist, 0.5)\nrand(dist, 10) \n\n10-element Vector{Float64}:\n  3.85518075958924\n  0.3929149904692296\n  5.591344959436813\n -4.352515525717326\n -2.481811222302205\n -1.092084900621999\n -1.3110149146960683\n  0.32403752369845795\n  0.8145392548148882\n  0.904832550064212\n\n\nScale-locations families are generated by addition and multiplication\n\nusing Distributions\n\n1 + 2*TDist(3)\nTDist(μ, σ, ν) = μ + σ*TDist(ν)\nTDist(3)\ndist = TDist(1, 2, 3)\npdf(dist, 0)\n\n0.1565904555044143"
+  },
+  {
+    "objectID": "distributions.html#optimization-and-autodiff",
+    "href": "distributions.html#optimization-and-autodiff",
+    "title": "Statistics with Julia",
+    "section": "Optimization and Autodiff",
+    "text": "Optimization and Autodiff\nThe Optim.jl package is the main package for numerical function optimization."
+  },
+  {
+    "objectID": "distributions.html#working-with-r-in-julia",
+    "href": "distributions.html#working-with-r-in-julia",
+    "title": "Statistics with Julia",
+    "section": "Working with R in Julia",
+    "text": "Working with R in Julia\nThe Rcall.jl package makes it possible to use R code, functions and packages from a Julia program."
+  },
+  {
+    "objectID": "workingwithdata.html#some-random-examples-from-my-teaching",
+    "href": "workingwithdata.html#some-random-examples-from-my-teaching",
+    "title": "Working with data",
+    "section": "Some random examples from my teaching",
+    "text": "Some random examples from my teaching"
   }
 ]

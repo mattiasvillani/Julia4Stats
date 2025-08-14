@@ -72,6 +72,29 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<style>
+/* Quarto right-margin TOC container */
+#quarto-margin-sidebar {
+  position: static !important;
+  top: auto !important;
+  max-height: none !important;
+  overflow: visible !important;
+}
+/* If your build uses Bootstrap's sticky helper inside the margin sidebar */
+#quarto-margin-sidebar .sticky-top {
+  position: static !important;
+  top: auto !important;
+}
+/* Fallback for older class names */
+.toc-sidebar, .toc-column {
+  position: static !important;
+  top: auto !important;
+}
+/* Keep the TOC itself non-sticky just in case */
+nav#TOC {
+  position: static !important;
+}
+</style>
 
 
 <link rel="stylesheet" href="styles.css">
@@ -269,7 +292,7 @@ ul.task-list li input[type="checkbox"] {
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Sections</h2>
+    <h2 id="toc-title">Contents</h2>
    
   <ul>
   <li><a href="#useful-commands-and-navigation-in-vs-code" id="toc-useful-commands-and-navigation-in-vs-code" class="nav-link active" data-scroll-target="#useful-commands-and-navigation-in-vs-code">Useful commands and navigation in VS Code</a></li>

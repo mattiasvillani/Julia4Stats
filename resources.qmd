@@ -8,6 +8,10 @@ editor: visual
 
 -   [The Julia Academy](https://github.com/JuliaAcademy) - great collection of learning resources.
 
+## Cheat sheets
+
+-   <https://cheatsheet.juliadocs.org/>
+
 #### Books
 
 Here is a [list of books](https://julialang.org/learning/books/).
@@ -24,9 +28,13 @@ Here is a [list of books](https://julialang.org/learning/books/).
 
 #### Online courses
 
+-   [Julia for Data Science](https://juliaacademy.com/p/julia-for-data-science)
+
 -   [Learn Julia in 4 hours](https://www.youtube.com/watch?v=KlorfxsdWDw) (for beginners to programming)
 
--   [Julia for Data Science](https://juliaacademy.com/p/julia-for-data-science)
+-   [Introduction to Computational thinking](https://computationalthinking.mit.edu/Fall20/) at MIT (using Julia throughout)
+
+-   [Advanced Scientific Computing](https://youtu.be/x4oi0IKf52w?si=WyIkge3sbYCTEjZ2) (open source software development using Julia)
 
 #### Podcasts
 

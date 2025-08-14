@@ -4,7 +4,7 @@ author: "Mattias Villani"
 editor: visual
 ---
 
-## ![](figs/julialogo.svg){width="30" height="27"} What is Julia? 
+## ![](figs/julialogo.svg){width="30" height="27"} What is Julia?
 
 -   Julia is a high-level programming language for **numerical computing**.
 
@@ -18,15 +18,17 @@ editor: visual
 
 -   Numerical linear algebra similar to Matlab.
 
--   Multiple dispatch with sophisticated type system makes the Julia **highly composable**.
+-   Macros inspired by Lisp.
 
-![](images/clipboard-2782725170.jpeg){width="121"}![](images/clipboard-2658870739.jpeg){width="125"}![](images/clipboard-1358662862.jpeg){width="125"}![](images/clipboard-1716984901.jpeg){width="125"}
+-   **Multiple dispatch** with sophisticated **type system** makes Julia **highly composable**.
 
-## ![](figs/julialogo.svg){width="30" height="27"} Come for the speed, stay for the rest
+![](images/clipboard-1358662862.jpeg){width="125"}![](images/clipboard-2658870739.jpeg){width="125"}![](images/clipboard-2782725170.jpeg){width="121"}![](images/clipboard-1716984901.jpeg){width="125"}
+
+## ![](figs/julialogo.svg){width="30" height="27"} Julia is fast
 
 ![](figs/benchmarks.svg)
 
-## ![](figs/julialogo.svg){width="30" height="27"} Why Julia (for a Statistician)? 
+## ![](figs/julialogo.svg){width="30" height="27"} Why Julia (for Statistics)?
 
 -   **Speed**. No need for a two language combo (R/Python **and** C++).
 
@@ -77,7 +79,7 @@ Instructions on how to install juliaup are [here](https://julialang.org/install/
 ::: callout-warning
 ## Avoid Linux repositories
 
-It is not recommended to install Julia from repositories on Linux since the versions there can be rather old.
+It is not recommended to install Julia from repositories on Linux since the versions can be rather old.
 :::
 
 ::: callout-tip
@@ -90,17 +92,21 @@ Julia can now be started by typing `julia` in the terminal (you may need to rest
 
 ![](figs/juliastart.png)
 
-This what is known as the console in the R world. In Julia we tend to call it the **REPL** (Read-Evaluate-Print Loop). The REPL is where you can interactively execute code and view the output. We will soon use VS Code as our main working environment (IDE, similar to RStudio, but much more general), but let's take a first dive into Julia directly in the REPL.
-
 ## ![](figs/terminalicon.png){width="30"} The Julia REPL (console)
 
-The REPL can be used to evaluate commands as in any interpreted language.
+-   The Julia **REPL** (Read-Evaluate-Print Loop) is where you can **interactively execute code** and view the output (Console in R).
 
-Old commands can be found quite nicely in the REPL:
+-   We will soon use VS Code as our main working environment (IDE, similar to RStudio), with the REPL as one component.
 
--   arrow-up and arrow-down goes back in command history. Typing, for example, `myf` and then arrow-up cycles old commands that start with `myf`. Ctrl+r gives more advanced reverse-search.
+The Julia REPL is very good:
 
--   past commands can be edited and re-used.
+-   arrow-up and arrow-down goes back in **command history**.
+
+-   **filtered search in history**. Start typing a word and then arrow-up will cycles though old commands that start with those letters.
+
+-   Ctrl+r gives more advanced **reverse-search**.
+
+-   **Past commands can be edited** and re-used.
 
 ![](figs/navigateREPL.gif){width="500"}
 
@@ -126,7 +132,7 @@ Useful keys bindings ([here](https://docs.julialang.org/en/v1/stdlib/REPL/#Key-b
 
 -   Ctrl + L to clear the REPL
 
-::: {.callout-note appearance="simple"}
+::: callout-note
 ## Exercise
 
 -   Get into *help mode* and read about the sin function.
@@ -136,9 +142,13 @@ Useful keys bindings ([here](https://docs.julialang.org/en/v1/stdlib/REPL/#Key-b
 -   Go into *package mode* and type `status` to see if you have any packages installed. (probably not if you have a fresh install).
 :::
 
-## ![](figs/pkgicon.png){width="30"} The package manager: a first look
+## ![](figs/pkgicon.png){width="30"} The package manager
 
-Similar to R, but a bit more extreme, most things in Julia are available in packages. Packages are typically named with a .jl ending, for example the *Distributions.jl* package contains many statistical distributions. Julia packages are hosted on GitHub and managed by the Julia **General Registry**.
+-   Similar to R, but a bit more extreme, most things in Julia are available in **packages**.
+
+-   Packages are typically named with a .jl ending, for example the *Distributions.jl* package contains many statistical distributions.
+
+-   Julia packages are hosted on **GitHub** and managed by the Julia **General Registry**.
 
 Here are some of the most common packages for Statistics:
 
@@ -192,25 +202,25 @@ There are other ways to use a package, like `import`. The main difference is tha
 
     Here is comparison of package handling in R, Julia and Python.
 
-    +------------+--------+----------------------------------------+--------+-------------------------------+--------+------------------------------+
-    | Language   |        | Repository                             |        | Install packages              |        | Use packages                 |
-    +------------+--------+----------------------------------------+--------+-------------------------------+--------+------------------------------+
-    | **R**      |        | CRAN (Comprehensive R Archive Network) |        | `install.packages("pkgname")` |        | `library(pkgname)`           |
-    +------------+--------+----------------------------------------+--------+-------------------------------+--------+------------------------------+
-    | **Julia**  |        | General registry (hosted on GitHub)    |        | `] add PkgName`               |        | `using` `PkgName`            |
-    |            |        |                                        |        |                               |        |                              |
-    |            |        |                                        |        |                               |        | `import PkgName`             |
-    |            |        |                                        |        |                               |        |                              |
-    |            |        |                                        |        |                               |        | `import PkgName: myfunc`     |
-    +------------+--------+----------------------------------------+--------+-------------------------------+--------+------------------------------+
-    | **Python** |        | **PyPI** (Python Package Index)\       |        | `pip install pkgname`         |        | `from pkgname import *`      |
-    |            |        | or **Conda**                           |        |                               |        |                              |
-    |            |        |                                        |        | `conda install pkgname`       |        | `import pkgname as pk`       |
-    |            |        |                                        |        |                               |        |                              |
-    |            |        |                                        |        |                               |        | `from pkgname import myfunc` |
-    +------------+--------+----------------------------------------+--------+-------------------------------+--------+------------------------------+
+    +------------+---+----------------------------------------+---+-------------------------------+---+------------------------------+
+    | Language   |   | Repository                             |   | Install packages              |   | Use packages                 |
+    +------------+---+----------------------------------------+---+-------------------------------+---+------------------------------+
+    | **R**      |   | CRAN (Comprehensive R Archive Network) |   | `install.packages("pkgname")` |   | `library(pkgname)`           |
+    +------------+---+----------------------------------------+---+-------------------------------+---+------------------------------+
+    | **Julia**  |   | General registry (hosted on GitHub)    |   | `] add PkgName`               |   | `using` `PkgName`            |
+    |            |   |                                        |   |                               |   |                              |
+    |            |   |                                        |   |                               |   | `import PkgName`             |
+    |            |   |                                        |   |                               |   |                              |
+    |            |   |                                        |   |                               |   | `import PkgName: myfunc`     |
+    +------------+---+----------------------------------------+---+-------------------------------+---+------------------------------+
+    | **Python** |   | **PyPI** (Python Package Index)\       |   | `pip install pkgname`         |   | `from pkgname import *`      |
+    |            |   | or **Conda**                           |   |                               |   |                              |
+    |            |   |                                        |   | `conda install pkgname`       |   | `import pkgname as pk`       |
+    |            |   |                                        |   |                               |   |                              |
+    |            |   |                                        |   |                               |   | `from pkgname import myfunc` |
+    +------------+---+----------------------------------------+---+-------------------------------+---+------------------------------+
 
-::: {.callout-note appearance="simple"}
+::: callout-note
 ## Exercise
 
 -   `Add` the Distributions.jl package in the package manager. Type `status` after install to see that it indeed was added.
@@ -253,13 +263,13 @@ We can run this code in terminal with the command
 julia plotfunc.jl
 ```
 
-::: {.callout-note appearance="simple"}
+::: callout-note
 ## Exercise
 
 Copy the code above to a text file name *plotfunc.jl* and run it using the command above. Check the pdf file.
 :::
 
-## ![](/misc/vscodeicon.png){width="25"} VS code - the Rstudio for Julia
+## ![](/misc/vscodeicon.png){width="25"} VS code - Rstudio for Julia
 
 #### VS code
 
@@ -289,7 +299,7 @@ The official documention is [here](https://code.visualstudio.com/docs/languages/
 
 If you prefer to not have the output inline in the editor, go to Julia extension settings and search for *Execution: Result Type*, and set it to REPL.
 
-::: {.callout-note appearance="simple"}
+::: callout-note
 ## Exercise
 
 Open the plotfunc.jl file from a previous exercise in VS Code and run it again using the command [Julia: Run File in New Process]{.underline}
@@ -340,3 +350,9 @@ Julia can be used in all major notebook systems:
 ## 💻 Live demo
 
 Live demo of basic Julia roughly based on [this script](code/gettingstarted.jl).
+
+#### Julia type hierarchy for Number type
+
+![](figs/numbertypes.png)
+
+Source: [cormullion](https://discourse.julialang.org/t/diagram-with-all-julia-types/5018)?

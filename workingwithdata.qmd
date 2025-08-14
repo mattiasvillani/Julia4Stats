@@ -6,36 +6,189 @@ editor: visual
 
 ## Read and writing data in Julia
 
-::: callout-tip
-## Packages used
+CSV files can be read with the [CSV.jl](https://csv.juliadata.org/stable/) package:
 
-![](figs/dataframes_logo.png){width="30"} [CSV.jl](https://csv.juliadata.org/stable/)
+```{julia}
+using CSV, DataFrames
+titanic = CSV.read("data/titanic.csv", DataFrame);
+first(titanic, 3)
+```
 
-![](figs/dataframes_logo.png){width="30"} [DataFrames.jl](https://dataframes.juliadata.org/stable/)
-:::
+ 
 
--   CSV files can be
+-   Use `CSV.Rows` or `CSV.Chunks` for reading only some observations at the time.
+
+-   With `StringEncodings.jl` package, `CSV` can handle other character encodings.
+
+-   Data can be read from an internet url with the help of the standard library `Downloads.jl`:
+
+```{julia}
+using CSV, DataFrames, Downloads
+url = "https://github.com/mattiasvillani/Julia4Stats/raw/main/data/titanic.csv";
+http_response = Downloads.download(url);
+titanic = CSV.read(http_response, DataFrame);
+first(titanic, 3)
+```
 
 ## Managing data
 
-::: callout-tip
-## Packages used
+![](figs/dataframes_logo.png){width="30"} [DataFrames.jl](https://dataframes.juliadata.org/stable/) is the original dataframe package in Julia.
 
-![](figs/dataframes_logo.png){width="30"} [DataFrames.jl](https://dataframes.juliadata.org/stable/)
+-   Construct `DataFrame` (labeled matrix/table) using different approaches.
 
-![](figs/dataframes_logo.png){width="30"} [DataFramesMeta.jl](https://juliadata.org/DataFramesMeta.jl/stable/)
+```{julia}
+using DataFrames
+df = DataFrame(
+    name = ["Alice", "Bob", "Charlie"],
+    age  = [25, 30, 35],
+    score = [88, 92, 95]
+)
+```
 
-![](figs/tidierdata_logo.png){width="30"} [TidierData.jl](https://tidierorg.github.io/TidierData.jl/latest/)
+ 
 
-![](figs/Rdatasets_logo.png){width="30"} [RDatasets.jl](https://github.com/JuliaStats/RDatasets.jl)
-:::
+-   DataFrames.jl has some data wrangling functions like `transform`, `filter`, `combine` etc.
 
-## Plotting data
+```{julia}
+df2 = transform(df, :age => (x -> 2x) => :age_doubled)
+```
 
-::: callout-tip
-## Packages used
+The data frame can be modfied in place with the Julia convention to use exclamation mark (!) to denote a mutating function:
 
-![](figs/plots_logo.png){width="30"} [Plots.jl](https://docs.juliaplots.org/stable/)
+```{julia}
+transform!(df, :age => (x -> 2x) => :age_doubled)      # Modify df in place
+```
 
-![](figs/tidierplots_logo.png){width="30" height="34"} [TidierPlots.jl](https://tidierorg.github.io/TidierPlots.jl/latest/)
-:::
+We can select a subset of the variables
+
+```{julia}
+df_selected = select(df, :name, :age_doubled)
+```
+
+Or filter out observations:
+
+```{julia}
+df_filtered = filter(:age => >(28), df)
+```
+
+ 
+
+![](figs/dataframes_logo.png){width="30"} [DataFramesMeta.jl](https://juliadata.org/DataFramesMeta.jl/stable/) uses Julia macros to @chain (pipe) together data manipulations, inspired by tidyverse in R.
+
+```{julia}
+using DataFramesMeta
+df_extra = DataFrame(
+    name = ["Alice", "Bob", "Diana"],
+    city = ["Stockholm", "Gothenburg", "Malmö"]
+)
+result = @chain df begin
+    @transform(:age_doubled = 2 .* :age)
+    @subset(_, :score .> 90)       # pipes to first argument, here explicitly using _
+    @select(:name, :score, :age_doubled) 
+    leftjoin(df_extra, on = :name)          # normal DataFrames function
+end
+```
+
+ 
+
+![](figs/tidierdata_logo.png){width="30"} [TidierData.jl](https://tidierorg.github.io/TidierData.jl/latest/) is a Julia re-implementation of the dplyr and tidyr packages from R.
+
+![](figs/tidier_logo.png){width="30"} [Tidier.jl](https://tidierorg.github.io/Tidier.jl) is meta package, similar to the tidyverse package in R.
+
+``` julia
+using CSV, DataFrames, Tidier
+
+# Read data from a URL using the standard library Downloads
+url = "https://github.com/mattiasvillani/Julia4Stats/raw/main/data/titanic.csv";
+http_response = Downloads.download(url);
+titanic = CSV.read(http_response, DataFrame)
+
+## TidierData.jl for data wrangling using @chain macro
+titanic2 = @chain titanic begin
+    @mutate(survived = survived == 1)
+    @mutate(first_class = pclass == 1)
+    @filter(fare > 10)
+    @select(name, survived, age, sex, first_class)
+end
+```
+
+## Plots
+
+![](figs/plots_logo.png){width="30"} [Plots.jl](https://docs.juliaplots.org/stable/) - a meta plotting package with many backends
+
+![](figs/makie_logo.png){width="30"} [Makie.jl](https://github.com/MakieOrg/Makie.jl) - gaining popularity, advanced features
+
+![](figs/tidierplots_logo.png){width="30" height="34"} [TidierPlots.jl](https://tidierorg.github.io/TidierPlots.jl/latest/) - Julia implementation of R's ggplot2.
+
+![](figs/plotly_logo.png){width="30"} [Plotly.jl](https://github.com/plotly/Plotly.jl) interface to the plot.ly library.
+
+and many many more.
+
+Here is an example using Plots.jl to plot the `mtcars` data from [Rdatasets.jl](https://github.com/JuliaStats/RDatasets.jl)
+
+```{julia}
+using Plots, LaTeXStrings, RDatasets, GLM
+
+mtcars = dataset("datasets", "mtcars")
+
+# Make a scatter plot of Horsepower vs Miles per gallon
+scatter(mtcars.HP, mtcars.MPG, 
+     xlabel = "Horsepower", ylabel = "Miles per gallon",
+     title = "MPG vs Horsepower", label = "Data points", 
+     legend = :topright, color = :blue)
+
+# Fit a linear model using GLM.jl
+using GLM
+lm_model = lm(@formula(MPG ~ HP), mtcars)
+
+# Add the fitted line to the plot, note the mutating plot! function
+plot!(mtcars.HP, predict(lm_model), 
+     label = "Fitted line", color = :red, linewidth = 2)  
+
+# Add a LaTeX string to the title
+βhat = round.(coef(lm_model), digits = 3)
+plot!(title = L"\beta_0 = %$(βhat[1])"* " and "* L"\beta_1 = %$(βhat[2])") 
+```
+
+## Some random examples from my teaching
+
+![](figs/RectangleSum2DmanyBars.png){width="500"}
+
+![](figs/taylorapprox2dimcontour.png){width="800"}
+
+![](figs/RajanBetaPostGrid.png){width="800"}
+
+![](figs/intervals.png){width="800"}
+
+![](figs/Dirichlet1.png){width="500"}
+
+![](figs/PikeLengthByAge.png){width="500"}
+
+![](figs/bikefeeltempbyseason.png){width="500"}
+
+![](figs/BayesianHistogramsDrawsDelta1_SamePlot.png){width="800"}
+
+## Switching backends
+
+Let us first plot surface in Plots.jl:
+
+```{julia}
+using Plots, LaTeXStrings
+
+# Plot a surface with the gr backend
+gr()
+xs = range(-4, 4; length=150)
+ys = range(-4, 4; length=150)
+f(x, y) = sin(x) * cos(y) * exp(-(x^2 + y^2)/8)
+Plots.surface(xs, ys, f; xlabel = L"x", ylabel = L"y", zlabel = L"f(x,y)", 
+    legend=false, camera = (30, 60))
+```
+
+Now we switch backend to PlotlyJS to get an interactive plot where we can pan, zoom and rotate:
+
+```{julia}
+import PlotlyJS
+plotlyjs() # swithing to plotlyjs for interactive Plots
+Plots.surface(xs, ys, f; xlabel = "x", ylabel = "y", zlabel = "f(x,y)", 
+    legend=false, camera = (30, 60))
+```
