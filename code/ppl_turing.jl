@@ -27,7 +27,7 @@ p = size(X, 2)
 τ = 10          # Prior standard deviation Σ = τ²I
 α = 0.70        # target acceptance probability in NUTS sampler
 model = poissonReg(y, X, τ)
-chain = sample(model, NUTS(α), 10000, discard_initial = 1000)
+chain = sample(model, NUTS(α), 10000, discard_initial = 1000, verbose = false)
 rateratio = exp.(chain.value) # exp(β) is the incidence rate ratio
 
 gr(grid = false)

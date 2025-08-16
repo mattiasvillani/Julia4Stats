@@ -68,7 +68,7 @@ $$
 \boldsymbol{\beta} \sim N(\boldsymbol{0}, \tau^2 \boldsymbol{I})
 $$
 
-![](figs/ebaydatatable.png){width="800"}
+![](figs/ebaydatatable.png)
 
 ```{julia}
 using Turing, CSV, Downloads, DataFrames, LinearAlgebra, LaTeXStrings, Plots

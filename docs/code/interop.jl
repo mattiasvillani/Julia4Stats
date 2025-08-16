@@ -31,17 +31,15 @@ R"""
 out = @rget out # Pull the R variable out back to Julia
 
 # We can wrap R functions in Julia functions
-function ARMAacf(ar, ma, lagmax, pacf = false) 
+function ARMAacf(ar, ma; lagmax, pacf = false) 
     R"""
-        act_theo = ARMAacf(ar = $ar, ma = $ma, lag.max = $lagmax, pacf = $pacf)
-        #suppressMessages(library(artfima))
+        acf_theo = ARMAacf(ar = $ar, ma = $ma, lag.max = $lagmax, pacf = $pacf)
     """
-    @rget act_theo
-	return act_theo
+    @rget acf_theo
+	return acf_theo
 end
 
-maxlag = 10
-ARMAacf([0.5, -0.2], [0.3], maxlag) 
+ARMAacf([0.5, -0.2], [0.3]; lagmax = 5) # This is Julia function now
 
 
 # Using Julia from R
@@ -63,27 +61,23 @@ julia_command("a = sqrt(2.0)")                    # Just for testing if the inst
 # Install needed Julia packages
 julia_install_package("LinearAlgebra")           # Installs Julia package
 julia_library("LinearAlgebra")                   # Loads Julia package
+julia_install_package("Distributions")
+julia_library("Distributions")
 ################################################################################
 
-# Loads the Julia source in Julia. Change path on your system.
-julia_source("code/juliaR2.jl")
-# This file contain the Julia function definition
-function R2(σ²ᵧ, β, Σ)
-    SST = σ²ᵧ + β'*Σ*β
-    SSR = β'*Σ*β
-    return SSR/SST
-end
+julia_source("code/poisloglik.jl") # Julia code file, contains:
+#function poisreg_loglik(β, y, X)                        
+#   return sum(logpdf.(Poisson.(exp.(X*β)), y))
+#end
 
 # This is the R function definition, wrapping the Julia function
-R2 <- function(sigma2y, beta_, Sigma){
-  return(julia_call("R2", sigma2y, beta_, Sigma))
+poisreg_loglik <- function(beta_, y, X){
+  return(julia_call("poisreg_loglik", beta_, y, X))
 }
-
-# Now we can call the R2 function as if it was R:
-sigma2y = 1
-beta_ = rnorm(2,0,1)
-Sigma = matrix(c(1,0.5,0.5,1),2,2)
-R2val = R2(sigma2y, beta_, Sigma)
+X = cbind(1, matrix(rnorm(100)))
+beta_ = c(0.5,-0.5)
+y = rpois(100, lambda = exp(X %*% beta_))
+poisreg_loglik(beta_, y, X)
 
 
 # Using Python from Julia with PyCall.jl
