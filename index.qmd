@@ -1,5 +1,5 @@
 ---
-title: "Julia for Statistics - a tutorial"
+title: "STILL IN DRAFT MODE - Julia for Statistics - a tutorial"
 format: html
 editor: 
   markdown: 
@@ -22,8 +22,9 @@ This tutorial introduces the Julia programming language and its use for statisti
 - the package manager and tooling
 - managing data in Julia
 - plots for statistics
-- statistical distributions and tools
+- statistical distributions
 - likelihood inference using numerical optimization
+- working with R and Python in Julia
 - probabilistic programming for statistical inference using Turing.jl
 
 ### Instructor
@@ -32,7 +33,7 @@ This tutorial introduces the Julia programming language and its use for statisti
 [Mattias Villani](https://mattiasvillani.com)<br> Professor of
 Statistics<br> Stockholm University
 
-### Workshop plan and schedule
+### Workshop plan, materials and schedule
 
 ---
 

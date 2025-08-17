@@ -398,8 +398,8 @@ nav#TOC {
 <li><p>Wonderful handling of <strong>statistical distributions</strong>.</p></li>
 <li><p>Strong <strong>linear algebra</strong> with beautiful syntax.</p></li>
 <li><p><strong>Parallel computing</strong> built in from the start.</p></li>
-<li><p><strong>Unicode</strong> (e.g.&nbsp;greek letters in code) makes clear algorithms.</p></li>
-<li><p>Easy to use R/Python/C/Fortran code from Julia.</p></li>
+<li><p><strong>Unicode</strong> (e.g.&nbsp;greek letters in code) makes <a href="https://github.com/mossr/BeautifulAlgorithms.jl">clear algorithms</a>.</p></li>
+<li><p>Easy to use R/Python/C/Fortran etc code from Julia.</p></li>
 </ul>
 <p><img src="figs/kalman.jpeg" class="img-fluid" width="800"></p>
 </section>
@@ -408,7 +408,7 @@ nav#TOC {
 <p>The recommended way to install Julia is using a little tool called <code>juliaup</code> . Benefits of <code>juliaup</code> :</p>
 <ul>
 <li><p>easy install of Julia</p></li>
-<li><p>allows you to switch between different versions of Julia (see <code>juliaup --help</code>)</p></li>
+<li><p>easy to switch between different Julia versions (see <code>juliaup --help</code>)</p></li>
 <li><p>notifies when a new Julia version is available.</p></li>
 </ul>
 <p>Instructions on how to install juliaup are <a href="https://julialang.org/install/">here</a>. In short:</p>
@@ -452,21 +452,21 @@ Uninstall juliaup
 <section id="the-julia-repl-console" class="level2">
 <h2 class="anchored" data-anchor-id="the-julia-repl-console"><img src="figs/terminalicon.png" class="img-fluid" width="30"> The Julia REPL (console)</h2>
 <ul>
-<li><p>The Julia <strong>REPL</strong> (Read-Evaluate-Print Loop) is where you can <strong>interactively execute code</strong> and view the output (Console in R).</p></li>
+<li><p>The Julia <strong>REPL</strong> (Read-Evaluate-Print Loop) is where you can <strong>interactively execute code</strong> and view the output (like Console in R).</p></li>
 <li><p>We will soon use VS Code as our main working environment (IDE, similar to RStudio), with the REPL as one component.</p></li>
 </ul>
 <p>The Julia REPL is very good:</p>
 <ul>
 <li><p>arrow-up and arrow-down goes back in <strong>command history</strong>.</p></li>
 <li><p><strong>filtered search in history</strong>. Start typing a word and then arrow-up will cycles though old commands that start with those letters.</p></li>
-<li><p>Ctrl+r gives more advanced <strong>reverse-search</strong>.</p></li>
-<li><p><strong>Past commands can be edited</strong> and re-used.</p></li>
+<li><p><code>ctrl+r</code> gives more advanced <strong>reverse-search</strong>.</p></li>
+<li><p><strong>past commands can be edited</strong> and re-used.</p></li>
 </ul>
 <p><img src="figs/navigateREPL.gif" class="img-fluid" width="500"></p>
 <p>The REPL has several prompt modes, for example:</p>
 <ul>
 <li><p><strong>Julian mode</strong>, which is the default seen above.</p></li>
-<li><p><strong>Help mode</strong>, activated by typing <strong>?</strong> at the prompt. The prompt changes to <code>help?&gt;</code> and you can search for documentation about functions etc. Backspace takes you back to Julian mode.</p></li>
+<li><p><strong>Help mode</strong>, activated by typing <strong>?</strong> at the prompt. The prompt changes to <code>help?&gt;</code> and you can search for documentation about functions etc; see animated gif below. <code>Backspace</code> takes you back to Julian mode.</p></li>
 <li><p><strong>Shell mode</strong>, activated by typing a semicolon <strong>;</strong>. The prompt changes to <code>shell&gt;</code> and you can use the usual shell commands for navigating directories, copying files etc. (On Windows, type <code>powershell</code> or <code>cmd</code> at <code>shell&gt;</code> to get access to the shell).</p></li>
 <li><p><strong>Pkg mode</strong>, activated by typing a right bracket <strong>]</strong>. This opens the package manager where Julia packages are added and managed.</p></li>
 <li><p><strong>Search mode</strong>, activated by <code>ctrl+r</code>, as explained above.</p></li>
@@ -500,7 +500,7 @@ Exercise
 <h2 class="anchored" data-anchor-id="the-package-manager"><img src="figs/pkgicon.png" class="img-fluid" width="30"> The package manager</h2>
 <ul>
 <li><p>Similar to R, but a bit more extreme, most things in Julia are available in <strong>packages</strong>.</p></li>
-<li><p>Packages are typically named with a .jl ending, for example the <em>Distributions.jl</em> package contains many statistical distributions.</p></li>
+<li><p>Packages are typically named with a .jl ending, for example the <a href="https://github.com/JuliaStats/Distributions.jl">Distributions.jl</a> package contains many statistical distributions.</p></li>
 <li><p>Julia packages are hosted on <strong>GitHub</strong> and managed by the Julia <strong>General Registry</strong>.</p></li>
 </ul>
 <p>Here are some of the most common packages for Statistics:</p>
@@ -536,13 +536,13 @@ Exercise
 <p>Here is comparison of package handling in R, Julia and Python.</p>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 9%">
-<col style="width: 2%">
-<col style="width: 30%">
-<col style="width: 2%">
-<col style="width: 23%">
-<col style="width: 2%">
-<col style="width: 23%">
+<col style="width: 8%">
+<col style="width: 6%">
+<col style="width: 27%">
+<col style="width: 6%">
+<col style="width: 21%">
+<col style="width: 6%">
+<col style="width: 20%">
 </colgroup>
 <tbody>
 <tr class="odd">

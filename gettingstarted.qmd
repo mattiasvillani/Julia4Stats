@@ -40,9 +40,9 @@ editor: visual
 
 -   **Parallel computing** built in from the start.
 
--   **Unicode** (e.g. greek letters in code) makes clear algorithms.
+-   **Unicode** (e.g. greek letters in code) makes [clear algorithms](https://github.com/mossr/BeautifulAlgorithms.jl).
 
--   Easy to use R/Python/C/Fortran code from Julia.
+-   Easy to use R/Python/C/Fortran etc code from Julia.
 
 ![](figs/kalman.jpeg){width="800"}
 
@@ -52,7 +52,7 @@ The recommended way to install Julia is using a little tool called `juliaup` . B
 
 -   easy install of Julia
 
--   allows you to switch between different versions of Julia (see `juliaup --help`)
+-   easy to switch between different Julia versions (see `juliaup --help`)
 
 -   notifies when a new Julia version is available.
 
@@ -94,7 +94,7 @@ Julia can now be started by typing `julia` in the terminal (you may need to rest
 
 ## ![](figs/terminalicon.png){width="30"} The Julia REPL (console)
 
--   The Julia **REPL** (Read-Evaluate-Print Loop) is where you can **interactively execute code** and view the output (Console in R).
+-   The Julia **REPL** (Read-Evaluate-Print Loop) is where you can **interactively execute code** and view the output (like Console in R).
 
 -   We will soon use VS Code as our main working environment (IDE, similar to RStudio), with the REPL as one component.
 
@@ -104,9 +104,9 @@ The Julia REPL is very good:
 
 -   **filtered search in history**. Start typing a word and then arrow-up will cycles though old commands that start with those letters.
 
--   Ctrl+r gives more advanced **reverse-search**.
+-   `ctrl+r` gives more advanced **reverse-search**.
 
--   **Past commands can be edited** and re-used.
+-   **past commands can be edited** and re-used.
 
 ![](figs/navigateREPL.gif){width="500"}
 
@@ -114,7 +114,7 @@ The REPL has several prompt modes, for example:
 
 -   **Julian mode**, which is the default seen above.
 
--   **Help mode**, activated by typing **?** at the prompt. The prompt changes to `help?>` and you can search for documentation about functions etc. Backspace takes you back to Julian mode.
+-   **Help mode**, activated by typing **?** at the prompt. The prompt changes to `help?>` and you can search for documentation about functions etc; see animated gif below. `Backspace` takes you back to Julian mode.
 
 -   **Shell mode**, activated by typing a semicolon **;**. The prompt changes to `shell>` and you can use the usual shell commands for navigating directories, copying files etc. (On Windows, type `powershell` or `cmd` at `shell>` to get access to the shell).
 
@@ -146,7 +146,7 @@ Useful keys bindings ([here](https://docs.julialang.org/en/v1/stdlib/REPL/#Key-b
 
 -   Similar to R, but a bit more extreme, most things in Julia are available in **packages**.
 
--   Packages are typically named with a .jl ending, for example the *Distributions.jl* package contains many statistical distributions.
+-   Packages are typically named with a .jl ending, for example the [Distributions.jl](https://github.com/JuliaStats/Distributions.jl) package contains many statistical distributions.
 
 -   Julia packages are hosted on **GitHub** and managed by the Julia **General Registry**.
 
@@ -202,23 +202,23 @@ There are other ways to use a package, like `import`. The main difference is tha
 
     Here is comparison of package handling in R, Julia and Python.
 
-    +------------+---+----------------------------------------+---+-------------------------------+---+------------------------------+
-    | Language   |   | Repository                             |   | Install packages              |   | Use packages                 |
-    +------------+---+----------------------------------------+---+-------------------------------+---+------------------------------+
-    | **R**      |   | CRAN (Comprehensive R Archive Network) |   | `install.packages("pkgname")` |   | `library(pkgname)`           |
-    +------------+---+----------------------------------------+---+-------------------------------+---+------------------------------+
-    | **Julia**  |   | General registry (hosted on GitHub)    |   | `] add PkgName`               |   | `using` `PkgName`            |
-    |            |   |                                        |   |                               |   |                              |
-    |            |   |                                        |   |                               |   | `import PkgName`             |
-    |            |   |                                        |   |                               |   |                              |
-    |            |   |                                        |   |                               |   | `import PkgName: myfunc`     |
-    +------------+---+----------------------------------------+---+-------------------------------+---+------------------------------+
-    | **Python** |   | **PyPI** (Python Package Index)\       |   | `pip install pkgname`         |   | `from pkgname import *`      |
-    |            |   | or **Conda**                           |   |                               |   |                              |
-    |            |   |                                        |   | `conda install pkgname`       |   | `import pkgname as pk`       |
-    |            |   |                                        |   |                               |   |                              |
-    |            |   |                                        |   |                               |   | `from pkgname import myfunc` |
-    +------------+---+----------------------------------------+---+-------------------------------+---+------------------------------+
+    +------------+--------+----------------------------------------+--------+-------------------------------+--------+------------------------------+
+    | Language   |        | Repository                             |        | Install packages              |        | Use packages                 |
+    +------------+--------+----------------------------------------+--------+-------------------------------+--------+------------------------------+
+    | **R**      |        | CRAN (Comprehensive R Archive Network) |        | `install.packages("pkgname")` |        | `library(pkgname)`           |
+    +------------+--------+----------------------------------------+--------+-------------------------------+--------+------------------------------+
+    | **Julia**  |        | General registry (hosted on GitHub)    |        | `] add PkgName`               |        | `using` `PkgName`            |
+    |            |        |                                        |        |                               |        |                              |
+    |            |        |                                        |        |                               |        | `import PkgName`             |
+    |            |        |                                        |        |                               |        |                              |
+    |            |        |                                        |        |                               |        | `import PkgName: myfunc`     |
+    +------------+--------+----------------------------------------+--------+-------------------------------+--------+------------------------------+
+    | **Python** |        | **PyPI** (Python Package Index)\       |        | `pip install pkgname`         |        | `from pkgname import *`      |
+    |            |        | or **Conda**                           |        |                               |        |                              |
+    |            |        |                                        |        | `conda install pkgname`       |        | `import pkgname as pk`       |
+    |            |        |                                        |        |                               |        |                              |
+    |            |        |                                        |        |                               |        | `from pkgname import myfunc` |
+    +------------+--------+----------------------------------------+--------+-------------------------------+--------+------------------------------+
 
 ::: callout-note
 ## Exercise
