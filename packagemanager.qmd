@@ -3,3 +3,5 @@ title: "The package manager"
 author: "Mattias Villani"
 editor: visual
 ---
+
+More info will be added here later.

@@ -112,5 +112,5 @@ Turing.jl](turing.qmd)<br>
 
 [Books, courses and podcasts etc about Julia](resources.qmd)<br> [A
 collection of Julia links](links.qmd)<br> [Writing Julia
-packages](building_packages.qmd)<br> [Working with
-environments](packagemanager.qmd)
+packages](building_packages.qmd)<br> [More on packages and the package
+manager](packagemanager.qmd)
