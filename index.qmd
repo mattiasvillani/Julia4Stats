@@ -1,5 +1,5 @@
 ---
-title: "STILL IN DRAFT MODE - Julia for Statistics - a tutorial"
+title: "Julia for Statistics - a tutorial"
 format: html
 editor: 
   markdown: 
@@ -7,25 +7,44 @@ editor:
 ---
 
 <!-- Place this tag in your head or just before your close body tag. -->
+
+```{=html}
 <script async defer src="https://buttons.github.io/buttons.js"></script>
+```
 
 <img src="misc/banner_image3.png" alt="AI generated banner image" class="center" width="100%"/>
 
 <!-- Place this tag where you want the button to render. -->
+
 <a class="github-button" href="https://github.com/mattiasvillani/Julia4Stats" data-color-scheme="no-preference: dark; light: light; dark: dark;" data-size="large" data-show-count="true" aria-label="Star mattiasvillani/Julia4Stats on GitHub">Star</a>
+
+> This tutorial was prepared as part of the COST action HiTEc for the
+> Econometrics & Statistics (Ecosta) 2025 conference in Tokyo.
+
+|  |  |
+|------------------------------------|------------------------------------|
+| ![](figs/logo_hitec.png){width="300"} | ![](images/clipboard-2072130348.png){width="99" height="54"} |
 
 ### Aim
 
-This tutorial introduces the Julia programming language and its use for statistical analysis. The following topics will be covered:
+This tutorial introduces the Julia programming language and its use for
+statistical analysis. <br> The following topics will be covered:
 
-- introduction to the Julia programming language
-- the package manager and tooling
-- managing data in Julia
-- plots for statistics
-- statistical distributions
-- likelihood inference using numerical optimization
-- working with R and Python in Julia
-- probabilistic programming for statistical inference using Turing.jl
+-   introduction to the Julia programming language
+
+-   the package manager and tooling
+
+-   managing data in Julia
+
+-   plots for statistics
+
+-   statistical distributions
+
+-   likelihood inference using numerical optimization
+
+-   working with R and Python in Julia
+
+-   probabilistic programming for statistical inference using Turing.jl
 
 ### Instructor
 
@@ -33,40 +52,65 @@ This tutorial introduces the Julia programming language and its use for statisti
 [Mattias Villani](https://mattiasvillani.com)<br> Professor of
 Statistics<br> Stockholm University
 
+### Before the tutorial
+
+You may want to install Julia and VS code before the tutorial, to follow
+along in my interactive demos and also experiment yourself. I will not
+assume that you have installed Julia however, and you can attend the
+tutorial just to listen. See the first lecture for information on how to
+install Julia and (optionally, but recommended, VS Code). If you want to
+have the same packages and versions that I use in the tutorial, do this
+after you have installed Julia:
+
+-   Download the [Project.toml](Project.toml) and
+    [Manifest.toml](Manifest.toml) files and place them in your
+    directory of choice.
+-   Start Julia by typing `julia` in the terminal.
+-   In Julia, cd to your directory by typing
+    `cd("PathToYourDirectory")`.
+-   In Julia, type `]` and press `Enter` to enter the package manager.
+    The prompt should change to something with `pkg>`.
+-   activate the environment by typing `activate .` and `Enter`. (that
+    is `activate` followed by space and a dot).
+-   Instantiate the environment with all dependencies by typing
+    `instantiate` and `Enter`. This will takes some time since many
+    packages are installed and precompiled.
+-   Press `Backspace` to exit the package manager.
+
 ### Workshop plan, materials and schedule
 
----
+------------------------------------------------------------------------
 
-**Lecture 1 - The Julia programming language and tooling**<br>
-Time: 14.00-15.00 <br>
-Reading: [Getting started with Julia](gettingstarted.qmd) <br>
-Live demo: [Basic Julia](code/gettingstarted.jl)
+**Lecture 1 - The Julia programming language and tooling**<br> Time:
+14.00-15.00 <br> Reading: [Getting started with
+Julia](gettingstarted.qmd) <br> Live demo: [Basic
+Julia](code/gettingstarted.jl)
 
-🍎 *leg stretcher* 
+🍎 *leg stretcher*
 
-**Lecture 2 - Working with data in Julia**<br> 
-Time: 15.00-16.00 <br>
+**Lecture 2 - Working with data in Julia**<br> Time: 15.00-16.00 <br>
 Reading: [Read, managing and plotting data](workingwithdata.qmd) <br>
-Code: [DataFrames.jl](code/workingwithdata_dataframes.jl) | [Tidier.jl](code/workingwithdata_tidier.jl) | [Plots](code/plotting.jl)
+Code: [DataFrames.jl](code/workingwithdata_dataframes.jl) \|
+[Tidier.jl](code/workingwithdata_tidier.jl) \| [Plots](code/plotting.jl)
 
 ☕ *tea break*
 
-**Lecture 3 - Statistics in Julia**<br> 
-Time: 16.30-17.30 <br>
-Reading: [Distributions and Optimization](dist_optim_R.qmd) | [Interop with R and Python](interop.qmd) <br>
-Code: [Distributions](code/distributions.jl) |  [Optimization](code/optimization.jl) | [Working with R and Python](code/interop.jl)
+**Lecture 3 - Statistics in Julia**<br> Time: 16.30-17.30 <br> Reading:
+[Distributions and Optimization](dist_optim_R.qmd) \| [Interop with R
+and Python](interop.qmd) <br> Code:
+[Distributions](code/distributions.jl) \|
+[Optimization](code/optimization.jl) \| [Working with R and
+Python](code/interop.jl)
 
-🍓 *leg stretcher* 
+🍓 *leg stretcher*
 
-**Lecture 4 - Probabilistic programming using Turing.jl**<br> 
-Time: 17.30-18.30 <br>
-Reading: [Probabilistic programming with Turing.jl](turing.qmd)<br>
-
+**Lecture 4 - Probabilistic programming using Turing.jl**<br> Time:
+17.30-18.30 <br> Reading: [Probabilistic programming with
+Turing.jl](turing.qmd)<br>
 
 ### More material
-[Books, courses and podcasts etc about Julia](resources.qmd)<br>
-[A collection of Julia links](links.qmd)<br>
-[Writing Julia packages](building_packages.qmd)<br>
-[Working with environments](packagemanager.qmd)
 
-
+[Books, courses and podcasts etc about Julia](resources.qmd)<br> [A
+collection of Julia links](links.qmd)<br> [Writing Julia
+packages](building_packages.qmd)<br> [Working with
+environments](packagemanager.qmd)

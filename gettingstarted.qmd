@@ -30,7 +30,7 @@ editor: visual
 
 ## ![](figs/julialogo.svg){width="30" height="27"} Why Julia (for Statistics)?
 
--   **Speed**. No need for a two language combo (R/Python **and** C++).
+-   **Speed**. No need for a two language combo (R/Python **and** C/C++).
 
 -   **Good packages** for Statistics and Data Analysis.
 
@@ -110,15 +110,15 @@ The Julia REPL is very good:
 
 ![](figs/navigateREPL.gif){width="500"}
 
-The REPL has several prompt modes, for example:
+The REPL has several **prompt modes**, for example:
 
--   **Julian mode**, which is the default seen above.
+-   **Julian mode**, which is the default `julia>` seen above.
 
 -   **Help mode**, activated by typing **?** at the prompt. The prompt changes to `help?>` and you can search for documentation about functions etc; see animated gif below. `Backspace` takes you back to Julian mode.
 
--   **Shell mode**, activated by typing a semicolon **;**. The prompt changes to `shell>` and you can use the usual shell commands for navigating directories, copying files etc. (On Windows, type `powershell` or `cmd` at `shell>` to get access to the shell).
-
 -   **Pkg mode**, activated by typing a right bracket **\]**. This opens the package manager where Julia packages are added and managed.
+
+-   **Shell mode**, activated by typing a semicolon **;**. The prompt changes to `shell>` and you can use the usual shell commands for navigating directories, copying files etc. (On Windows, type `powershell` or `cmd` at `shell>` to get access to the shell).
 
 -   **Search mode**, activated by `ctrl+r`, as explained above.
 
@@ -184,6 +184,8 @@ Some useful commands in Pkg mode:
 
 -   `add` `PkgName` (installs the PkgName.jl package, for example Distributions.jl)
 
+-   `add GitHubLink` adds the package directly from Github, e.g. `add git@github.com:JuliaStats/Distributions.jl.git`
+
 -   `rm` `PkgName` (removes the PkgName.jl package)
 
 -   `update` (checks registry and updates packages)
@@ -202,25 +204,38 @@ There are other ways to use a package, like `import`. The main difference is tha
 
     Here is comparison of package handling in R, Julia and Python.
 
-    +------------+--------+----------------------------------------+--------+-------------------------------+--------+------------------------------+
-    | Language   |        | Repository                             |        | Install packages              |        | Use packages                 |
-    +------------+--------+----------------------------------------+--------+-------------------------------+--------+------------------------------+
-    | **R**      |        | CRAN (Comprehensive R Archive Network) |        | `install.packages("pkgname")` |        | `library(pkgname)`           |
-    +------------+--------+----------------------------------------+--------+-------------------------------+--------+------------------------------+
-    | **Julia**  |        | General registry (hosted on GitHub)    |        | `] add PkgName`               |        | `using` `PkgName`            |
-    |            |        |                                        |        |                               |        |                              |
-    |            |        |                                        |        |                               |        | `import PkgName`             |
-    |            |        |                                        |        |                               |        |                              |
-    |            |        |                                        |        |                               |        | `import PkgName: myfunc`     |
-    +------------+--------+----------------------------------------+--------+-------------------------------+--------+------------------------------+
-    | **Python** |        | **PyPI** (Python Package Index)\       |        | `pip install pkgname`         |        | `from pkgname import *`      |
-    |            |        | or **Conda**                           |        |                               |        |                              |
-    |            |        |                                        |        | `conda install pkgname`       |        | `import pkgname as pk`       |
-    |            |        |                                        |        |                               |        |                              |
-    |            |        |                                        |        |                               |        | `from pkgname import myfunc` |
-    +------------+--------+----------------------------------------+--------+-------------------------------+--------+------------------------------+
+    +------------+--------+----------------------------------------+--------+-------------------------------+--------+-------------------------------+
+    | Language   |        | Repository                             |        | Install packages              |        | Use packages                  |
+    +------------+--------+----------------------------------------+--------+-------------------------------+--------+-------------------------------+
+    | **R**      |        | CRAN (Comprehensive R Archive Network) |        | `install.packages("pkgname")` |        | `library(pkgname)`            |
+    +------------+--------+----------------------------------------+--------+-------------------------------+--------+-------------------------------+
+    | **Julia**  |        | General registry (hosted on GitHub)    |        | `] add PkgName`               |        | `using` `PkgName`             |
+    |            |        |                                        |        |                               |        |                               |
+    |            |        |                                        |        |                               |        | `import PkgName`              |
+    |            |        |                                        |        |                               |        |                               |
+    |            |        |                                        |        |                               |        | `import PkgName: myfunc`      |
+    +------------+--------+----------------------------------------+--------+-------------------------------+--------+-------------------------------+
+    | **Python** |        | **PyPI** (Python Package Index)\       |        | `pip install pkgname`         |        | `from pkgname import *`       |
+    |            |        | or **Conda**                           |        |                               |        |                               |
+    |            |        |                                        |        | `conda install pkgname`       |        | `import pkgname as pk`        |
+    |            |        |                                        |        |                               |        |                               |
+    |            |        |                                        |        |                               |        | `from pkgname import myfunc`  |
+    +------------+--------+----------------------------------------+--------+-------------------------------+--------+-------------------------------+
+
+#### Environments
+
+-   Packages are by default `add`:ed to the default environment (e.g. v1.11 if you use Julia 1.11). However, it is common to have several projects ongoing at the same time, and different projects needs different packages. Here is where *environments* are very useful.
+
+-   A Julia **environment** is basically a list of all the packages used in a project, potentially including detailed information about which version of the packages that are to be used in the project. An environment is created by going to a directory and typing `activate .` in the Pkg prompt. The dot means *here* (in the directory structure; alternatively, the dot can be replaced by a path where you want the project to live). The activate command creates two files:
+
+    -   [Project.toml](Project.toml) - This is a list of the packages added to the project (so called direct dependencies), and their compatibility. Each package is identified by a unique ID. The link goes to the Project.toml used for this tutorial.
+
+    -   [Manifest.toml](Manifest.toml) - This contains the complete dependency structure of the added packages (since your added packages will often depend on other packages, so called indirect dependencies). The manifest.toml file can be used to `instantiate` all packages and their dependencies to the exact versions used in a particular project, so that code can be exactly reproduced with a frozen state of dependencies.
+
+-   When two projects use the same package at the same version, the content of this package is not duplicated.
 
 ::: callout-note
+
 ## Exercise
 
 -   `Add` the Distributions.jl package in the package manager. Type `status` after install to see that it indeed was added.
@@ -236,7 +251,7 @@ There are other ways to use a package, like `import`. The main difference is tha
 
 ## ![](figs/terminalicon.png){width="30"} Running programs
 
-We can write Julia code in any text editor and then execute it in the terminal with the `julia` command. Here is a small Julia example program (`plotfunc.jl`) that plots the square function using the `Plots.jl` package (which needs to added first) and finally saves the graph to a pdf file.
+We can write Julia code in any text editor and then execute it in the terminal with the `julia` command. Here is a small Julia example program (`plotfunc.jl`) that plots the square function using the `Plots.jl` package (which needs to `add`:ed first) and finally saves the graph to a pdf file.
 
 ``` julia
 # adding Plots.jl package programatically (needed if it is not already installed)
@@ -275,7 +290,7 @@ Copy the code above to a text file name *plotfunc.jl* and run it using the comma
 
 The most common way to work with Julia is using the [VS code](https://code.visualstudio.com/) IDE (similar to RStudio, but more general). VS code is free and open source. It can be installed from [here](https://code.visualstudio.com/Download). There are many many extensions or plug-ins for VS code for doing mostly anything you want. Here is a [100 sec video about VS code](https://www.youtube.com/watch?v=KMxo3T_MTvY). The [official getting started guide](https://code.visualstudio.com/docs/getstarted/getting-started) is quite good.
 
-The most important command in VS code is `ctrl+shift+p` which opens the **Command palette**. From there you can type thing like *settings* to access all the settings, execute code etc.
+The most important command in VS code is `ctrl+shift+p` which opens the **Command palette**. From there you can type things like *settings* to access all the settings, execute code etc.
 
 #### Julia in VS Code
 
@@ -285,7 +300,7 @@ The official documention is [here](https://code.visualstudio.com/docs/languages/
 
 [Here](vscode.qmd) are some useful commands, keyboard shortcuts and extensions in VS code.
 
--   Julia code in VS code can be run in three basic modes:
+-   Julia code in VS code can be run in three basic ways:
 
     -   **Run a file in a separate terminal**: from command palette: [Julia: Run File in New Process]{.underline} or from the **Play button** in the top right corner of the editor.
 
@@ -295,16 +310,16 @@ The official documention is [here](https://code.visualstudio.com/docs/languages/
 
 ![](figs/JuliaShortcuts1.png){width="651"}
 
-`shift + enter` or `shift + ctrl` on a line in the editor starts the Julia REPL automatically. However, if you close the REPL, you have to use the command [Julia: Restart REPL]{.underline} to start a new one.
+`shift + enter` or `shift + ctrl` on a line in the editor starts the Julia REPL automatically. However, if you close the REPL, you have to use the command [Julia: Restart REPL]{.underline} in the Command palette to start a new one.
 
-If you prefer to not have the output inline in the editor, go to Julia extension settings and search for *Execution: Result Type*, and set it to REPL.
+If you prefer to not have the output inline in the editor, go to Julia extension settings and search for *Execution: Result Type*, and set it to REPL (the default is Both REPL and inline).
 
 ::: callout-note
 ## Exercise
 
 Open the plotfunc.jl file from a previous exercise in VS Code and run it again using the command [Julia: Run File in New Process]{.underline}
 
-Now, run each line in plotfunc.jl interactively in the VS code Julia REPL.
+Now, run each line in plotfunc.jl interactively in the VS code Julia REPL. The plot should appear in a plot pane in VS code.
 :::
 
 ## ![](figs/Jupyter_logo.png){width="25"} Notebooks

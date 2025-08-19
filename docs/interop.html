@@ -375,16 +375,16 @@ nav#TOC {
 </ul></li>
 <li><p>RCall.jl does:</p>
 <ul>
-<li><p><strong>Sends R commands</strong> to a R session in the background.</p></li>
+<li><p><strong>Sends R commands</strong> to an R session in the background.</p></li>
 <li><p><strong>Moves data</strong> from Julia to R, and R back to Julia.</p></li>
 <li><p><strong>Transforms data structures</strong> in Julia to the “right” data structure in R. Dictionary -&gt; list etc.</p></li>
 <li><p>Enter <strong>R mode</strong> by typing <code>$</code> to get access to R console.</p></li>
 </ul></li>
 <li><p>To send a command to R, use <code>R"julia_expression"</code></p></li>
 </ul>
-<div id="0c7a064a" class="cell" data-execution_count="1">
+<div id="8ef8f748" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">RCall</span>         <span class="co"># Julia session must be set up, see RCall.jl docs</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>R<span class="st">"plot(rnorm(10))"</span>  <span class="co"># Evaluates in R</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>R<span class="st">"plot(rnorm(10))"</span>;  <span class="co"># Evaluates in R</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -392,17 +392,13 @@ nav#TOC {
 </figure>
 </div>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="24">
-<pre><code>RObject{NilSxp}
-NULL</code></pre>
-</div>
 </div>
 <ul>
 <li>Variables in Julia can be interpolated in R code using the <code>$</code> -syntax</li>
 </ul>
-<div id="b134184c" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="fl">10</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>R<span class="st">"plot(rnorm(</span><span class="sc">$</span>n<span class="st">))"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="09599ba0" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="fl">10</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>R<span class="st">"plot(rnorm(</span><span class="sc">$</span>n<span class="st">))"</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -410,63 +406,59 @@ NULL</code></pre>
 </figure>
 </div>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="25">
-<pre><code>RObject{NilSxp}
-NULL</code></pre>
-</div>
 </div>
 <ul>
 <li><p>Julia variables can be sent to R with <span class="citation" data-cites="rput">@rput</span> .</p></li>
 <li><p>R variables can be sent back to Julia with <span class="citation" data-cites="rget">@rget</span>.</p></li>
 </ul>
-<div id="3a9be61b" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Just some regression data to play with</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="fl">100</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> <span class="fl">3</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> <span class="fu">randn</span>(n,p)</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>β <span class="op">=</span> [<span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">0.5</span>]</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>σ <span class="op">=</span> <span class="fl">0.3</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>y  <span class="op">=</span> X<span class="op">*</span>β <span class="op">+</span> <span class="fu">σ*randn</span>(n)</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="pp">@rput</span> y               <span class="co"># y now lives in the R session</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="pp">@rput</span> X</span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>R<span class="st">"modelFit &lt;- lm(y ~ X)"</span></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>R<span class="st">"betaHat &lt;- modelFit</span><span class="sc">$</span>coef<span class="st">"</span></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>βhat <span class="op">=</span> <span class="pp">@rget</span> betaHat  <span class="co"># Pull the R variable betaHat back to Julia</span></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>βhat                  <span class="co"># lives in Julia now</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="26">
+<div id="98ada5fa" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Just some regression data to play with</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="fl">100</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> <span class="fl">3</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> <span class="fu">randn</span>(n,p)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>β <span class="op">=</span> [<span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">0.5</span>]</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>σ <span class="op">=</span> <span class="fl">0.3</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>y  <span class="op">=</span> X<span class="op">*</span>β <span class="op">+</span> <span class="fu">σ*randn</span>(n)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="pp">@rput</span> y               <span class="co"># y now lives in the R session</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="pp">@rput</span> X</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>R<span class="st">"modelFit &lt;- lm(y ~ X)"</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>R<span class="st">"betaHat &lt;- modelFit</span><span class="sc">$</span>coef<span class="st">"</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>βhat <span class="op">=</span> <span class="pp">@rget</span> betaHat  <span class="co"># Pull the R variable betaHat back to Julia</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>βhat                  <span class="co"># lives in Julia now</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="48">
 <pre><code>4-element Vector{Float64}:
- -0.08002389572087976
-  1.0021483540874887
-  2.053871472942861
-  0.45832332105205714</code></pre>
+ 0.043620495361893274
+ 0.9772471884035804
+ 2.014358371543607
+ 0.592342891482621</code></pre>
 </div>
 </div>
 <ul>
 <li><p>For longer multiline code chunks, use the triple quotes:</p>
-<div id="1099e7f7" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>z <span class="op">=</span> <span class="fl">2</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="pp">@rput</span> z</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>R<span class="st">"""</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="st">    f &lt;- function(x, z) x + z</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="st">    fvalue &lt;- f(1, </span><span class="sc">$</span>z<span class="st">)</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>out <span class="op">=</span> <span class="pp">@rget</span> fvalue <span class="co"># Pull the R variable out back to Julia</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="27">
+<div id="b89de7ab" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>z <span class="op">=</span> <span class="fl">2</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="pp">@rput</span> z</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>R<span class="st">"""</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="st">    f &lt;- function(x, z) x + z</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="st">    fvalue &lt;- f(1, </span><span class="sc">$</span>z<span class="st">)</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>out <span class="op">=</span> <span class="pp">@rget</span> fvalue <span class="co"># Pull the R variable out back to Julia</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="49">
 <pre><code>3.0</code></pre>
 </div>
 </div></li>
 <li><p>Wrap R functions into Julia functions (works also for installed packages):</p>
-<div id="6f505c13" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">ARMAacf</span>(ar, ma; lagmax, pacf <span class="op">=</span> <span class="cn">false</span>) </span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    R<span class="st">"""</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="st">        acf_theo = ARMAacf(ar = </span><span class="sc">$</span>ar<span class="st">, ma = </span><span class="sc">$</span>ma<span class="st">, lag.max = </span><span class="sc">$</span>lagmax<span class="st">, pacf = </span><span class="sc">$</span>pacf<span class="st">)</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="st">    """</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="pp">@rget</span> acf_theo</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> acf_theo</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="fu">ARMAacf</span>([<span class="fl">0.5</span>, <span class="op">-</span><span class="fl">0.2</span>], [<span class="fl">0.3</span>]; lagmax <span class="op">=</span> <span class="fl">5</span>) <span class="co"># This is Julia function now</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="28">
+<div id="f7ee4e71" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">ARMAacf</span>(ar, ma; lagmax, pacf <span class="op">=</span> <span class="cn">false</span>) </span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    R<span class="st">"""</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="st">        acf_theo = ARMAacf(ar = </span><span class="sc">$</span>ar<span class="st">, ma = </span><span class="sc">$</span>ma<span class="st">, lag.max = </span><span class="sc">$</span>lagmax<span class="st">, pacf = </span><span class="sc">$</span>pacf<span class="st">)</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="st">    """</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="pp">@rget</span> acf_theo</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> acf_theo</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="fu">ARMAacf</span>([<span class="fl">0.5</span>, <span class="op">-</span><span class="fl">0.2</span>], [<span class="fl">0.3</span>]; lagmax <span class="op">=</span> <span class="fl">5</span>) <span class="co"># This is Julia function now</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="50">
 <pre><code>6-element Vector{Float64}:
   1.0
   0.5646766169154229
@@ -517,53 +509,53 @@ poisreg_loglik(beta_, y, X)</code></pre>
 <li><p>The <a href="https://github.com/JuliaPy/PyCall.jl">PyCall.jl</a> package makes it possible to use Python code from Julia.</p></li>
 <li><p>At setup, you may need to tell PyCall.jl where your Python install is with <code>ENV["PYTHON"] = "~/anaconda3/bin/python"</code> (this is my path) and then re-build PyCall from the package manager with <code>] build PyCall</code></p></li>
 <li><p>Here is an example using the matplotlib library in Python for plotting</p>
-<div id="fcac5a12" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">PyCall</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="fu">range</span>(<span class="fl">0</span>; stop<span class="op">=</span><span class="fl">2</span><span class="op">*</span><span class="cn">pi</span>, length<span class="op">=</span><span class="fl">1000</span>)</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> <span class="fu">sin</span>.(<span class="fl">3</span><span class="op">*</span>x)</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>plt <span class="op">=</span> <span class="fu">pyimport</span>(<span class="st">"matplotlib.pyplot"</span>)  <span class="co"># importing matplotlib as plt</span></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>plt.<span class="fu">plot</span>(x, y, color<span class="op">=</span><span class="st">"red"</span>, linewidth<span class="op">=</span><span class="fl">2.0</span>, linestyle<span class="op">=</span><span class="st">"--"</span>)</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>plt.<span class="fu">show</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="c48b759f" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">PyCall</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="fu">range</span>(<span class="fl">0</span>; stop<span class="op">=</span><span class="fl">2</span><span class="op">*</span><span class="cn">pi</span>, length<span class="op">=</span><span class="fl">1000</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> <span class="fu">sin</span>.(<span class="fl">3</span><span class="op">*</span>x)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>plt <span class="op">=</span> <span class="fu">pyimport</span>(<span class="st">"matplotlib.pyplot"</span>)  <span class="co"># importing matplotlib as plt</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>plt.<span class="fu">plot</span>(x, y, color<span class="op">=</span><span class="st">"red"</span>, linewidth<span class="op">=</span><span class="fl">2.0</span>, linestyle<span class="op">=</span><span class="st">"--"</span>)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>plt.<span class="fu">show</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Figure(640x480)</code></pre>
 </div>
 </div></li>
 <li><p>Using Newton’s method in the Python package SciPy for root finding</p>
-<div id="c7d54a36" class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>so <span class="op">=</span> <span class="fu">pyimport</span>(<span class="st">"scipy.optimize"</span>)</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>so.<span class="fu">newton</span>(x <span class="op">-&gt;</span> <span class="fu">cos</span>(x) <span class="op">-</span> x, <span class="fl">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="30">
+<div id="24acb79a" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>so <span class="op">=</span> <span class="fu">pyimport</span>(<span class="st">"scipy.optimize"</span>)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>so.<span class="fu">newton</span>(x <span class="op">-&gt;</span> <span class="fu">cos</span>(x) <span class="op">-</span> x, <span class="fl">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="52">
 <pre><code>0.7390851332151607</code></pre>
 </div>
 </div></li>
 <li><p>Using Python function in Julia:</p>
-<div id="13e2242c" class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>py<span class="st">"""</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="st">import numpy as np</span></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="st">def my_sin(x):</span></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="st">    print("hello from the Python side.")</span></span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="st">    return np.sin(x)</span></span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span></span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>py<span class="st">"my_sin"</span>(<span class="cn">π</span><span class="op">/</span><span class="fl">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="566275e6" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>py<span class="st">"""</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="st">import numpy as np</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="st">def my_sin(x):</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="st">    print("hello from the Python side.")</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="st">    return np.sin(x)</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>py<span class="st">"my_sin"</span>(<span class="cn">π</span><span class="op">/</span><span class="fl">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>hello from the Python side.</code></pre>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="31">
+<div class="cell-output cell-output-display" data-execution_count="53">
 <pre><code>1.0</code></pre>
 </div>
 </div></li>
 <li><p>Wrap a Python function in a Julia function</p></li>
 </ul>
-<div id="a1ca4f95" class="cell" data-execution_count="9">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">my_sin</span>(x)</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span>(py<span class="st">"my_sin"</span>(x))</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="fu">my_sin</span>(<span class="cn">π</span><span class="op">/</span><span class="fl">2</span>) <span class="co"># This is a Julia function now</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="4c670934" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">my_sin</span>(x)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span>(py<span class="st">"my_sin"</span>(x))</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="fu">my_sin</span>(<span class="cn">π</span><span class="op">/</span><span class="fl">2</span>) <span class="co"># This is a Julia function now</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>hello from the Python side.</code></pre>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="32">
+<div class="cell-output cell-output-display" data-execution_count="54">
 <pre><code>1.0</code></pre>
 </div>
 </div>

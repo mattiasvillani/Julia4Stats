@@ -25,7 +25,12 @@ plot!(title = L"\beta_0 = %$(βhat[1])"* " and "* L"\beta_1 = %$(βhat[2])")
 # Save the plot to a file
 savefig("mtcars_plot.pdf")
 
-# Plot a surface, with GR and PlotlyJS backends
+
+histogram(mtcars.HP, bins = 20, normalize = true, xlabel = "horsepower (hp)", 
+     ylabel = "density")
+# TODO: add KDE
+
+### Plot a surface, with GR and PlotlyJS backends
 gr()
 xs = range(-4, 4; length=150)
 ys = range(-4, 4; length=150)

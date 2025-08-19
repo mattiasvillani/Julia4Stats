@@ -14,7 +14,7 @@ editor: visual
 
 -   RCall.jl does:
 
-    -   **Sends R commands** to a R session in the background.
+    -   **Sends R commands** to an R session in the background.
 
     -   **Moves data** from Julia to R, and R back to Julia.
 
@@ -26,14 +26,14 @@ editor: visual
 
 ```{julia}
 using RCall         # Julia session must be set up, see RCall.jl docs
-R"plot(rnorm(10))"  # Evaluates in R
+R"plot(rnorm(10))";  # Evaluates in R
 ```
 
 -   Variables in Julia can be interpolated in R code using the `$` -syntax
 
 ```{julia}
 n = 10
-R"plot(rnorm($n))"
+R"plot(rnorm($n))";
 ```
 
 -   Julia variables can be sent to R with @rput .

@@ -170,7 +170,7 @@ plot!(title = L"\beta_0 = %$(βhat[1])"* " and "* L"\beta_1 = %$(βhat[2])")
 
 ## Switching backends
 
-Let us first plot surface in Plots.jl:
+Let us first plot a surface in Plots.jl:
 
 ```{julia}
 using Plots, LaTeXStrings

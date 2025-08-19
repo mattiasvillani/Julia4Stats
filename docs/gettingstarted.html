@@ -393,7 +393,7 @@ nav#TOC {
 <section id="why-julia-for-statistics" class="level2">
 <h2 class="anchored" data-anchor-id="why-julia-for-statistics"><img src="figs/julialogo.svg" width="30" height="27"> Why Julia (for Statistics)?</h2>
 <ul>
-<li><p><strong>Speed</strong>. No need for a two language combo (R/Python <strong>and</strong> C++).</p></li>
+<li><p><strong>Speed</strong>. No need for a two language combo (R/Python <strong>and</strong> C/C++).</p></li>
 <li><p><strong>Good packages</strong> for Statistics and Data Analysis.</p></li>
 <li><p>Wonderful handling of <strong>statistical distributions</strong>.</p></li>
 <li><p>Strong <strong>linear algebra</strong> with beautiful syntax.</p></li>
@@ -463,12 +463,12 @@ Uninstall juliaup
 <li><p><strong>past commands can be edited</strong> and re-used.</p></li>
 </ul>
 <p><img src="figs/navigateREPL.gif" class="img-fluid" width="500"></p>
-<p>The REPL has several prompt modes, for example:</p>
+<p>The REPL has several <strong>prompt modes</strong>, for example:</p>
 <ul>
-<li><p><strong>Julian mode</strong>, which is the default seen above.</p></li>
+<li><p><strong>Julian mode</strong>, which is the default <code>julia&gt;</code> seen above.</p></li>
 <li><p><strong>Help mode</strong>, activated by typing <strong>?</strong> at the prompt. The prompt changes to <code>help?&gt;</code> and you can search for documentation about functions etc; see animated gif below. <code>Backspace</code> takes you back to Julian mode.</p></li>
-<li><p><strong>Shell mode</strong>, activated by typing a semicolon <strong>;</strong>. The prompt changes to <code>shell&gt;</code> and you can use the usual shell commands for navigating directories, copying files etc. (On Windows, type <code>powershell</code> or <code>cmd</code> at <code>shell&gt;</code> to get access to the shell).</p></li>
 <li><p><strong>Pkg mode</strong>, activated by typing a right bracket <strong>]</strong>. This opens the package manager where Julia packages are added and managed.</p></li>
+<li><p><strong>Shell mode</strong>, activated by typing a semicolon <strong>;</strong>. The prompt changes to <code>shell&gt;</code> and you can use the usual shell commands for navigating directories, copying files etc. (On Windows, type <code>powershell</code> or <code>cmd</code> at <code>shell&gt;</code> to get access to the shell).</p></li>
 <li><p><strong>Search mode</strong>, activated by <code>ctrl+r</code>, as explained above.</p></li>
 <li><p><strong>R mode</strong>. Later, when discuss how R and Julia can work together with the RCall.jl package, there will an R mode available by typing <strong>$</strong> which opens an R prompt. More later.</p></li>
 </ul>
@@ -523,6 +523,7 @@ Exercise
 <ul>
 <li><p><code>status</code>, shows the packages installed in the currently active environment</p></li>
 <li><p><code>add</code> <code>PkgName</code> (installs the PkgName.jl package, for example Distributions.jl)</p></li>
+<li><p><code>add GitHubLink</code> adds the package directly from Github, e.g.&nbsp;<code>add git@github.com:JuliaStats/Distributions.jl.git</code></p></li>
 <li><p><code>rm</code> <code>PkgName</code> (removes the PkgName.jl package)</p></li>
 <li><p><code>update</code> (checks registry and updates packages)</p></li>
 </ul>
@@ -542,7 +543,7 @@ Exercise
 <col style="width: 6%">
 <col style="width: 21%">
 <col style="width: 6%">
-<col style="width: 20%">
+<col style="width: 21%">
 </colgroup>
 <tbody>
 <tr class="odd">
@@ -590,6 +591,17 @@ or <strong>Conda</strong></td>
 </tbody>
 </table></li>
 </ul>
+<section id="environments" class="level4">
+<h4 class="anchored" data-anchor-id="environments">Environments</h4>
+<ul>
+<li><p>Packages are by default <code>add</code>:ed to the default environment (e.g.&nbsp;v1.11 if you use Julia 1.11). However, it is common to have several projects ongoing at the same time, and different projects needs different packages. Here is where <em>environments</em> are very useful.</p></li>
+<li><p>A Julia <strong>environment</strong> is basically a list of all the packages used in a project, potentially including detailed information about which version of the packages that are to be used in the project. An environment is created by going to a directory and typing <code>activate .</code> in the Pkg prompt. The dot means <em>here</em> (in the directory structure; alternatively, the dot can be replaced by a path where you want the project to live). The activate command creates two files:</p>
+<ul>
+<li><p><a href="Project.toml">Project.toml</a> - This is a list of the packages added to the project (so called direct dependencies), and their compatibility. Each package is identified by a unique ID. The link goes to the Project.toml used for this tutorial.</p></li>
+<li><p><a href="Manifest.toml">Manifest.toml</a> - This contains the complete dependency structure of the added packages (since your added packages will often depend on other packages, so called indirect dependencies). The manifest.toml file can be used to <code>instantiate</code> all packages and their dependencies to the exact versions used in a particular project, so that code can be exactly reproduced with a frozen state of dependencies.</p></li>
+</ul></li>
+<li><p>When two projects use the same package at the same version, the content of this package is not duplicated.</p></li>
+</ul>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -610,9 +622,10 @@ Exercise
 </div>
 </div>
 </section>
+</section>
 <section id="running-programs" class="level2">
 <h2 class="anchored" data-anchor-id="running-programs"><img src="figs/terminalicon.png" class="img-fluid" width="30"> Running programs</h2>
-<p>We can write Julia code in any text editor and then execute it in the terminal with the <code>julia</code> command. Here is a small Julia example program (<code>plotfunc.jl</code>) that plots the square function using the <code>Plots.jl</code> package (which needs to added first) and finally saves the graph to a pdf file.</p>
+<p>We can write Julia code in any text editor and then execute it in the terminal with the <code>julia</code> command. Here is a small Julia example program (<code>plotfunc.jl</code>) that plots the square function using the <code>Plots.jl</code> package (which needs to <code>add</code>:ed first) and finally saves the graph to a pdf file.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># adding Plots.jl package programatically (needed if it is not already installed)</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> <span class="bu">Pkg;</span> Pkg.add("Plots")</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Plots</span></span>
@@ -650,7 +663,7 @@ Exercise
 <section id="vs-code" class="level4">
 <h4 class="anchored" data-anchor-id="vs-code">VS code</h4>
 <p>The most common way to work with Julia is using the <a href="https://code.visualstudio.com/">VS code</a> IDE (similar to RStudio, but more general). VS code is free and open source. It can be installed from <a href="https://code.visualstudio.com/Download">here</a>. There are many many extensions or plug-ins for VS code for doing mostly anything you want. Here is a <a href="https://www.youtube.com/watch?v=KMxo3T_MTvY">100 sec video about VS code</a>. The <a href="https://code.visualstudio.com/docs/getstarted/getting-started">official getting started guide</a> is quite good.</p>
-<p>The most important command in VS code is <code>ctrl+shift+p</code> which opens the <strong>Command palette</strong>. From there you can type thing like <em>settings</em> to access all the settings, execute code etc.</p>
+<p>The most important command in VS code is <code>ctrl+shift+p</code> which opens the <strong>Command palette</strong>. From there you can type things like <em>settings</em> to access all the settings, execute code etc.</p>
 </section>
 <section id="julia-in-vs-code" class="level4">
 <h4 class="anchored" data-anchor-id="julia-in-vs-code">Julia in VS Code</h4>
@@ -658,7 +671,7 @@ Exercise
 <p>The official documention is <a href="https://code.visualstudio.com/docs/languages/julia">here</a>.</p>
 <p><a href="./vscode.html">Here</a> are some useful commands, keyboard shortcuts and extensions in VS code.</p>
 <ul>
-<li><p>Julia code in VS code can be run in three basic modes:</p>
+<li><p>Julia code in VS code can be run in three basic ways:</p>
 <ul>
 <li><p><strong>Run a file in a separate terminal</strong>: from command palette: <u>Julia: Run File in New Process</u> or from the <strong>Play button</strong> in the top right corner of the editor.</p></li>
 <li><p><strong>Debug mode</strong>.</p></li>
@@ -666,8 +679,8 @@ Exercise
 </ul></li>
 </ul>
 <p><img src="figs/JuliaShortcuts1.png" class="img-fluid" width="651"></p>
-<p><code>shift + enter</code> or <code>shift + ctrl</code> on a line in the editor starts the Julia REPL automatically. However, if you close the REPL, you have to use the command <u>Julia: Restart REPL</u> to start a new one.</p>
-<p>If you prefer to not have the output inline in the editor, go to Julia extension settings and search for <em>Execution: Result Type</em>, and set it to REPL.</p>
+<p><code>shift + enter</code> or <code>shift + ctrl</code> on a line in the editor starts the Julia REPL automatically. However, if you close the REPL, you have to use the command <u>Julia: Restart REPL</u> in the Command palette to start a new one.</p>
+<p>If you prefer to not have the output inline in the editor, go to Julia extension settings and search for <em>Execution: Result Type</em>, and set it to REPL (the default is Both REPL and inline).</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -679,7 +692,7 @@ Exercise
 </div>
 <div class="callout-body-container callout-body">
 <p>Open the plotfunc.jl file from a previous exercise in VS Code and run it again using the command <u>Julia: Run File in New Process</u></p>
-<p>Now, run each line in plotfunc.jl interactively in the VS code Julia REPL.</p>
+<p>Now, run each line in plotfunc.jl interactively in the VS code Julia REPL. The plot should appear in a plot pane in VS code.</p>
 </div>
 </div>
 </section>

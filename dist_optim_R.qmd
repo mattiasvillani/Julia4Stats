@@ -12,7 +12,7 @@ editor: visual
 
     -   `Normal(2,4)` is a $N(2,4^2)$ distribution object.
 
-    -   `Pois(4)` is a $\mathrm{Poisson}(4)$ distribution object.
+    -   `Poisson(4)` is a $\mathrm{Poisson}(4)$ distribution object.
 
     ```{julia}
     using Distributions
@@ -36,7 +36,7 @@ editor: visual
 -   Compute **quantiles**
 
     ```{julia}
-    quantile(dist, 0.5)
+    quantile(dist, [0.025, 0.5, 0.975])
 
     ```
 
@@ -50,10 +50,13 @@ editor: visual
 
 ```{julia}
 using Distributions
-
 1 + 2*TDist(3)
+```
+
+so one can easily define location-scale version
+
+```{julia}
 TDist(μ, σ, ν) = μ + σ*TDist(ν)
-TDist(3)
 dist = TDist(1, 2, 3)
 pdf(dist, 0)
 ```
@@ -118,7 +121,7 @@ scatter!([3], [pdf(dist,3)], m = :circle, mc = :indianred, ms = 8,
 
 The [Optim.jl](https://julianlsolvers.github.io/Optim.jl/stable/) package is the main package for numerical function optimization.
 
-As a simple example finding the maximum likelihood estimate in Poisson regression with the BFGS optimizer.
+As a simple example, consider finding the maximum likelihood estimate in Poisson regression with the BFGS optimizer.
 
 First, let us simulate some data from a Poisson regression model with an intercept and three covariates:
 
@@ -132,7 +135,8 @@ X = [ones(n,1) randn(n,p-1)]
 β = 0.5*[1,-1,1,-1]
 λ = exp.(X*β)
 y = rand.(Poisson.(λ));
-scatter(X[:,2], y, title = "Scatter plot of y against the first covariate", xlabel = L"x_1", ylabel = L"y")
+scatter(X[:,2], y, title = "Scatter of y against the first covariate", 
+  xlabel = L"x_1", ylabel = L"y")
 ```
 
 To find the ML estimate we need to define the log-likelihood function:
