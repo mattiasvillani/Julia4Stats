@@ -204,23 +204,23 @@ There are other ways to use a package, like `import`. The main difference is tha
 
     Here is comparison of package handling in R, Julia and Python.
 
-    +------------+--------+----------------------------------------+--------+-------------------------------+--------+-------------------------------+
-    | Language   |        | Repository                             |        | Install packages              |        | Use packages                  |
-    +------------+--------+----------------------------------------+--------+-------------------------------+--------+-------------------------------+
-    | **R**      |        | CRAN (Comprehensive R Archive Network) |        | `install.packages("pkgname")` |        | `library(pkgname)`            |
-    +------------+--------+----------------------------------------+--------+-------------------------------+--------+-------------------------------+
-    | **Julia**  |        | General registry (hosted on GitHub)    |        | `] add PkgName`               |        | `using` `PkgName`             |
-    |            |        |                                        |        |                               |        |                               |
-    |            |        |                                        |        |                               |        | `import PkgName`              |
-    |            |        |                                        |        |                               |        |                               |
-    |            |        |                                        |        |                               |        | `import PkgName: myfunc`      |
-    +------------+--------+----------------------------------------+--------+-------------------------------+--------+-------------------------------+
-    | **Python** |        | **PyPI** (Python Package Index)\       |        | `pip install pkgname`         |        | `from pkgname import *`       |
-    |            |        | or **Conda**                           |        |                               |        |                               |
-    |            |        |                                        |        | `conda install pkgname`       |        | `import pkgname as pk`        |
-    |            |        |                                        |        |                               |        |                               |
-    |            |        |                                        |        |                               |        | `from pkgname import myfunc`  |
-    +------------+--------+----------------------------------------+--------+-------------------------------+--------+-------------------------------+
+    +------------+---+----------------------------------------+---+-------------------------------+---+------------------------------+
+    | Language   |   | Repository                             |   | Install packages              |   | Use packages                 |
+    +------------+---+----------------------------------------+---+-------------------------------+---+------------------------------+
+    | **R**      |   | CRAN (Comprehensive R Archive Network) |   | `install.packages("pkgname")` |   | `library(pkgname)`           |
+    +------------+---+----------------------------------------+---+-------------------------------+---+------------------------------+
+    | **Julia**  |   | General registry (hosted on GitHub)    |   | `] add PkgName`               |   | `using` `PkgName`            |
+    |            |   |                                        |   |                               |   |                              |
+    |            |   |                                        |   |                               |   | `import PkgName`             |
+    |            |   |                                        |   |                               |   |                              |
+    |            |   |                                        |   |                               |   | `import PkgName: myfunc`     |
+    +------------+---+----------------------------------------+---+-------------------------------+---+------------------------------+
+    | **Python** |   | **PyPI** (Python Package Index)\       |   | `pip install pkgname`         |   | `from pkgname import *`      |
+    |            |   | or **Conda**                           |   |                               |   |                              |
+    |            |   |                                        |   | `conda install pkgname`       |   | `import pkgname as pk`       |
+    |            |   |                                        |   |                               |   |                              |
+    |            |   |                                        |   |                               |   | `from pkgname import myfunc` |
+    +------------+---+----------------------------------------+---+-------------------------------+---+------------------------------+
 
 #### Environments
 
@@ -235,7 +235,6 @@ There are other ways to use a package, like `import`. The main difference is tha
 -   When two projects use the same package at the same version, the content of this package is not duplicated.
 
 ::: callout-note
-
 ## Exercise
 
 -   `Add` the Distributions.jl package in the package manager. Type `status` after install to see that it indeed was added.

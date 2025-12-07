@@ -18,8 +18,8 @@ editor:
 
 <a class="github-button" href="https://github.com/mattiasvillani/Julia4Stats" data-color-scheme="no-preference: dark; light: light; dark: dark;" data-size="large" data-show-count="true" aria-label="Star mattiasvillani/Julia4Stats on GitHub">Star</a>
 
-> This tutorial was prepared as part of the COST action HiTEc for the
-> Econometrics & Statistics (Ecosta) 2025 conference in Tokyo.
+> This tutorial was initially prepared as part of the COST action HiTEc for the
+> Econometrics & Statistics (EcoSta) conference in Tokyo, and updated to a second version for the Joint Conference CFE-CMStatistics 2025 in London, with an additional module on Probabilistic Programming contributed by the Turing.jl team.
 
 |  |  |
 |------------------------------------|------------------------------------|
@@ -102,11 +102,6 @@ and Python](interop.qmd) <br> Code:
 [Optimization](code/optimization.jl) \| [Working with R and
 Python](code/interop.jl)
 
-🍓 *leg stretcher*
-
-**Lecture 4 - Probabilistic programming using Turing.jl**<br> Time:
-17.30-18.30 <br> Reading: [Probabilistic programming with
-Turing.jl](turing.qmd)<br>
 
 ### More material
 

@@ -33,9 +33,9 @@ rateratio = exp.(chain.value) # exp(β) is the incidence rate ratio
 gr(grid = false)
 h = []
 for i = 1:p
-    ptmp = histogram(rateratio[:,i], nbins = 50, fillcolor = :indianred, linecolor = nothing, 
+    ptmp = histogram(rateratio[:,i], nbins = 50, fillcolor = :steelblue, linecolor = nothing, 
         normalize = true, title = varnames[i], xlab = L"\exp(\beta_{%$(i-1)})", 
-        yaxis = false, fillopacity = 0.5)    
+        yaxis = false, fillopacity = 0.5, label = "")    
     push!(h, ptmp)
 end
 plot(h..., size = (600,600), legend = :right)
@@ -66,6 +66,6 @@ end
 μ₀ = 0   # Prior mean of log(ψ), where ψ is the overdispersion parameter
 σ₀ = 10  
 α = 0.70  # target acceptance probability in NUTS sampler
-model = negbinomialReg(y, X[:,[1,3]], τ, μ₀, σ₀)
+model = negbinomialReg(y, X, τ, μ₀, σ₀)
 chain = sample(model, NUTS(α), 10000, discard_initial = 1000)
 rateratio = exp.(chain.value)

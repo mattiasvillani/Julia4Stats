@@ -97,7 +97,7 @@ F = [A; C] # Concatenating matrices vertically, same as vcat(A, C)
 n = 100
 x = randn(n) # covariate data
 X = [ones(n) x]
-β = [1,3]
+β = [1,3] 
 y = X*β + randn(n) # Linear model
 βhat = inv(X'X)X'y # Linear regression using matrix inversion. Note X'X = X'*X etc
 βhat = X \ y # Linear regression using Matlab-type backslash operator
@@ -106,7 +106,7 @@ y = X*β + randn(n) # Linear model
 ⊗(A, B) = kron(A, B) # Kronecker product operator
 A ⊗ D == kron(A, D) 
 inv(A'*A ⊗ D) == inv(A'*A) ⊗ inv(D) # not necessarily true, because of floating point errors
-inv(A'*A ⊗ D) ≈  inv(A'*A) ⊗ inv(D) # always true ( ≈ typed as \approx and Tab)
+inv(A'*A ⊗ D) ≈ inv(A'*A) ⊗ inv(D) # always true ( ≈ typed as \approx and Tab)
 
 # Plot the regression line
 regline(x, β) = β[1] + β[2]*x # Regression line function

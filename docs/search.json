@@ -306,5 +306,12 @@
     "title": "The package manager",
     "section": "",
     "text": "More info will be added here later."
+  },
+  {
+    "objectID": "CFECM2025.html",
+    "href": "CFECM2025.html",
+    "title": "Probabilistic programming for statistical analysis in Julia",
+    "section": "",
+    "text": "This tutorial is part of the COST action HiTEc, prepared for the CFE-CMStatistics 2025 conference in London.\n\nJulia has emerged as an important language for statistical data analysis and machine learning. It is a high-level language that is easy to learn, but with a speed close to C/C++ from its just-in-time compilation. Despite its relatively young age, Julia already has an impressive set of libraries for statistics, and can be easily integrated with a workflow in R or Python.\nThis first half of this tutorial introduces the Julia programming language with a focus on statistical analysis. The second half focuses on likelihood and Bayesian inference using the Turing.jl probabilistic programming ecosystem in Julia. Participants are encouraged to install Julia and some statistical packages before the tutorial, to follow along on their own laptops.\n\nIntroduction to the Julia programming language\nInstructor: Mattias Villani, Professor of Statistics, Stockholm University.\nWeb site for the material: Julia4Stats.\n\n\nProbabilistic programming for statistical analysis in Turing.jl\nInstructors:\n\nMarkus Hauru, Senior Research Data Scientist, Alan Turing Institute\nPenelope Yong, Research Data Scientist, Alan Turing Institute\nTim Hargreaves, PhD candidate, University of Cambridge"
   }
 ]
