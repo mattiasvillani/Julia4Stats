@@ -34,17 +34,13 @@ statistical analysis. <br> The following topics will be covered:
 
 -   the package manager and tooling
 
--   managing data in Julia
-
--   plots for statistics
+-   managing data and plotting in Julia
 
 -   statistical distributions
 
--   likelihood inference using numerical optimization
+-   numerical optimization and automatic differentiation
 
 -   working with R and Python in Julia
-
--   probabilistic programming for statistical inference using Turing.jl
 
 ### Instructor
 
@@ -86,14 +82,10 @@ after you have installed Julia:
 Julia](gettingstarted.qmd) <br> Live demo: [Basic
 Julia](code/gettingstarted.jl)
 
-🍎 *leg stretcher*
-
 **Lecture 2 - Working with data in Julia**<br> Time: 15.00-16.00 <br>
 Reading: [Read, managing and plotting data](workingwithdata.qmd) <br>
 Code: [DataFrames.jl](code/workingwithdata_dataframes.jl) \|
 [Tidier.jl](code/workingwithdata_tidier.jl) \| [Plots](code/plotting.jl)
-
-☕ *tea break*
 
 **Lecture 3 - Statistics in Julia**<br> Time: 16.30-17.30 <br> Reading:
 [Distributions and Optimization](dist_optim_R.qmd) \| [Interop with R
@@ -101,7 +93,6 @@ and Python](interop.qmd) <br> Code:
 [Distributions](code/distributions.jl) \|
 [Optimization](code/optimization.jl) \| [Working with R and
 Python](code/interop.jl)
-
 
 ### More material
 
