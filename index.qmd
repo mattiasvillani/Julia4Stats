@@ -51,11 +51,7 @@ Statistics<br> Stockholm University
 ### Before the tutorial
 
 You may want to install Julia and VS code before the tutorial, to follow
-along in my interactive demos and also experiment yourself. I will not
-assume that you have installed Julia however, and you can attend the
-tutorial just to listen. See the first lecture for information on how to
-install Julia and (optionally, but recommended, VS Code). If you want to
-have the same packages and versions that I use in the tutorial, do this
+along in my interactive demos and also experiment yourself. See the first lecture for information on how to install Julia and (optionally, but recommended, VS Code). If you want to have the same packages and versions that I use in the tutorial, do this
 after you have installed Julia:
 
 -   Download the [Project.toml](Project.toml) and
@@ -77,18 +73,17 @@ after you have installed Julia:
 
 ------------------------------------------------------------------------
 
-**Lecture 1 - The Julia programming language and tooling**<br> Time:
-14.00-15.00 <br> Reading: [Getting started with
+**Lecture 1 - The Julia programming language and tooling**<br> Reading: [Getting started with
 Julia](gettingstarted.qmd) <br> Live demo: [Basic
 Julia](code/gettingstarted.jl)
 
-**Lecture 2 - Working with data in Julia**<br> Time: 15.00-16.00 <br>
+**Lecture 2 - Working with data in Julia**<br>
 Reading: [Read, managing and plotting data](workingwithdata.qmd) <br>
 Code: [DataFrames.jl](code/workingwithdata_dataframes.jl) \|
 [Tidier.jl](code/workingwithdata_tidier.jl) \| [Plots](code/plotting.jl)
 
-**Lecture 3 - Statistics in Julia**<br> Time: 16.30-17.30 <br> Reading:
-[Distributions and Optimization](dist_optim_R.qmd) \| [Interop with R
+**Lecture 3 - Statistics in Julia**<br> 
+Reading: [Distributions and Optimization](dist_optim_R.qmd) \| [Interop with R
 and Python](interop.qmd) <br> Code:
 [Distributions](code/distributions.jl) \|
 [Optimization](code/optimization.jl) \| [Working with R and

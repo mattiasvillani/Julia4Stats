@@ -9,9 +9,9 @@ sin(3)
 # Basic data types
 typeof(a) # Integer
 typeof(1.0) # Float
-d = "Hej"
+d = "Hello"
 typeof(d) # String
-println(d * ", Värld!") # Multiplication to concatenate strings
+println(d * ", World!") # Multiplication to concatenate strings
 
 # Loops and all that
 for i in 1:10
@@ -85,7 +85,7 @@ D = A'*A
 isposdef(D)
 det(D)      # Determinant of matrix A
 inv(D)      # Inverse of matrix A
-eigvals(D) # Eigenvalues of matrix A
+eigvals(D)  # Eigenvalues of matrix A
 eigvecs(D)
 kron(A, D) # Kronecker product of A with itself
 Symmetric(D) # Makes A symmetric if it isn't because of floating point numerics
@@ -137,6 +137,8 @@ x = [1, 2, 3]
 y = [4, 5, 6]
 x*y                     # error: x*y is not defined for vectors x'*y is
 x .* y                  # element-wise multiplication with dot operator
+x'*y                    # works, dot product returns a scalar
+x ⋅ y                   # \cdot ⋅ works also for dot product
 sin(x)                  # gives an error sin(x) is not defined for arrays
 sin.(x) # broadcasting with dot operator. The sin function is applied to each element of x.
 sin.(cos.(x))           # fused broadcasting, only one loop is created.

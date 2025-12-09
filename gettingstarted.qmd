@@ -139,7 +139,7 @@ Useful keys bindings ([here](https://docs.julialang.org/en/v1/stdlib/REPL/#Key-b
 
 -   Drop into *shell mode* and change directory to somewhere else on your computer. Then go back to Julian mode (backspace) and check with `pwd()` that you indeed changed directory. Go back to shell mode and change the directory back to where you where before this exercise.
 
--   Go into *package mode* and type `status` to see if you have any packages installed. (probably not if you have a fresh install).
+-   Go into *package mode* and type `status` (or just `st`) to see if you have any packages installed. (probably not if you have a fresh install).
 :::
 
 ## ![](figs/pkgicon.png){width="30"} The package manager
@@ -176,7 +176,7 @@ Here are some of the most common packages for Statistics:
 
 -   [RDatasets.jl](https://github.com/JuliaStats/RDatasets.jl) (the R datasets that we all love, in Julia)
 
-The package manager is most easily accessed by typing `]` to get into Pkg mode. The prompt changes to `(@v.11) pkg>` which means that you are in package mode in the default environment v.11 (if you are using Julia 1.11, more on environments later).
+The package manager is most easily accessed by typing `]` to get into Pkg mode. The prompt changes to `(@v1.12) pkg>` which means that you are in package mode in the default environment v.1.12 (if you are using Julia 1.12, more on environments later).
 
 Some useful commands in Pkg mode:
 
@@ -190,7 +190,7 @@ Some useful commands in Pkg mode:
 
 -   `update` (checks registry and updates packages)
 
-When we write, for example, `] add Distributions` we mean to type `]` and then `add Distributions` on the Pkg prompt.
+When we write, for example, `] add Distributions` we mean to type `]` and then `add Distributions` on the `pkg>` prompt.
 
 Once a package has been `add`ed it can be used from the Julian prompt (just `backspace` out from Pkg mode) with the using command: `using PkgName` . This loads the package in memory and its functions and other objects can now be used.
 
@@ -198,35 +198,35 @@ There are other ways to use a package, like `import`. The main difference is tha
 
 -   `using` exposes all exported function directly without needing to call then with the package name as prefix, e.g. `myfunc(3)`.
 
--   `import` does not expose exported function directly and requires a call to function to be prefixed with the package name, e.g. `PkgName.myfunc(3)`. This is closer to Python's namespace convention, but namespaces are less essential in Julia due to multiple dispatch and Julias clever handling of function (method) name collisions.
+-   `import` does not expose exported function directly and requires a call to function to be prefixed with the package name, e.g. `PkgName.myfunc(3)`. This is closer to Python's namespace convention, but namespaces are less essential in Julia due to multiple dispatch and Julia's clever handling of function (method) name collisions.
 
 -   It is also possible to use only specific functions from a package: `using PkgName: myfunc, otherfunc`.
 
     Here is comparison of package handling in R, Julia and Python.
 
-    +------------+---+----------------------------------------+---+-------------------------------+---+------------------------------+
-    | Language   |   | Repository                             |   | Install packages              |   | Use packages                 |
-    +------------+---+----------------------------------------+---+-------------------------------+---+------------------------------+
-    | **R**      |   | CRAN (Comprehensive R Archive Network) |   | `install.packages("pkgname")` |   | `library(pkgname)`           |
-    +------------+---+----------------------------------------+---+-------------------------------+---+------------------------------+
-    | **Julia**  |   | General registry (hosted on GitHub)    |   | `] add PkgName`               |   | `using` `PkgName`            |
-    |            |   |                                        |   |                               |   |                              |
-    |            |   |                                        |   |                               |   | `import PkgName`             |
-    |            |   |                                        |   |                               |   |                              |
-    |            |   |                                        |   |                               |   | `import PkgName: myfunc`     |
-    +------------+---+----------------------------------------+---+-------------------------------+---+------------------------------+
-    | **Python** |   | **PyPI** (Python Package Index)\       |   | `pip install pkgname`         |   | `from pkgname import *`      |
-    |            |   | or **Conda**                           |   |                               |   |                              |
-    |            |   |                                        |   | `conda install pkgname`       |   | `import pkgname as pk`       |
-    |            |   |                                        |   |                               |   |                              |
-    |            |   |                                        |   |                               |   | `from pkgname import myfunc` |
-    +------------+---+----------------------------------------+---+-------------------------------+---+------------------------------+
+    +------------+--------+----------------------------------------+--------+-------------------------------+--------+------------------------------+
+    | Language   |        | Repository                             |        | Install packages              |        | Use packages                 |
+    +------------+--------+----------------------------------------+--------+-------------------------------+--------+------------------------------+
+    | **R**      |        | CRAN (Comprehensive R Archive Network) |        | `install.packages("pkgname")` |        | `library(pkgname)`           |
+    +------------+--------+----------------------------------------+--------+-------------------------------+--------+------------------------------+
+    | **Julia**  |        | General registry (hosted on GitHub)    |        | `] add PkgName`               |        | `using` `PkgName`            |
+    |            |        |                                        |        |                               |        |                              |
+    |            |        |                                        |        |                               |        | `import PkgName`             |
+    |            |        |                                        |        |                               |        |                              |
+    |            |        |                                        |        |                               |        | `import PkgName: myfunc`     |
+    +------------+--------+----------------------------------------+--------+-------------------------------+--------+------------------------------+
+    | **Python** |        | **PyPI** (Python Package Index)\       |        | `pip install pkgname`         |        | `from pkgname import *`      |
+    |            |        | or **Conda**                           |        |                               |        |                              |
+    |            |        |                                        |        | `conda install pkgname`       |        | `import pkgname as pk`       |
+    |            |        |                                        |        |                               |        |                              |
+    |            |        |                                        |        |                               |        | `from pkgname import myfunc` |
+    +------------+--------+----------------------------------------+--------+-------------------------------+--------+------------------------------+
 
 #### Environments
 
--   Packages are by default `add`:ed to the default environment (e.g. v1.11 if you use Julia 1.11). However, it is common to have several projects ongoing at the same time, and different projects needs different packages. Here is where *environments* are very useful.
+-   Packages are by default `add`:ed to the default environment (e.g. v1.12 if you use Julia 1.12). However, it is common to have several projects ongoing at the same time, and different projects needs different packages. Here is where *environments* are very useful.
 
--   A Julia **environment** is basically a list of all the packages used in a project, potentially including detailed information about which version of the packages that are to be used in the project. An environment is created by going to a directory and typing `activate .` in the Pkg prompt. The dot means *here* (in the directory structure; alternatively, the dot can be replaced by a path where you want the project to live). The activate command creates two files:
+-   A Julia **environment** is basically a list of all the packages used in a project, potentially including detailed information about which version of the packages that are to be used in the project. An environment is created by going to a directory and typing `activate .` in the Pkg prompt. The dot means *here* (in the directory structure; alternatively, the dot can be replaced by a path where you want the environment to live). The activate command creates two files:
 
     -   [Project.toml](Project.toml) - This is a list of the packages added to the project (so called direct dependencies), and their compatibility. Each package is identified by a unique ID. The link goes to the Project.toml used for this tutorial.
 
@@ -283,7 +283,7 @@ julia plotfunc.jl
 Copy the code above to a text file name *plotfunc.jl* and run it using the command above. Check the pdf file.
 :::
 
-## ![](/misc/vscodeicon.png){width="25"} VS code - Rstudio for Julia
+## ![](/misc/vscodeicon.png){width="25"} VS code - Rstudio/Positron for Julia
 
 #### VS code
 
@@ -309,7 +309,7 @@ The official documention is [here](https://code.visualstudio.com/docs/languages/
 
 ![](figs/JuliaShortcuts1.png){width="651"}
 
-`shift + enter` or `shift + ctrl` on a line in the editor starts the Julia REPL automatically. However, if you close the REPL, you have to use the command [Julia: Restart REPL]{.underline} in the Command palette to start a new one.
+`shift + enter` or `alt + enter` on a line in the editor starts the Julia REPL automatically. However, if you close the REPL, you have to use the command [Julia: Restart REPL]{.underline} in the Command palette to start a new one.
 
 If you prefer to not have the output inline in the editor, go to Julia extension settings and search for *Execution: Result Type*, and set it to REPL (the default is Both REPL and inline).
 
