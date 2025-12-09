@@ -1,0 +1,333 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "---\n",
+        "title: \"Working with data\"\n",
+        "author: \"Mattias Villani\"\n",
+        "editor: visual\n",
+        "---\n",
+        "\n",
+        "## Read and writing data in Julia\n",
+        "\n",
+        "CSV files can be read with the [CSV.jl](https://csv.juliadata.org/stable/) package:"
+      ],
+      "id": "a1f1ab28"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "using CSV, DataFrames\n",
+        "titanic = CSV.read(\"data/titanic.csv\", DataFrame);\n",
+        "first(titanic, 3)"
+      ],
+      "id": "528fec57",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "-   Use `CSV.Rows` or `CSV.Chunks` for reading only some observations at the time.\n",
+        "\n",
+        "-   With `StringEncodings.jl` package, `CSV` can handle other character encodings.\n",
+        "\n",
+        "-   Data can be read from an internet url with the help of the standard library `Downloads.jl`:"
+      ],
+      "id": "b900e11d"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "using CSV, DataFrames, Downloads\n",
+        "url = \"https://github.com/mattiasvillani/Julia4Stats/raw/main/data/titanic.csv\";\n",
+        "http_response = Downloads.download(url);\n",
+        "titanic = CSV.read(http_response, DataFrame);\n",
+        "first(titanic, 3)"
+      ],
+      "id": "4c0815a6",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## Managing data\n",
+        "\n",
+        "![](figs/dataframes_logo.png){width=\"30\"} [DataFrames.jl](https://dataframes.juliadata.org/stable/) is the original dataframe package in Julia.\n",
+        "\n",
+        "-   Construct `DataFrame` (labeled matrix/table) using different approaches."
+      ],
+      "id": "cd36ac86"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "using DataFrames\n",
+        "df = DataFrame(\n",
+        "    name = [\"Alice\", \"Bob\", \"Charlie\"],\n",
+        "    age  = [25, 30, 35],\n",
+        "    score = [88, 92, 95]\n",
+        ")"
+      ],
+      "id": "8f894f56",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "-   DataFrames.jl has some data wrangling functions like `transform`, `filter`, `combine` etc."
+      ],
+      "id": "1e11686a"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "df2 = transform(df, :age => (x -> 2x) => :age_doubled)"
+      ],
+      "id": "432b01b7",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "The data frame can be modfied in place with the Julia convention to use exclamation mark (!) to denote a mutating function:"
+      ],
+      "id": "f62f4b95"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "transform!(df, :age => (x -> 2x) => :age_doubled)      # Modify df in place"
+      ],
+      "id": "17295f0f",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "We can select a subset of the variables"
+      ],
+      "id": "4d9e0ba3"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "df_selected = select(df, :name, :age_doubled)"
+      ],
+      "id": "9af81f12",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Or filter out observations:"
+      ],
+      "id": "514fb195"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "df_filtered = filter(:age => >(28), df)"
+      ],
+      "id": "912ad0aa",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "![](figs/dataframes_logo.png){width=\"30\"} [DataFramesMeta.jl](https://juliadata.org/DataFramesMeta.jl/stable/) uses Julia macros to @chain (pipe) together data manipulations, inspired by tidyverse in R."
+      ],
+      "id": "5f81b450"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "using DataFramesMeta\n",
+        "df_extra = DataFrame(\n",
+        "    name = [\"Alice\", \"Bob\", \"Diana\"],\n",
+        "    city = [\"Stockholm\", \"Gothenburg\", \"Malmö\"]\n",
+        ")\n",
+        "result = @chain df begin\n",
+        "    @transform(:age_doubled = 2 .* :age)\n",
+        "    @subset(_, :score .> 90)       # pipes to first argument, here explicitly using _\n",
+        "    @select(:name, :score, :age_doubled) \n",
+        "    leftjoin(df_extra, on = :name)          # normal DataFrames function\n",
+        "end"
+      ],
+      "id": "44f6674a",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "![](figs/tidierdata_logo.png){width=\"30\"} [TidierData.jl](https://tidierorg.github.io/TidierData.jl/latest/) is a Julia re-implementation of the dplyr and tidyr packages from R.\n",
+        "\n",
+        "![](figs/tidier_logo.png){width=\"30\"} [Tidier.jl](https://tidierorg.github.io/Tidier.jl) is meta package, similar to the tidyverse package in R.\n",
+        "\n",
+        "``` julia\n",
+        "using CSV, DataFrames, Tidier\n",
+        "\n",
+        "# Read data from a URL using the standard library Downloads\n",
+        "url = \"https://github.com/mattiasvillani/Julia4Stats/raw/main/data/titanic.csv\";\n",
+        "http_response = Downloads.download(url);\n",
+        "titanic = CSV.read(http_response, DataFrame)\n",
+        "\n",
+        "## TidierData.jl for data wrangling using @chain macro\n",
+        "titanic2 = @chain titanic begin\n",
+        "    @mutate(survived = survived == 1)\n",
+        "    @mutate(first_class = pclass == 1)\n",
+        "    @filter(fare > 10)\n",
+        "    @select(name, survived, age, sex, first_class)\n",
+        "end\n",
+        "```\n",
+        "\n",
+        "## Plots\n",
+        "\n",
+        "![](figs/plots_logo.png){width=\"30\"} [Plots.jl](https://docs.juliaplots.org/stable/) - a meta plotting package with many backends\n",
+        "\n",
+        "![](figs/makie_logo.png){width=\"30\"} [Makie.jl](https://github.com/MakieOrg/Makie.jl) - gaining popularity, advanced features\n",
+        "\n",
+        "![](figs/tidierplots_logo.png){width=\"30\" height=\"34\"} [TidierPlots.jl](https://tidierorg.github.io/TidierPlots.jl/latest/) - Julia implementation of R's ggplot2.\n",
+        "\n",
+        "![](figs/plotly_logo.png){width=\"30\"} [Plotly.jl](https://github.com/plotly/Plotly.jl) interface to the plot.ly library.\n",
+        "\n",
+        "and many many more.\n",
+        "\n",
+        "Here is an example using Plots.jl to plot the `mtcars` data from [Rdatasets.jl](https://github.com/JuliaStats/RDatasets.jl)"
+      ],
+      "id": "b85cac55"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "using Plots, LaTeXStrings, RDatasets, GLM\n",
+        "\n",
+        "mtcars = dataset(\"datasets\", \"mtcars\")\n",
+        "\n",
+        "# Make a scatter plot of Horsepower vs Miles per gallon\n",
+        "scatter(mtcars.HP, mtcars.MPG, \n",
+        "     xlabel = \"Horsepower\", ylabel = \"Miles per gallon\",\n",
+        "     title = \"MPG vs Horsepower\", label = \"Data points\", \n",
+        "     legend = :topright, color = :blue)\n",
+        "\n",
+        "# Fit a linear model using GLM.jl\n",
+        "using GLM\n",
+        "lm_model = lm(@formula(MPG ~ HP), mtcars)\n",
+        "\n",
+        "# Add the fitted line to the plot, note the mutating plot! function\n",
+        "plot!(mtcars.HP, predict(lm_model), \n",
+        "     label = \"Fitted line\", color = :red, linewidth = 2)  \n",
+        "\n",
+        "# Add a LaTeX string to the title\n",
+        "βhat = round.(coef(lm_model), digits = 3)\n",
+        "plot!(title = L\"\\beta_0 = %$(βhat[1])\"* \" and \"* L\"\\beta_1 = %$(βhat[2])\") "
+      ],
+      "id": "0f85527f",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## Some random examples from my teaching\n",
+        "\n",
+        "![](figs/RectangleSum2DmanyBars.png){width=\"500\"}\n",
+        "\n",
+        "![](figs/taylorapprox2dimcontour.png){width=\"800\"}\n",
+        "\n",
+        "![](figs/RajanBetaPostGrid.png){width=\"800\"}\n",
+        "\n",
+        "![](figs/intervals.png){width=\"800\"}\n",
+        "\n",
+        "![](figs/Dirichlet1.png){width=\"500\"}\n",
+        "\n",
+        "![](figs/PikeLengthByAge.png){width=\"500\"}\n",
+        "\n",
+        "![](figs/bikefeeltempbyseason.png){width=\"500\"}\n",
+        "\n",
+        "![](figs/BayesianHistogramsDrawsDelta1_SamePlot.png){width=\"800\"}\n",
+        "\n",
+        "## Switching backends\n",
+        "\n",
+        "Let us first plot a surface in Plots.jl:"
+      ],
+      "id": "e7184957"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "using Plots, LaTeXStrings\n",
+        "\n",
+        "# Plot a surface with the gr backend\n",
+        "gr()\n",
+        "xs = range(-4, 4; length=150)\n",
+        "ys = range(-4, 4; length=150)\n",
+        "f(x, y) = sin(x) * cos(y) * exp(-(x^2 + y^2)/8)\n",
+        "Plots.surface(xs, ys, f; xlabel = L\"x\", ylabel = L\"y\", zlabel = L\"f(x,y)\", \n",
+        "    legend=false, camera = (30, 60))"
+      ],
+      "id": "aae71b77",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Now we switch backend to PlotlyJS to get an interactive plot where we can pan, zoom and rotate:"
+      ],
+      "id": "78ee1429"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "import PlotlyJS\n",
+        "plotlyjs() # swithing to plotlyjs for interactive Plots\n",
+        "Plots.surface(xs, ys, f; xlabel = \"x\", ylabel = \"y\", zlabel = \"f(x,y)\", \n",
+        "    legend=false, camera = (30, 60))"
+      ],
+      "id": "3d1d6511",
+      "execution_count": null,
+      "outputs": []
+    }
+  ],
+  "metadata": {
+    "kernelspec": {
+      "name": "julia-1.11",
+      "language": "julia",
+      "display_name": "Julia 1.11.6",
+      "path": "/home/mv/.local/share/jupyter/kernels/julia-1.11"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 5
+}

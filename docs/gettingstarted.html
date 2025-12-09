@@ -337,7 +337,7 @@ nav#TOC {
   <li><a href="#the-julia-repl-console" id="toc-the-julia-repl-console" class="nav-link" data-scroll-target="#the-julia-repl-console"><img src="figs/terminalicon.png" class="img-fluid" width="30"> The Julia REPL (console)</a></li>
   <li><a href="#the-package-manager" id="toc-the-package-manager" class="nav-link" data-scroll-target="#the-package-manager"><img src="figs/pkgicon.png" class="img-fluid" width="30"> The package manager</a></li>
   <li><a href="#running-programs" id="toc-running-programs" class="nav-link" data-scroll-target="#running-programs"><img src="figs/terminalicon.png" class="img-fluid" width="30"> Running programs</a></li>
-  <li><a href="#vs-code---rstudio-for-julia" id="toc-vs-code---rstudio-for-julia" class="nav-link" data-scroll-target="#vs-code---rstudio-for-julia"><img src="./misc/vscodeicon.png" class="img-fluid" width="25"> VS code - Rstudio for Julia</a></li>
+  <li><a href="#vs-code---rstudiopositron-for-julia" id="toc-vs-code---rstudiopositron-for-julia" class="nav-link" data-scroll-target="#vs-code---rstudiopositron-for-julia"><img src="./misc/vscodeicon.png" class="img-fluid" width="25"> VS code - Rstudio/Positron for Julia</a></li>
   <li><a href="#notebooks" id="toc-notebooks" class="nav-link" data-scroll-target="#notebooks"><img src="figs/Jupyter_logo.png" class="img-fluid" width="25"> Notebooks</a></li>
   <li><a href="#live-demo" id="toc-live-demo" class="nav-link" data-scroll-target="#live-demo">💻 Live demo</a></li>
   </ul>
@@ -491,7 +491,7 @@ Exercise
 <ul>
 <li><p>Get into <em>help mode</em> and read about the sin function.</p></li>
 <li><p>Drop into <em>shell mode</em> and change directory to somewhere else on your computer. Then go back to Julian mode (backspace) and check with <code>pwd()</code> that you indeed changed directory. Go back to shell mode and change the directory back to where you where before this exercise.</p></li>
-<li><p>Go into <em>package mode</em> and type <code>status</code> (or just <code>st</code>)to see if you have any packages installed. (probably not if you have a fresh install).</p></li>
+<li><p>Go into <em>package mode</em> and type <code>status</code> (or just <code>st</code>) to see if you have any packages installed. (probably not if you have a fresh install).</p></li>
 </ul>
 </div>
 </div>
@@ -518,7 +518,7 @@ Exercise
 <li><p><a href="https://juliadiff.org/DifferentiationInterface.jl/DifferentiationInterface/stable/">DifferentiationInterface.jl</a> (interface to Julia’s many autodiff libraries)</p></li>
 <li><p><a href="https://github.com/JuliaStats/RDatasets.jl">RDatasets.jl</a> (the R datasets that we all love, in Julia)</p></li>
 </ul>
-<p>The package manager is most easily accessed by typing <code>]</code> to get into Pkg mode. The prompt changes to <code>(@v.11) pkg&gt;</code> which means that you are in package mode in the default environment v.11 (if you are using Julia 1.11, more on environments later).</p>
+<p>The package manager is most easily accessed by typing <code>]</code> to get into Pkg mode. The prompt changes to <code>(@v1.12) pkg&gt;</code> which means that you are in package mode in the default environment v.1.12 (if you are using Julia 1.12, more on environments later).</p>
 <p>Some useful commands in Pkg mode:</p>
 <ul>
 <li><p><code>status</code>, shows the packages installed in the currently active environment</p></li>
@@ -527,12 +527,12 @@ Exercise
 <li><p><code>rm</code> <code>PkgName</code> (removes the PkgName.jl package)</p></li>
 <li><p><code>update</code> (checks registry and updates packages)</p></li>
 </ul>
-<p>When we write, for example, <code>] add Distributions</code> we mean to type <code>]</code> and then <code>add Distributions</code> on the Pkg prompt.</p>
+<p>When we write, for example, <code>] add Distributions</code> we mean to type <code>]</code> and then <code>add Distributions</code> on the <code>pkg&gt;</code> prompt.</p>
 <p>Once a package has been <code>add</code>ed it can be used from the Julian prompt (just <code>backspace</code> out from Pkg mode) with the using command: <code>using PkgName</code> . This loads the package in memory and its functions and other objects can now be used.</p>
 <p>There are other ways to use a package, like <code>import</code>. The main difference is that</p>
 <ul>
 <li><p><code>using</code> exposes all exported function directly without needing to call then with the package name as prefix, e.g.&nbsp;<code>myfunc(3)</code>.</p></li>
-<li><p><code>import</code> does not expose exported function directly and requires a call to function to be prefixed with the package name, e.g.&nbsp;<code>PkgName.myfunc(3)</code>. This is closer to Python’s namespace convention, but namespaces are less essential in Julia due to multiple dispatch and Julias clever handling of function (method) name collisions.</p></li>
+<li><p><code>import</code> does not expose exported function directly and requires a call to function to be prefixed with the package name, e.g.&nbsp;<code>PkgName.myfunc(3)</code>. This is closer to Python’s namespace convention, but namespaces are less essential in Julia due to multiple dispatch and Julia’s clever handling of function (method) name collisions.</p></li>
 <li><p>It is also possible to use only specific functions from a package: <code>using PkgName: myfunc, otherfunc</code>.</p>
 <p>Here is comparison of package handling in R, Julia and Python.</p>
 <table class="caption-top table">
@@ -594,8 +594,8 @@ or <strong>Conda</strong></td>
 <section id="environments" class="level4">
 <h4 class="anchored" data-anchor-id="environments">Environments</h4>
 <ul>
-<li><p>Packages are by default <code>add</code>:ed to the default environment (e.g.&nbsp;v1.11 if you use Julia 1.11). However, it is common to have several projects ongoing at the same time, and different projects needs different packages. Here is where <em>environments</em> are very useful.</p></li>
-<li><p>A Julia <strong>environment</strong> is basically a list of all the packages used in a project, potentially including detailed information about which version of the packages that are to be used in the project. An environment is created by going to a directory and typing <code>activate .</code> in the Pkg prompt. The dot means <em>here</em> (in the directory structure; alternatively, the dot can be replaced by a path where you want the project to live). The activate command creates two files:</p>
+<li><p>Packages are by default <code>add</code>:ed to the default environment (e.g.&nbsp;v1.12 if you use Julia 1.12). However, it is common to have several projects ongoing at the same time, and different projects needs different packages. Here is where <em>environments</em> are very useful.</p></li>
+<li><p>A Julia <strong>environment</strong> is basically a list of all the packages used in a project, potentially including detailed information about which version of the packages that are to be used in the project. An environment is created by going to a directory and typing <code>activate .</code> in the Pkg prompt. The dot means <em>here</em> (in the directory structure; alternatively, the dot can be replaced by a path where you want the environment to live). The activate command creates two files:</p>
 <ul>
 <li><p><a href="Project.toml">Project.toml</a> - This is a list of the packages added to the project (so called direct dependencies), and their compatibility. Each package is identified by a unique ID. The link goes to the Project.toml used for this tutorial.</p></li>
 <li><p><a href="Manifest.toml">Manifest.toml</a> - This contains the complete dependency structure of the added packages (since your added packages will often depend on other packages, so called indirect dependencies). The manifest.toml file can be used to <code>instantiate</code> all packages and their dependencies to the exact versions used in a particular project, so that code can be exactly reproduced with a frozen state of dependencies.</p></li>
@@ -658,8 +658,8 @@ Exercise
 </div>
 </div>
 </section>
-<section id="vs-code---rstudio-for-julia" class="level2">
-<h2 class="anchored" data-anchor-id="vs-code---rstudio-for-julia"><img src="./misc/vscodeicon.png" class="img-fluid" width="25"> VS code - Rstudio for Julia</h2>
+<section id="vs-code---rstudiopositron-for-julia" class="level2">
+<h2 class="anchored" data-anchor-id="vs-code---rstudiopositron-for-julia"><img src="./misc/vscodeicon.png" class="img-fluid" width="25"> VS code - Rstudio/Positron for Julia</h2>
 <section id="vs-code" class="level4">
 <h4 class="anchored" data-anchor-id="vs-code">VS code</h4>
 <p>The most common way to work with Julia is using the <a href="https://code.visualstudio.com/">VS code</a> IDE (similar to RStudio, but more general). VS code is free and open source. It can be installed from <a href="https://code.visualstudio.com/Download">here</a>. There are many many extensions or plug-ins for VS code for doing mostly anything you want. Here is a <a href="https://www.youtube.com/watch?v=KMxo3T_MTvY">100 sec video about VS code</a>. The <a href="https://code.visualstudio.com/docs/getstarted/getting-started">official getting started guide</a> is quite good.</p>
@@ -679,7 +679,7 @@ Exercise
 </ul></li>
 </ul>
 <p><img src="figs/JuliaShortcuts1.png" class="img-fluid" width="651"></p>
-<p><code>shift + enter</code> or <code>shift + ctrl</code> on a line in the editor starts the Julia REPL automatically. However, if you close the REPL, you have to use the command <u>Julia: Restart REPL</u> in the Command palette to start a new one.</p>
+<p><code>shift + enter</code> or <code>alt + enter</code> on a line in the editor starts the Julia REPL automatically. However, if you close the REPL, you have to use the command <u>Julia: Restart REPL</u> in the Command palette to start a new one.</p>
 <p>If you prefer to not have the output inline in the editor, go to Julia extension settings and search for <em>Execution: Result Type</em>, and set it to REPL (the default is Both REPL and inline).</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
