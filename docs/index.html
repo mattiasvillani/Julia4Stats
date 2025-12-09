@@ -364,15 +364,28 @@ nav#TOC {
 </section>
 <section id="before-the-tutorial" class="level3">
 <h3 class="anchored" data-anchor-id="before-the-tutorial">Before the tutorial</h3>
-<p>You may want to install Julia and VS code before the tutorial, to follow along in my interactive demos and also experiment yourself. See the first lecture for information on how to install Julia and (optionally, but recommended, VS Code). If you want to have the same packages and versions that I use in the tutorial, do this after you have installed Julia:</p>
+<p>You may want to install Julia, some packages, and VS code before the tutorial, to follow along in the interactive demos and also experiment yourself.</p>
+<ol type="1">
+<li>Install Julia. <a href="./gettingstarted.html#installing-julia">Here</a> are the instructions.</li>
+<li>(optional) Install <strong>VS code</strong> (IDE similar to RStudio for R). Instructions are <a href="gettingstarted.html#vs-code---rstudiopositron-for-julia">here</a>.</li>
+<li>Activate an environment and install some Julia packages:</li>
+</ol>
 <ul>
-<li>Download the <a href="Project.toml">Project.toml</a> and <a href="Manifest.toml">Manifest.toml</a> files and place them in your directory of choice.</li>
+<li>Download this <a href="env_light/Project.toml">Project.toml</a> file to your directory of choice.</li>
 <li>Start Julia by typing <code>julia</code> in the terminal.</li>
 <li>In Julia, cd to your directory by typing <code>cd("PathToYourDirectory")</code>.</li>
 <li>In Julia, type <code>]</code> and press <code>Enter</code> to enter the package manager. The prompt should change to something with <code>pkg&gt;</code>.</li>
 <li>activate the environment by typing <code>activate .</code> and <code>Enter</code>. (that is <code>activate</code> followed by space and a dot).</li>
-<li>Instantiate the environment with all dependencies by typing <code>instantiate</code> and <code>Enter</code>. This will takes some time since many packages are installed and precompiled.</li>
-<li>Press <code>Backspace</code> to exit the package manager.</li>
+<li>still at the <code>pkg&gt;</code> prompt, type <code>update</code> to install the most important packages for the tutorial and Turing.jl. Go back to the <code>julia&gt;</code> prompt by pressing <code>Backspace</code>.</li>
+</ul>
+<p>If you want all packages used in the tutorial (takes longer) in exactly the same state as in my presentation, do this:</p>
+<ul>
+<li>Download the <a href="Manifest.toml">Manifest.toml</a> file and place it in your directory of choice.</li>
+<li>Start Julia by typing <code>julia</code> in the terminal.</li>
+<li>In Julia, cd to your directory by typing <code>cd("PathToYourDirectory")</code>.</li>
+<li>In Julia, type <code>]</code> and press <code>Enter</code> to enter the package manager. The prompt should change to something with <code>pkg&gt;</code>.</li>
+<li>activate the environment by typing <code>activate .</code> and <code>Enter</code>. (that is <code>activate</code> followed by space and a dot).</li>
+<li>still at the <code>pkg&gt;</code> prompt, type <code>instantiate</code> and <code>Enter</code> to install all packages used in the tutorial, with the exact same versions. Go back to the <code>julia&gt;</code> prompt by pressing <code>Backspace</code>.</li>
 </ul>
 </section>
 <section id="workshop-plan-materials-and-schedule" class="level3">
