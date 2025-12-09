@@ -263,9 +263,10 @@ There are other ways to use a package, like `import`. The main difference is tha
 -   Evaluate the pdf of this normal at `x=1` using the `pdf` function on the normal distribution object `dist`.
 :::
 
-::: {#q:modes .callout-note collapse="true" icon="false"}
+::: {.callout-note collapse="true" icon="false"}
 ## Solution
-``` 
+
+```         
 # add Distributions.jl in package manager
 ] add Distributions
 
@@ -280,7 +281,7 @@ rand(dist, 10)
 
 # Compute pdf at x = 1
 pdf(dist, 1)
-``` 
+```
 :::
 
 ## ![](figs/terminalicon.png){width="30"} Running programs
@@ -346,7 +347,17 @@ The official documention is [here](https://code.visualstudio.com/docs/languages/
 
 `shift + enter` or `alt + enter` on a line in the editor starts the Julia REPL automatically. However, if you close the REPL, you have to use the command [Julia: Restart REPL]{.underline} in the Command palette to start a new one.
 
+::: callout-tip
+## Disable inline results
+
 If you prefer to not have the output inline in the editor, go to Julia extension settings and search for *Execution: Result Type*, and set it to REPL (the default is Both REPL and inline).
+:::
+
+::: callout-tip
+## Making Julia in VS Code more similar to RStudio
+
+To make VS Code a little more like the Panes view in RStudio, you may want to search for the setting (press `ctrl+shift+p`): `Terminal Default Location` and change its value to `editor`. This will make the Julia REPL appears in the editor as a tab, which you can then drag to a new location.
+:::
 
 ::: callout-note
 ## Exercise
