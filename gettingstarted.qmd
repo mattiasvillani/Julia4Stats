@@ -142,6 +142,21 @@ Useful keys bindings ([here](https://docs.julialang.org/en/v1/stdlib/REPL/#Key-b
 -   Go into *package mode* and type `status` (or just `st`) to see if you have any packages installed. (probably not if you have a fresh install).
 :::
 
+::: {#q:modes .callout-note collapse="true" icon="false"}
+## Solution
+
+```         
+# Go into help mode and read the docs about the sine function
+?sin
+
+# Step into shell mode with ; and change directory. 
+; cd SomeDirectory
+
+# Go into package mode and check the status of installed packages in the env
+] st
+```
+:::
+
 ## ![](figs/pkgicon.png){width="30"} The package manager
 
 -   Similar to R, but a bit more extreme, most things in Julia are available in **packages**.
@@ -246,6 +261,26 @@ There are other ways to use a package, like `import`. The main difference is tha
 -   Generate 10 random draws from this normal distribution using the `rand` function on the normal distribution object `dist`.
 
 -   Evaluate the pdf of this normal at `x=1` using the `pdf` function on the normal distribution object `dist`.
+:::
+
+::: {#q:modes .callout-note collapse="true" icon="false"}
+## Solution
+``` 
+# add Distributions.jl in package manager
+] add Distributions
+
+# Load Distributions.jl
+julia> using Distributions
+
+# Set dist to a normal distribution object
+dist = Normal(2,3)
+
+# Generate 10 draws
+rand(dist, 10)
+
+# Compute pdf at x = 1
+pdf(dist, 1)
+``` 
 :::
 
 ## ![](figs/terminalicon.png){width="30"} Running programs
