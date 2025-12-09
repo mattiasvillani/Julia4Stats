@@ -22,6 +22,8 @@ Here is a [list of books](https://julialang.org/learning/books/).
 
 -   [Julia High Performance](https://www.packtpub.com/en-us/product/julia-high-performance-9781788298117)
 
+-   [Statistical Modeling and Computation](https://link.springer.com/book/10.1007/978-1-0716-4132-3)
+
 -   [Data Science using Julia](https://juliadatascience.io/)
 
 -   [Julia Quick Syntax Reference](https://link.springer.com/book/10.1007/979-8-8688-0965-1#toc)

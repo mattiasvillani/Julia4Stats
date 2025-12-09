@@ -57,20 +57,20 @@ along in the interactive demos and also experiment yourself.
 2. (optional) Install **VS code** (IDE similar to RStudio for R). Instructions are [here](gettingstarted.html#vs-code---rstudiopositron-for-julia).
 3. Activate an environment and install some Julia packages:
 -   Download this [Project.toml](env_light/Project.toml) file to your
-    directory of choice.
+    directory of choice. This file lists some of the most important packages used in the tutorial.
 -   Start Julia by typing `julia` in the terminal.
--   In Julia, cd to your directory by typing
+-   In Julia, change working directory to your chosen directory by typing
     `cd("PathToYourDirectory")`.
 -   In Julia, type `]` and press `Enter` to enter the package manager.
     The prompt should change to something with `pkg>`.
 -   activate the environment by typing `activate .` and `Enter`. (that
     is `activate` followed by space and a dot).
--   still at the `pkg>` prompt, type `update` to install the most important packages for the tutorial and Turing.jl. Go back to the `julia>` prompt by pressing `Backspace`.
+-   still at the `pkg>` prompt, type `update` to install the most important packages for the tutorial, including Turing.jl. Go back to the `julia>` prompt by pressing `Backspace`.
 
 If you want all packages used in the tutorial (takes longer) in exactly the same state as in my presentation, do this:
 
 - Download the [Manifest.toml](Manifest.toml) file and place it in your
-    directory of choice.
+    directory of choice. This file list all packages and their dependencies with the same version used in the tutorial.
 -   Start Julia by typing `julia` in the terminal.
 -   In Julia, cd to your directory by typing
     `cd("PathToYourDirectory")`.
@@ -81,7 +81,7 @@ If you want all packages used in the tutorial (takes longer) in exactly the same
 -   still at the `pkg>` prompt, type `instantiate` and `Enter` to install all packages used in the tutorial, with the exact same versions. Go back to the `julia>` prompt by pressing `Backspace`.
 
 
-### Workshop plan, materials and schedule
+### Plan and material
 
 ------------------------------------------------------------------------
 

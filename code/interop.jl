@@ -54,9 +54,8 @@ ARMAacf([0.5, -0.2], [0.3]; lagmax = 5) # This is Julia function now
 #remotes::install_github("Non-Contradiction/JuliaCall") # installs the JuliaCall package
 #library(JuliaCall)
 
-options(JULIA_HOME = " ~/.juliaup/bin/julia")     # Set the path to your Julia binary
-julia_setup()                                     # Setup Julia
-julia_command("a = sqrt(2.0)")                    # Just for testing if the install worked.
+julia_setup(JULIA_HOME = "/home/mv/.juliaup/bin/")  # Setup Julia, change to your path
+julia_command("a = sqrt(2.0)")                      # Just for testing if the install worked.
 
 # Install needed Julia packages
 julia_install_package("LinearAlgebra")           # Installs Julia package

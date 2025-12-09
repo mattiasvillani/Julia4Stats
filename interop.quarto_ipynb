@@ -1,0 +1,300 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "---\n",
+        "title: \"Julia + R + Python = True\"\n",
+        "author: \"Mattias Villani\"\n",
+        "editor: visual\n",
+        "---\n",
+        "\n",
+        "## Calling R from Julia code\n",
+        "\n",
+        "-   The [RCall.jl](https://juliainterop.github.io/RCall.jl/stable/) package makes it possible to call R from Julia.\n",
+        "\n",
+        "    -   An R package or function may be lacking in Julia\n",
+        "\n",
+        "    -   Benchmarking against methods in R packages.\n",
+        "\n",
+        "-   RCall.jl does:\n",
+        "\n",
+        "    -   **Sends R commands** to an R session in the background.\n",
+        "\n",
+        "    -   **Moves data** from Julia to R, and R back to Julia.\n",
+        "\n",
+        "    -   **Transforms data structures** in Julia to the \"right\" data structure in R. Dictionary -\\> list etc.\n",
+        "\n",
+        "    -   Enter **R mode** by typing `$` to get access to R console.\n",
+        "\n",
+        "-   To send a command to R, use `R\"julia_expression\"`"
+      ],
+      "id": "515ad550"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "using RCall         # Julia session must be set up, see RCall.jl docs\n",
+        "R\"plot(rnorm(10))\";  # Evaluates in R"
+      ],
+      "id": "55e7db19",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "-   Variables in Julia can be interpolated in R code using the `$` -syntax"
+      ],
+      "id": "f0980f0f"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "n = 10\n",
+        "R\"plot(rnorm($n))\";"
+      ],
+      "id": "d9a4b672",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "-   Julia variables can be sent to R with @rput .\n",
+        "\n",
+        "-   R variables can be sent back to Julia with @rget."
+      ],
+      "id": "146dc2d0"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "# Just some regression data to play with\n",
+        "n = 100\n",
+        "p = 3\n",
+        "X = randn(n,p)\n",
+        "β = [1, 2, 0.5]\n",
+        "σ = 0.3\n",
+        "y  = X*β + σ*randn(n)\n",
+        "@rput y               # y now lives in the R session\n",
+        "@rput X\n",
+        "R\"modelFit <- lm(y ~ X)\"\n",
+        "R\"betaHat <- modelFit$coef\"\n",
+        "βhat = @rget betaHat  # Pull the R variable betaHat back to Julia\n",
+        "βhat                  # lives in Julia now"
+      ],
+      "id": "31e4ef61",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "-   For longer multiline code chunks, use the triple quotes:"
+      ],
+      "id": "1d6f9b8a"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "md-indent": "    "
+      },
+      "source": [
+        "z = 2\n",
+        "@rput z\n",
+        "R\"\"\"\n",
+        "    f <- function(x, z) x + z\n",
+        "    fvalue <- f(1, $z)\n",
+        "\"\"\"\n",
+        "out = @rget fvalue # Pull the R variable out back to Julia"
+      ],
+      "id": "bd98d3c2",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "-   Wrap R functions into Julia functions (works also for installed packages):"
+      ],
+      "id": "be4407ed"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "md-indent": "    "
+      },
+      "source": [
+        "function ARMAacf(ar, ma; lagmax, pacf = false) \n",
+        "    R\"\"\"\n",
+        "        acf_theo = ARMAacf(ar = $ar, ma = $ma, lag.max = $lagmax, pacf = $pacf)\n",
+        "    \"\"\"\n",
+        "    @rget acf_theo\n",
+        "\treturn acf_theo\n",
+        "end\n",
+        "\n",
+        "ARMAacf([0.5, -0.2], [0.3]; lagmax = 5) # This is Julia function now"
+      ],
+      "id": "fefed0e7",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## Calling Julia from R\n",
+        "\n",
+        "-   The `JuliaCall` package in R can be used to call Julia code from R.\n",
+        "\n",
+        "-   One time setup (install Julia first):\n",
+        "\n",
+        "```{r}\n",
+        "library(JuliaCall)\n",
+        "options(JULIA_HOME = \" ~/.juliaup/bin/julia\")     # Set path to Julia binary\n",
+        "julia_setup()                                     # Setup Julia\n",
+        "julia_command(\"a = sqrt(2.0)\")                    # Just testing the install\n",
+        "```\n",
+        "\n",
+        "Here is a simple example:\n",
+        "\n",
+        "```{r}\n",
+        "julia_install_package(\"LinearAlgebra\")            # Installs Julia package\n",
+        "julia_library(\"LinearAlgebra\")                    # Loads Julia package\n",
+        "julia_install_package(\"Distributions\")           \n",
+        "julia_library(\"Distributions\")\n",
+        "\n",
+        "julia_source(\"code/poisloglik.jl\") # Julia code file, contains:\n",
+        "#function poisreg_loglik(β, y, X)                        \n",
+        "#   return sum(logpdf.(Poisson.(exp.(X*β)), y))\n",
+        "#end\n",
+        "\n",
+        "# This is the R function definition, wrapping the Julia function\n",
+        "poisreg_loglik <- function(beta_, y, X){\n",
+        "  return(julia_call(\"poisreg_loglik\", beta_, y, X))\n",
+        "}\n",
+        "X = cbind(1, matrix(rnorm(100)))\n",
+        "beta_ = c(0.5,-0.5)\n",
+        "y = rpois(100, lambda = exp(X %*% beta_))\n",
+        "poisreg_loglik(beta_, y, X)\n",
+        "```\n",
+        "\n",
+        "-   The R package <https://github.com/Non-Contradiction/autodiffr> uses JuliaCall to bring autodiff to R.\n",
+        "\n",
+        "## Using Python from Julia\n",
+        "\n",
+        "-   The [PyCall.jl](https://github.com/JuliaPy/PyCall.jl) package makes it possible to use Python code from Julia.\n",
+        "\n",
+        "-   At setup, you may need to tell PyCall.jl where your Python install is with `ENV[\"PYTHON\"] = \"~/anaconda3/bin/python\"` (this is my path) and then re-build PyCall from the package manager with `] build PyCall`\n",
+        "\n",
+        "-   Here is an example using the matplotlib library in Python for plotting"
+      ],
+      "id": "2058a9ea"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "md-indent": "    "
+      },
+      "source": [
+        "using PyCall\n",
+        "x = range(0; stop=2*pi, length=1000)\n",
+        "y = sin.(3*x)\n",
+        "plt = pyimport(\"matplotlib.pyplot\")  # importing matplotlib as plt\n",
+        "plt.plot(x, y, color=\"red\", linewidth=2.0, linestyle=\"--\")\n",
+        "plt.show()"
+      ],
+      "id": "cbc4cb50",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "-   Using Newton's method in the Python package SciPy for root finding"
+      ],
+      "id": "658be94e"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "md-indent": "    "
+      },
+      "source": [
+        "so = pyimport(\"scipy.optimize\")\n",
+        "so.newton(x -> cos(x) - x, 1)"
+      ],
+      "id": "fb88bded",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "-   Using Python function in Julia:"
+      ],
+      "id": "645f1229"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "md-indent": "    "
+      },
+      "source": [
+        "py\"\"\"\n",
+        "import numpy as np\n",
+        "\n",
+        "def my_sin(x):\n",
+        "    print(\"hello from the Python side.\")\n",
+        "    return np.sin(x)\n",
+        "\"\"\"\n",
+        "py\"my_sin\"(π/2)"
+      ],
+      "id": "747890d9",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "-   Wrap a Python function in a Julia function"
+      ],
+      "id": "f4790e48"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "function my_sin(x)\n",
+        "    return(py\"my_sin\"(x))\n",
+        "end\n",
+        "my_sin(π/2) # This is a Julia function now"
+      ],
+      "id": "1f048a86",
+      "execution_count": null,
+      "outputs": []
+    }
+  ],
+  "metadata": {
+    "kernelspec": {
+      "name": "julia-1.11",
+      "language": "julia",
+      "display_name": "Julia 1.11.6",
+      "path": "/home/mv/.local/share/jupyter/kernels/julia-1.11"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 5
+}
