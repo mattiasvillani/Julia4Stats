@@ -1,4 +1,5 @@
-using Plots, Distributions, GLM, LinearAlgebra, Optim, ForwardDiff
+using Plots, Distributions, GLM, LinearAlgebra 
+using Optim, ForwardDiff
 
 # Generate data from Poisson regression with β = [1,-1,1,-1]
 n = 500

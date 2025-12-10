@@ -97,7 +97,7 @@ F = [A; C] # Concatenating matrices vertically, same as vcat(A, C)
 n = 100
 x = randn(n) # covariate data
 X = [ones(n) x]
-β = [1,3] 
+β = [1,3]
 y = X*β + randn(n) # Linear model
 βhat = inv(X'X)X'y # Linear regression using matrix inversion. Note X'X = X'*X etc
 βhat = X \ y # Linear regression using Matlab-type backslash operator
